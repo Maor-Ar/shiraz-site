@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Montenegro Travel Guides — Discover the Jewel of the Balkans</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'playfair': ['Playfair Display', 'serif'],
+            'inter': ['Inter', 'sans-serif'],
+            'cormorant': ['Cormorant Garamond', 'serif'],
+          },
+          colors: {
+            'mont': {
+              50: '#f0f7ff',
+              100: '#dceeff',
+              200: '#b3daff',
+              300: '#7ac0ff',
+              400: '#3399ff',
+              500: '#0a6fff',
+              600: '#0050d4',
+              700: '#003fa0',
+              800: '#003580',
+              900: '#001d4d',
+              950: '#000f2a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #000f2a; color: #fff; overflow-x: hidden; }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #001d4d; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #3399ff, #0a6fff); border-radius: 10px; }
+
+    /* Scroll animations */
+    .reveal { opacity: 0; transform: translateY(60px); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-80px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal-left.active { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(80px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal-right.active { opacity: 1; transform: translateX(0); }
+    .reveal-scale { opacity: 0; transform: scale(0.8); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal-scale.active { opacity: 1; transform: scale(1); }
+    .reveal-rotate { opacity: 0; transform: rotate(-5deg) scale(0.9); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal-rotate.active { opacity: 1; transform: rotate(0deg) scale(1); }
+
+    /* Stagger children */
+    .stagger-children .reveal:nth-child(1) { transition-delay: 0.1s; }
+    .stagger-children .reveal:nth-child(2) { transition-delay: 0.2s; }
+    .stagger-children .reveal:nth-child(3) { transition-delay: 0.3s; }
+    .stagger-children .reveal:nth-child(4) { transition-delay: 0.4s; }
+    .stagger-children .reveal:nth-child(5) { transition-delay: 0.5s; }
+    .stagger-children .reveal:nth-child(6) { transition-delay: 0.6s; }
+
+    /* Hero parallax */
+    .parallax-layer { transition: transform 0.1s ease-out; }
+
+    /* Floating animation */
+    @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(2deg); } }
+    @keyframes floatSlow { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+    @keyframes floatReverse { 0%, 100% { transform: translateY(-15px) rotate(-1deg); } 50% { transform: translateY(5px) rotate(1deg); } }
+    .float { animation: float 6s ease-in-out infinite; }
+    .float-slow { animation: floatSlow 8s ease-in-out infinite; }
+    .float-reverse { animation: floatReverse 7s ease-in-out infinite; }
+    .float-delay-1 { animation-delay: 1s; }
+    .float-delay-2 { animation-delay: 2s; }
+    .float-delay-3 { animation-delay: 3s; }
+
+    /* Pulse glow */
+    @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 20px rgba(51, 153, 255, 0.3); } 50% { box-shadow: 0 0 40px rgba(51, 153, 255, 0.6), 0 0 80px rgba(51, 153, 255, 0.2); } }
+    .pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
+
+    /* Shimmer */
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    .shimmer { background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%); background-size: 200% 100%; animation: shimmer 3s ease-in-out infinite; }
+
+    /* Gradient text */
+    .gradient-text { background: linear-gradient(135deg, #7ac0ff, #3399ff, #ffffff, #7ac0ff); background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: gradientShift 6s ease-in-out infinite; }
+    @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+    /* Interactive hover cards */
+    .guide-card { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+    .guide-card:hover, .guide-card.touched { transform: translateY(-12px) scale(1.02); }
+    .guide-card:hover .card-shine, .guide-card.touched .card-shine { opacity: 1; transform: translateX(100%); }
+    .card-shine { position: absolute; inset: 0; background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.1) 55%, transparent 60%); opacity: 0; transform: translateX(-100%); transition: all 0.8s ease; pointer-events: none; }
+
+    /* Ripple effect */
+    .ripple-container { position: relative; overflow: hidden; }
+    .ripple { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.15); transform: scale(0); animation: rippleAnim 0.6s ease-out; pointer-events: none; }
+    @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+
+    /* Flowing section backgrounds */
+    .section-flow { position: relative; }
+    .section-flow::before { content: ''; position: absolute; top: -100px; left: 0; right: 0; height: 200px; background: inherit; z-index: 1; clip-path: ellipse(55% 100% at 50% 0%); }
+
+    /* Morph blob */
+    @keyframes morph { 0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; } 25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; } 50% { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; } 75% { border-radius: 60% 40% 60% 30% / 60% 40% 30% 60%; } }
+    .morph-blob { animation: morph 8s ease-in-out infinite; }
+
+    /* Wave divider */
+    .wave-divider { position: absolute; bottom: 0; left: 0; width: 100%; overflow: hidden; line-height: 0; }
+    .wave-divider svg { position: relative; display: block; width: calc(100% + 1.3px); height: 80px; }
+
+    /* Horizontal scroll */
+    .horizontal-scroll { display: flex; gap: 2rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 1rem; }
+    .horizontal-scroll::-webkit-scrollbar { display: none; }
+    .horizontal-scroll > * { scroll-snap-align: start; flex-shrink: 0; }
+
+    /* Magnetic button */
+    .magnetic-btn { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .magnetic-btn:hover { transform: scale(1.05); }
+    .magnetic-btn:active { transform: scale(0.98); }
+
+    /* Particle canvas */
+    #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+    /* Text reveal animation */
+    @keyframes textReveal { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    .text-reveal { animation: textReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+    /* Counter animation */
+    .counter-value { display: inline-block; }
+
+    /* Tilt effect */
+    .tilt-card { transition: transform 0.3s ease; transform-style: preserve-3d; }
+
+    /* Line drawing animation */
+    @keyframes drawLine { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
+    .draw-line { stroke-dasharray: 1000; stroke-dashoffset: 1000; }
+    .draw-line.active { animation: drawLine 2s ease forwards; }
+
+    /* Nav */
+    .nav-glass { backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); background: rgba(0, 15, 42, 0.7); border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .nav-scrolled { background: rgba(0, 15, 42, 0.95); box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
+
+    /* Loader */
+    @keyframes loaderSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes loaderFade { 0%, 80% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+    #loader { animation: loaderFade 2.5s ease forwards; }
+    .loader-ring { animation: loaderSpin 1.2s linear infinite; border: 3px solid transparent; border-top-color: #3399ff; border-radius: 50%; }
+
+    /* Section-specific backgrounds */
+    .bg-hero { background: linear-gradient(170deg, #000f2a 0%, #001d4d 30%, #003580 60%, #003fa0 100%); }
+    .bg-guides { background: linear-gradient(175deg, #003fa0 0%, #001d4d 40%, #000f2a 100%); }
+    .bg-destinations { background: linear-gradient(170deg, #000f2a 0%, #001838 50%, #001d4d 100%); }
+    .bg-experience { background: linear-gradient(175deg, #001d4d 0%, #003070 40%, #003fa0 70%, #001d4d 100%); }
+    .bg-testimonials { background: linear-gradient(170deg, #001d4d 0%, #000f2a 50%, #001838 100%); }
+    .bg-pricing { background: linear-gradient(175deg, #001838 0%, #003580 40%, #001d4d 100%); }
+    .bg-cta { background: linear-gradient(170deg, #001d4d 0%, #003fa0 50%, #0050d4 100%); }
+
+    /* Glowing orbs */
+    @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(30px, -50px) scale(1.1); } 66% { transform: translate(-20px, 20px) scale(0.9); } }
+    @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(-40px, 30px) scale(0.9); } 66% { transform: translate(20px, -40px) scale(1.1); } }
+    .orb-1 { animation: orbFloat1 15s ease-in-out infinite; }
+    .orb-2 { animation: orbFloat2 18s ease-in-out infinite; }
+
+    /* Image hover zoom */
+    .img-zoom { overflow: hidden; }
+    .img-zoom img { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    .img-zoom:hover img, .img-zoom.touched img { transform: scale(1.1); }
+
+    /* Interactive sparkle on hover */
+    .sparkle-hover { position: relative; }
+    .sparkle-hover::after { content: '✦'; position: absolute; font-size: 12px; color: #7ac0ff; opacity: 0; transition: all 0.3s; pointer-events: none; }
+    .sparkle-hover:hover::after { opacity: 1; transform: translateY(-10px) scale(1.2); }
+
+    /* Marquee */
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .marquee-track { animation: marquee 30s linear infinite; }
+
+    /* Text stroke */
+    .text-stroke { -webkit-text-stroke: 2px rgba(122, 192, 255, 0.4); -webkit-text-fill-color: transparent; }
+
+    /* Breathing border */
+    @keyframes breatheBorder { 0%, 100% { border-color: rgba(51, 153, 255, 0.2); } 50% { border-color: rgba(51, 153, 255, 0.6); } }
+    .breathe-border { animation: breatheBorder 3s ease-in-out infinite; }
+
+    /* Progress bar for scroll */
+    #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #3399ff, #7ac0ff, #ffffff); z-index: 9999; transition: width 0.1s; }
+
+    /* Cursor follower */
+    #cursor-follower { position: fixed; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(51,153,255,0.08) 0%, transparent 70%); pointer-events: none; z-index: 1; transition: transform 0.3s ease-out, opacity 0.3s; transform: translate(-50%, -50%); }
+
+    /* Mobile tap effect */
+    @keyframes tapPulse { 0% { transform: scale(0.8); opacity: 1; } 100% { transform: scale(2.5); opacity: 0; } }
+  </style>
+</head>
+<body>
+
+<!-- Scroll Progress -->
+<div id="scroll-progress"></div>
+
+<!-- Cursor Follower (desktop) -->
+<div id="cursor-follower" class="hidden md:block"></div>
+
+<!-- Particles -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- Loader -->
+<div id="loader" class="fixed inset-0 z-[9999] bg-mont-950 flex items-center justify-center">
+  <div class="text-center">
+    <div class="loader-ring w-16 h-16 mx-auto mb-4"></div>
+    <p class="font-cormorant text-2xl text-mont-300 italic">Discovering Montenegro...</p>
+  </div>
+</div>
+
+<!-- Navigation -->
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 nav-glass transition-all duration-500">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 md:h-20">
+      <a href="#" class="flex items-center gap-2 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-mont-400 to-mont-600 flex items-center justify-center pulse-glow">
+          <i data-lucide="mountain" class="w-5 h-5 text-white"></i>
+        </div>
+        <span class="font-playfair text-xl font-bold tracking-wide">Monté<span class="text-mont-400">Guide</span></span>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#guides" class="text-sm text-mont-200 hover:text-white transition-colors relative group">
+          Guides
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-mont-400 group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#destinations" class="text-sm text-mont-200 hover:text-white transition-colors relative group">
+          Destinations
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-mont-400 group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#experience" class="text-sm text-mont-200 hover:text-white transition-colors relative group">
+          Experience
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-mont-400 group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#pricing" class="text-sm text-mont-200 hover:text-white transition-colors relative group">
+          Pricing
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-mont-400 group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#pricing" class="magnetic-btn ripple-container bg-gradient-to-r from-mont-500 to-mont-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold shadow-lg shadow-mont-500/25 hover:shadow-mont-500/40 transition-shadow">
+          Get Your Guide
+        </a>
+      </div>
+      <button id="mobile-menu-btn" class="md:hidden text-white p-2">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="md:hidden hidden bg-mont-950/95 backdrop-blur-xl border-t border-white/5">
+    <div class="px-4 py-6 space-y-4">
+      <a href="#guides" class="block text-lg text-mont-200 hover:text-white py-2 transition-colors">Guides</a>
+      <a href="#destinations" class="block text-lg text-mont-200 hover:text-white py-2 transition-colors">Destinations</a>
+      <a href="#experience" class="block text-lg text-mont-200 hover:text-white py-2 transition-colors">Experience</a>
+      <a href="#pricing" class="block text-lg text-mont-200 hover:text-white py-2 transition-colors">Pricing</a>
+      <a href="#pricing" class="block bg-gradient-to-r from-mont-500 to-mont-600 text-white px-6 py-3 rounded-full text-center font-semibold mt-4">Get Your Guide</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO SECTION ============ -->
+<section class="relative min-h-screen flex items-center bg-hero overflow-hidden" id="hero">
+  <!-- Animated orbs -->
+  <div class="absolute top-20 left-10 w-72 h-72 bg-mont-500/20 rounded-full blur-3xl orb-1"></div>
+  <div class="absolute bottom-20 right-10 w-96 h-96 bg-mont-400/10 rounded-full blur-3xl orb-2"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-mont-600/5 rounded-full blur-3xl morph-blob"></div>
+
+  <!-- Floating decorative elements -->
+  <div class="absolute top-32 right-20 float float-delay-1 hidden lg:block">
+    <div class="w-20 h-20 border border-mont-400/20 rounded-2xl rotate-12 backdrop-blur-sm bg-mont-400/5"></div>
+  </div>
+  <div class="absolute bottom-40 left-20 float-reverse float-delay-2 hidden lg:block">
+    <div class="w-16 h-16 border border-mont-300/20 rounded-full backdrop-blur-sm bg-mont-300/5"></div>
+  </div>
+  <div class="absolute top-60 left-1/3 float-slow float-delay-3 hidden lg:block">
+    <div class="w-3 h-3 bg-mont-400/60 rounded-full"></div>
+  </div>
+  <div class="absolute top-48 right-1/3 float float-delay-2 hidden lg:block">
+    <div class="w-2 h-2 bg-mont-300/80 rounded-full"></div>
+  </div>
+
+  <!-- Grid overlay -->
+  <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 60px 60px;"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 w-full">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+      <!-- Left content -->
+      <div class="text-center lg:text-left">
+        <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 mb-8 reveal" style="transition-delay: 0.2s">
+          <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+          <span class="text-sm text-mont-200 font-medium">2025 Edition — Now Available</span>
+        </div>
+        <h1 class="font-playfair text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.95] mb-6 reveal" style="transition-delay: 0.4s">
+          Discover<br>
+          <span class="gradient-text">Montenegro</span><br>
+          <span class="text-mont-300 font-light italic text-4xl sm:text-5xl lg:text-6xl">like never before</span>
+        </h1>
+        <p class="text-lg text-mont-200 max-w-lg mx-auto lg:mx-0 mb-10 leading-relaxed reveal" style="transition-delay: 0.6s">
+          Immerse yourself in handcrafted travel guides that unlock hidden bays, ancient towns, and breathtaking mountain trails. Your journey starts here.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start reveal" style="transition-delay: 0.8s">
+          <a href="#guides" class="magnetic-btn ripple-container group relative bg-gradient-to-r from-mont-400 to-mont-600 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-2xl shadow-mont-500/30 hover:shadow-mont-500/50 transition-all overflow-hidden">
+            <span class="relative z-10 flex items-center gap-2 justify-center">
+              Explore Guides
+              <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+            </span>
+          </a>
+          <a href="#experience" class="magnetic-btn ripple-container group border border-white/20 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/5 transition-all flex items-center gap-2 justify-center">
+            <i data-lucide="play-circle" class="w-5 h-5"></i>
+            Watch Preview
+          </a>
+        </div>
+        <!-- Stats -->
+        <div class="flex gap-8 mt-12 justify-center lg:justify-start reveal" style="transition-delay: 1s">
+          <div>
+            <div class="text-3xl font-bold font-playfair counter-value" data-target="12">0</div>
+            <div class="text-sm text-mont-300 mt-1">Guides</div>
+          </div>
+          <div class="w-px bg-white/10"></div>
+          <div>
+            <div class="text-3xl font-bold font-playfair counter-value" data-target="250">0</div>
+            <div class="text-sm text-mont-300 mt-1">Destinations</div>
+          </div>
+          <div class="w-px bg-white/10"></div>
+          <div>
+            <div class="text-3xl font-bold font-playfair counter-value" data-target="15000">0</div>
+            <div class="text-sm text-mont-300 mt-1">Happy Travelers</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right - Hero Image Collage -->
+      <div class="relative reveal-scale" style="transition-delay: 0.6s">
+        <div class="relative">
+          <!-- Main image -->
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-mont-900/50 img-zoom">
+            <img src="http://static.photos/nature/640x360/42" alt="Montenegro Bay" class="w-full h-80 sm:h-96 object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-mont-950/60 via-transparent to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6">
+              <div class="flex items-center gap-2 text-white/90">
+                <i data-lucide="map-pin" class="w-4 h-4 text-mont-400"></i>
+                <span class="text-sm font-medium">Kotor Bay, Montenegro</span>
+              </div>
+            </div>
+          </div>
+          <!-- Floating card 1 -->
+          <div class="absolute -top-4 -right-4 sm:-right-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 float-slow shadow-xl">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center">
+                <i data-lucide="star" class="w-5 h-5 text-white fill-current"></i>
+              </div>
+              <div>
+                <div class="text-sm font-bold">4.9 Rating</div>
+                <div class="text-xs text-mont-300">2.3K Reviews</div>
+              </div>
+            </div>
+          </div>
+          <!-- Floating card 2 -->
+          <div class="absolute -bottom-4 -left-4 sm:-left-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 float-reverse shadow-xl">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-teal-600 rounded-xl flex items-center justify-center">
+                <i data-lucide="book-open" class="w-5 h-5 text-white"></i>
+              </div>
+              <div>
+                <div class="text-sm font-bold">Instant PDF</div>
+                <div class="text-xs text-mont-300">Download Now</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wave divider -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+      <path d="M0,40 C300,80 900,0 1200,40 L1200,80 L0,80 Z" fill="#003fa0"></path>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ MARQUEE STRIP ============ -->
+<div class="relative bg-[#003fa0] py-5 overflow-hidden z-10">
+  <div class="marquee-track flex items-center gap-12 whitespace-nowrap">
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2"><i data-lucide="compass" class="w-4 h-4"></i> Kotor Bay</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2"><i data-lucide="mountain" class="w-4 h-4"></i> Durmitor</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2"><i data-lucide="waves" class="w-4 h-4"></i> Budva Riviera</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2"><i data-lucide="landmark" class="w-4 h-4"></i> Ostrog Monastery</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2"><i data-lucide="tree-pine" class="w-4 h-4"></i> Biogradska Gora</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2"><i data-lucide="sailboat" class="w-4 h-4"></i> Sveti Stefan</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2"><i data-lucide="camera" class="w-4 h-4"></i> Perast</span>
+    <span class="text-mont-400">✦</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2"><i data-lucide="compass" class="w-4 h-4"></i> Kotor Bay</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2"><i data-lucide="mountain" class="w-4 h-4"></i> Durmitor</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2"><i data-lucide="waves" class="w-4 h-4"></i> Budva Riviera</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2"><i data-lucide="landmark" class="w-4 h-4"></i> Ostrog Monastery</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2"><i data-lucide="tree-pine" class="w-4 h-4"></i> Biogradska Gora</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2"><i data-lucide="sailboat" class="w-4 h-4"></i> Sveti Stefan</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2"><i data-lucide="camera" class="w-4 h-4"></i> Perast</span>
+    <span class="text-mont-400">✦</span>
+  </div>
+</div>
+
+<!-- ============ FEATURED GUIDES SECTION ============ -->
+<section class="relative bg-guides py-24 overflow-hidden" id="guides">
+  <!-- Background decorations -->
+  <div class="absolute top-0 right-0 w-96 h-96 bg-mont-400/5 rounded-full blur-3xl orb-1"></div>
+  <div class="absolute bottom-0 left-0 w-80 h-80 bg-mont-500/5 rounded-full blur-3xl orb-2"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <span class="reveal inline-block text-mont-400 text-sm font-semibold tracking-widest uppercase mb-4">Our Collection</span>
+      <h2 class="reveal font-playfair text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+        Handcrafted Travel <span class="gradient-text">Guides</span>
+      </h2>
+      <p class="reveal text-mont-200 text-lg max-w-2xl mx-auto">Each guide is a labor of love — meticulously researched, beautifully written, and designed to transform your Montenegro adventure.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
+      <!-- Guide Card 1 -->
+      <div class="guide-card ripple-container reveal group relative bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-mont-400/40 transition-all duration-500 cursor-pointer tilt-card">
+        <div class="card-shine"></div>
+        <div class="img-zoom">
+          <img src="http://static.photos/nature/640x360/15" alt="Coastal Guide" class="w-full h-56 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/80 via-mont-950/20 to-transparent"></div>
+        </div>
+        <div class="relative p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-mont-500/20 text-mont-300 text-xs font-semibold px-3 py-1 rounded-full border border-mont-400/20">Bestseller</span>
+            <span class="bg-yellow-500/20 text-yellow-300 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1">
+              <i data-lucide="star" class="w-3 h-3 fill-current"></i> 4.9
+            </span>
+          </div>
+          <h3 class="font-playfair text-xl font-bold mb-2 group-hover:text-mont-300 transition-colors">Montenegro Coastal Journey</h3>
+          <p class="text-mont-300 text-sm mb-4 line-clamp-2">From Kotor's fjord-like bay to the pink sands of Ulcinj — every coastal gem unveiled.</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 text-xs text-mont-400">
+              <span class="flex items-center gap-1"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> 186 pages</span>
+              <span class="flex items-center gap-1"><i data-lucide="map" class="w-3.5 h-3.5"></i> 24 maps</span>
+            </div>
+            <span class="text-2xl font-bold font-playfair">€24<span class="text-sm text-mont-400 font-normal">.99</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide Card 2 -->
+      <div class="guide-card ripple-container reveal group relative bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-mont-400/40 transition-all duration-500 cursor-pointer tilt-card">
+        <div class="card-shine"></div>
+        <div class="img-zoom">
+          <img src="http://static.photos/nature/640x360/88" alt="Mountain Guide" class="w-full h-56 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/80 via-mont-950/20 to-transparent"></div>
+        </div>
+        <div class="relative p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-emerald-500/20 text-emerald-300 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-400/20">New</span>
+            <span class="bg-yellow-500/20 text-yellow-300 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1">
+              <i data-lucide="star" class="w-3 h-3 fill-current"></i> 4.8
+            </span>
+          </div>
+          <h3 class="font-playfair text-xl font-bold mb-2 group-hover:text-mont-300 transition-colors">Durmitor & Northern Peaks</h3>
+          <p class="text-mont-300 text-sm mb-4 line-clamp-2">Conquer Montenegro's wild north — glacier lakes, canyons, and highland villages await.</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 text-xs text-mont-400">
+              <span class="flex items-center gap-1"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> 214 pages</span>
+              <span class="flex items-center gap-1"><i data-lucide="map" class="w-3.5 h-3.5"></i> 31 maps</span>
+            </div>
+            <span class="text-2xl font-bold font-playfair">€29<span class="text-sm text-mont-400 font-normal">.99</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide Card 3 -->
+      <div class="guide-card ripple-container reveal group relative bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-mont-400/40 transition-all duration-500 cursor-pointer tilt-card">
+        <div class="card-shine"></div>
+        <div class="img-zoom">
+          <img src="http://static.photos/nature/640x360/156" alt="Culture Guide" class="w-full h-56 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/80 via-mont-950/20 to-transparent"></div>
+        </div>
+        <div class="relative p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-purple-500/20 text-purple-300 text-xs font-semibold px-3 py-1 rounded-full border border-purple-400/20">Cultural</span>
+            <span class="bg-yellow-500/20 text-yellow-300 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1">
+              <i data-lucide="star" class="w-3 h-3 fill-current"></i> 4.9
+            </span>
+          </div>
+          <h3 class="font-playfair text-xl font-bold mb-2 group-hover:text-mont-300 transition-colors">Historic Towns & Culture</h3>
+          <p class="text-mont-300 text-sm mb-4 line-clamp-2">Wander through centuries — medieval old towns, monasteries, and stories etched in stone.</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 text-xs text-mont-400">
+              <span class="flex items-center gap-1"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> 162 pages</span>
+              <span class="flex items-center gap-1"><i data-lucide="map" class="w-3.5 h-3.5"></i> 18 maps</span>
+            </div>
+            <span class="text-2xl font-bold font-playfair">€19<span class="text-sm text-mont-400 font-normal">.99</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- More guides row -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 stagger-children">
+      <div class="guide-card ripple-container reveal group relative bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-mont-400/40 transition-all duration-500 cursor-pointer tilt-card">
+        <div class="card-shine"></div>
+        <div class="img-zoom">
+          <img src="http://static.photos/food/640x360/33" alt="Food Guide" class="w-full h-56 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/80 via-mont-950/20 to-transparent"></div>
+        </div>
+        <div class="relative p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-orange-500/20 text-orange-300 text-xs font-semibold px-3 py-1 rounded-full border border-orange-400/20">Gastronomy</span>
+          </div>
+          <h3 class="font-playfair text-xl font-bold mb-2 group-hover:text-mont-300 transition-colors">Taste of Montenegro</h3>
+          <p class="text-mont-300 text-sm mb-4 line-clamp-2">From Njeguški pršut to Kotor's konobas — a culinary journey through local flavors.</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 text-xs text-mont-400">
+              <span class="flex items-center gap-1"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> 128 pages</span>
+              <span class="flex items-center gap-1"><i data-lucide="utensils" class="w-3.5 h-3.5"></i> 45 recipes</span>
+            </div>
+            <span class="text-2xl font-bold font-playfair">€17<span class="text-sm text-mont-400 font-normal">.99</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-card ripple-container reveal group relative bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-mont-400/40 transition-all duration-500 cursor-pointer tilt-card">
+        <div class="card-shine"></div>
+        <div class="img-zoom">
+          <img src="http://static.photos/travel/640x360/77" alt="Adventure Guide" class="w-full h-56 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/80 via-mont-950/20 to-transparent"></div>
+        </div>
+        <div class="relative p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-red-500/20 text-red-300 text-xs font-semibold px-3 py-1 rounded-full border border-red-400/20">Adventure</span>
+          </div>
+          <h3 class="font-playfair text-xl font-bold mb-2 group-hover:text-mont-300 transition-colors">Adrenaline & Outdoors</h3>
+          <p class="text-mont-300 text-sm mb-4 line-clamp-2">Rafting the Tara, hiking the Prokletije, paragliding Budva — for the wild at heart.</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 text-xs text-mont-400">
+              <span class="flex items-center gap-1"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> 176 pages</span>
+              <span class="flex items-center gap-1"><i data-lucide="compass" class="w-3.5 h-3.5"></i> 38 routes</span>
+            </div>
+            <span class="text-2xl font-bold font-playfair">€22<span class="text-sm text-mont-400 font-normal">.99</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-card ripple-container reveal group relative bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-mont-400/40 transition-all duration-500 cursor-pointer tilt-card">
+        <div class="card-shine"></div>
+        <div class="img-zoom">
+          <img src="http://static.photos/nature/640x360/201" alt="Complete Guide" class="w-full h-56 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/80 via-mont-950/20 to-transparent"></div>
+        </div>
+        <div class="relative p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-mont-500/20 text-mont-300 text-xs font-semibold px-3 py-1 rounded-full border border-mont-400/20">Complete</span>
+            <span class="bg-yellow-500/20 text-yellow-300 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1">
+              <i data-lucide="star" class="w-3 h-3 fill-current"></i> 5.0
+            </span>
+          </div>
+          <h3 class="font-playfair text-xl font-bold mb-2 group-hover:text-mont-300 transition-colors">The Ultimate Montenegro</h3>
+          <p class="text-mont-300 text-sm mb-4 line-clamp-2">Everything in one volume — coast, mountains, culture, food, and hidden secrets.</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 text-xs text-mont-400">
+              <span class="flex items-center gap-1"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> 420 pages</span>
+              <span class="flex items-center gap-1"><i data-lucide="map" class="w-3.5 h-3.5"></i> 52 maps</span>
+            </div>
+            <span class="text-2xl font-bold font-playfair">€39<span class="text-sm text-mont-400 font-normal">.99</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wave divider -->
+  <div class="wave-divider" style="transform: rotate(180deg); top: 0; bottom: auto;">
+    <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+      <path d="M0,40 C300,0 900,80 1200,40 L1200,0 L0,0 Z" fill="#000f2a"></path>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ DESTINATIONS SECTION ============ -->
+<section class="relative bg-destinations py-24 overflow-hidden" id="destinations">
+  <div class="absolute top-1/4 left-0 w-72 h-72 bg-mont-400/5 rounded-full blur-3xl orb-2"></div>
+  <div class="absolute bottom-0 right-10 w-96 h-96 bg-mont-500/5 rounded-full blur-3xl orb-1"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <span class="reveal inline-block text-mont-400 text-sm font-semibold tracking-widest uppercase mb-4">Destinations</span>
+      <h2 class="reveal font-playfair text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+        Places That Will <span class="gradient-text">Take Your Breath Away</span>
+      </h2>
+    </div>
+
+    <!-- Destination grid -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 stagger-children">
+      <!-- Large card -->
+      <div class="col-span-2 row-span-2 reveal-rotate group">
+        <div class="relative h-full min-h-[400px] rounded-3xl overflow-hidden img-zoom cursor-pointer guide-card">
+          <img src="http://static.photos/nature/1024x576/42" alt="Kotor Bay" class="w-full h-full object-cover absolute inset-0">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/90 via-mont-950/30 to-transparent"></div>
+          <div class="absolute inset-0 shimmer"></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <span class="bg-mont-500/30 text-mont-200 text-xs font-semibold px-3 py-1 rounded-full border border-mont-400/30 backdrop-blur-sm">Most Popular</span>
+            <h3 class="font-playfair text-3xl sm:text-4xl font-bold mt-3 mb-2">Kotor Bay</h3>
+            <p class="text-mont-200 text-sm sm:text-base max-w-md">Europe's southernmost fjord, wrapped in medieval walls and timeless beauty.</p>
+            <div class="flex items-center gap-2 mt-4 text-mont-300 group-hover:text-mont-200 transition-colors">
+              <span class="text-sm font-medium">Explore in guide</span>
+              <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-2 transition-transform"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal group">
+        <div class="relative h-full min-h-[190px] rounded-3xl overflow-hidden img-zoom cursor-pointer guide-card">
+          <img src="http://static.photos/nature/640x360/55" alt="Sveti Stefan" class="w-full h-full object-cover absolute inset-0">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/90 via-mont-950/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <h3 class="font-playfair text-lg font-bold">Sveti Stefan</h3>
+            <p class="text-mont-300 text-xs">Iconic island hotel</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal group">
+        <div class="relative h-full min-h-[190px] rounded-3xl overflow-hidden img-zoom cursor-pointer guide-card">
+          <img src="http://static.photos/aerial/640x360/22" alt="Durmitor" class="w-full h-full object-cover absolute inset-0">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/90 via-mont-950/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <h3 class="font-playfair text-lg font-bold">Durmitor</h3>
+            <p class="text-mont-300 text-xs">UNESCO National Park</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal group">
+        <div class="relative h-full min-h-[190px] rounded-3xl overflow-hidden img-zoom cursor-pointer guide-card">
+          <img src="http://static.photos/travel/640x360/99" alt="Perast" class="w-full h-full object-cover absolute inset-0">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/90 via-mont-950/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <h3 class="font-playfair text-lg font-bold">Perast</h3>
+            <p class="text-mont-300 text-xs">Baroque jewel</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal group">
+        <div class="relative h-full min-h-[190px] rounded-3xl overflow-hidden img-zoom cursor-pointer guide-card">
+          <img src="http://static.photos/nature/640x360/130" alt="Tara Canyon" class="w-full h-full object-cover absolute inset-0">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/90 via-mont-950/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <h3 class="font-playfair text-lg font-bold">Tara Canyon</h3>
+            <p class="text-mont-300 text-xs">Deepest in Europe</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE / WHY US SECTION ============ -->
+<section class="relative bg-experience py-24 overflow-hidden" id="experience">
+  <div class="absolute top-20 right-0 w-[500px] h-[500px] bg-mont-400/5 rounded-full blur-3xl morph-blob"></div>
+  <div class="absolute bottom-0 left-20 w-64 h-64 bg-mont-500/8 rounded-full blur-3xl orb-2"></div>
+
+  <!-- Floating geometric shapes -->
+  <div class="absolute top-40 left-10 float hidden lg:block">
+    <div class="w-12 h-12 border-2 border-mont-400/20 rotate-45"></div>
+  </div>
+  <div class="absolute bottom-32 right-20 float-reverse float-delay-2 hidden lg:block">
+    <div class="w-8 h-8 bg-mont-400/10 rounded-lg rotate-12"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Left - Visual -->
+      <div class="relative reveal-left">
+        <div class="relative">
+          <div class="rounded-3xl overflow-hidden shadow-2xl shadow-mont-900/50 img-zoom">
+            <img src="http://static.photos/nature/1200x630/42" alt="Montenegro Experience" class="w-full h-72 sm:h-96 object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-mont-950/40 to-transparent"></div>
+          </div>
+
+          <!-- Interactive floating stats -->
+          <div class="absolute -top-6 -left-6 sm:-left-10 bg-gradient-to-br from-mont-500 to-mont-700 p-5 rounded-2xl shadow-xl float-slow cursor-pointer guide-card">
+            <div class="text-center">
+              <div class="text-3xl font-bold font-playfair">7</div>
+              <div class="text-xs text-mont-200 mt-1">Years of<br>Research</div>
+            </div>
+          </div>
+          <div class="absolute -bottom-6 -right-6 sm:-right-10 bg-white/10 backdrop-blur-xl border border-white/20 p-5 rounded-2xl shadow-xl float-reverse cursor-pointer guide-card">
+            <div class="text-center">
+              <div class="text-3xl font-bold font-playfair text-mont-300">100%</div>
+              <div class="text-xs text-mont-200 mt-1">Independently<br>Written</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right - Content -->
+      <div class="reveal-right">
+        <span class="inline-block text-mont-400 text-sm font-semibold tracking-widest uppercase mb-4">Why Our Guides</span>
+        <h2 class="font-playfair text-4xl sm:text-5xl font-bold mb-8">
+          Not Just Guides.<br><span class="gradient-text">Your Passport to Wonder.</span>
+        </h2>
+        <p class="text-mont-200 text-lg mb-10 leading-relaxed">We don't do tourist traps. Our writers live in Montenegro, speak the language, and uncover what no Google search ever will.</p>
+
+        <div class="space-y-6">
+          <div class="flex items-start gap-4 group cursor-pointer">
+            <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-mont-400/20 to-mont-600/20 rounded-2xl flex items-center justify-center border border-mont-400/20 group-hover:border-mont-400/50 group-hover:bg-mont-400/30 transition-all duration-300 breathe-border">
+              <i data-lucide="pen-tool" class="w-6 h-6 text-mont-300 group-hover:text-mont-200 transition-colors"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-lg mb-1 group-hover:text-mont-300 transition-colors">Written by Locals</h3>
+              <p class="text-mont-300 text-sm leading-relaxed">Every word crafted by people who call Montenegro home. No AI, no copy-paste — pure local insight.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 group cursor-pointer">
+            <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-emerald-400/20 to-emerald-600/20 rounded-2xl flex items-center justify-center border border-emerald-400/20 group-hover:border-emerald-400/50 group-hover:bg-emerald-400/30 transition-all duration-300">
+              <i data-lucide="camera" class="w-6 h-6 text-emerald-300 group-hover:text-emerald-200 transition-colors"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-lg mb-1 group-hover:text-emerald-300 transition-colors">Stunning Photography</h3>
+              <p class="text-mont-300 text-sm leading-relaxed">Full-color photos that capture Montenegro's soul — from sunrise over Lovćen to midnight in Kotor.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 group cursor-pointer">
+            <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-purple-400/20 to-purple-600/20 rounded-2xl flex items-center justify-center border border-purple-400/20 group-hover:border-purple-400/50 group-hover:bg-purple-400/30 transition-all duration-300">
+              <i data-lucide="map" class="w-6 h-6 text-purple-300 group-hover:text-purple-200 transition-colors"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-lg mb-1 group-hover:text-purple-300 transition-colors">Custom Illustrated Maps</h3>
+              <p class="text-mont-300 text-sm leading-relaxed">Hand-drawn maps with secret spots, local tips, and off-the-beaten-path treasures marked just for you.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 group cursor-pointer">
+            <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-orange-400/20 to-orange-600/20 rounded-2xl flex items-center justify-center border border-orange-400/20 group-hover:border-orange-400/50 group-hover:bg-orange-400/30 transition-all duration-300">
+              <i data-lucide="refresh-cw" class="w-6 h-6 text-orange-300 group-hover:text-orange-200 transition-colors"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-lg mb-1 group-hover:text-orange-300 transition-colors">Free Lifetime Updates</h3>
+              <p class="text-mont-300 text-sm leading-relaxed">Buy once, explore forever. Every new edition is yours free — because Montenegro keeps evolving.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IMMERSIVE FULL-WIDTH PARALLAX SECTION ============ -->
+<section class="relative h-[70vh] overflow-hidden flex items-center justify-center">
+  <div class="absolute inset-0">
+    <img src="http://static.photos/nature/1200x630/88" alt="Montenegro Landscape" class="w-full h-full object-cover" id="parallax-img">
+    <div class="absolute inset-0 bg-mont-950/50"></div>
+  </div>
+  <div class="relative z-10 text-center px-4">
+    <h2 class="reveal-scale font-playfair text-5xl sm:text-6xl lg:text-8xl font-bold mb-6">
+      <span class="text-stroke">Wild.</span> <span class="gradient-text">Beautiful.</span> <span class="text-stroke">Yours.</span>
+    </h2>
+    <p class="reveal text-mont-200 text-xl sm:text-2xl font-cormorant italic max-w-2xl mx-auto">"Montenegro is not a country you visit. It's a country that visits your soul."</p>
+  </div>
+</section>
+
+<!-- ============ INSIDE THE GUIDE SECTION ============ -->
+<section class="relative bg-destinations py-24 overflow-hidden">
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-mont-400/3 rounded-full blur-3xl morph-blob"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <span class="reveal inline-block text-mont-400 text-sm font-semibold tracking-widest uppercase mb-4">What's Inside</span>
+      <h2 class="reveal font-playfair text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+        A Glimpse <span class="gradient-text">Inside</span>
+      </h2>
+    </div>
+
+    <!-- Horizontal scroll cards -->
+    <div class="horizontal-scroll px-4 reveal">
+      <div class="w-72 sm:w-80 flex-shrink-0 group">
+        <div class="bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-mont-400/30 transition-all duration-500 guide-card">
+          <div class="img-zoom">
+            <img src="http://static.photos/nature/640x360/200" alt="Sample Page" class="w-full h-52 object-cover">
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 text-mont-400 text-xs mb-2">
+              <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+              <span>Chapter 3 — Kotor</span>
+            </div>
+            <h3 class="font-semibold mb-2">Hidden Courtyards</h3>
+            <p class="text-mont-300 text-sm">Discover secret gardens and forgotten passages behind Kotor's ancient walls.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-72 sm:w-80 flex-shrink-0 group">
+        <div class="bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-mont-400/30 transition-all duration-500 guide-card">
+          <div class="img-zoom">
+            <img src="http://static.photos/food/640x360/12" alt="Food Section" class="w-full h-52 object-cover">
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 text-mont-400 text-xs mb-2">
+              <i data-lucide="utensils" class="w-3.5 h-3.5"></i>
+              <span>Chapter 7 — Cuisine</span>
+            </div>
+            <h3 class="font-semibold mb-2">Local Konobas</h3>
+            <p class="text-mont-300 text-sm">The family-run taverns where Montenegrins actually eat — far from tourist menus.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-72 sm:w-80 flex-shrink-0 group">
+        <div class="bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-mont-400/30 transition-all duration-500 guide-card">
+          <div class="img-zoom">
+            <img src="http://static.photos/nature/640x360/175" alt="Hiking Section" class="w-full h-52 object-cover">
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 text-mont-400 text-xs mb-2">
+              <i data-lucide="compass" class="w-3.5 h-3.5"></i>
+              <span>Chapter 5 — Hiking</span>
+            </div>
+            <h3 class="font-semibold mb-2">Trail Secrets</h3>
+            <p class="text-mont-300 text-sm">Routes to glacier lakes that don't appear on any standard tourist map.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-72 sm:w-80 flex-shrink-0 group">
+        <div class="bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-mont-400/30 transition-all duration-500 guide-card">
+          <div class="img-zoom">
+            <img src="http://static.photos/travel/640x360/155" alt="Beach Section" class="w-full h-52 object-cover">
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 text-mont-400 text-xs mb-2">
+              <i data-lucide="waves" class="w-3.5 h-3.5"></i>
+              <span>Chapter 9 — Coast</span>
+            </div>
+            <h3 class="font-semibold mb-2">Wild Beaches</h3>
+            <p class="text-mont-300 text-sm">Hidden coves accessible only by boat or foot — your private Adriatic paradise.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-72 sm:w-80 flex-shrink-0 group">
+        <div class="bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-mont-400/30 transition-all duration-500 guide-card">
+          <div class="img-zoom">
+            <img src="http://static.photos/education/640x360/44" alt="History Section" class="w-full h-52 object-cover">
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 text-mont-400 text-xs mb-2">
+              <i data-lucide="landmark" class="w-3.5 h-3.5"></i>
+              <span>Chapter 2 — History</span>
+            </div>
+            <h3 class="font-semibold mb-2">Living History</h3>
+            <p class="text-mont-300 text-sm">Stories of empires, pirates, and poets that shaped this remarkable land.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center text-mont-400 text-sm mt-6 reveal">← Scroll to explore →</p>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS SECTION ============ -->
+<section class="relative bg-testimonials py-24 overflow-hidden" id="testimonials">
+  <div class="absolute top-0 right-0 w-80 h-80 bg-mont-400/5 rounded-full blur-3xl orb-1"></div>
+  <div class="absolute bottom-20 left-10 w-64 h-64 bg-mont-500/5 rounded-full blur-3xl orb-2"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <span class="reveal inline-block text-mont-400 text-sm font-semibold tracking-widest uppercase mb-4">Testimonials</span>
+      <h2 class="reveal font-playfair text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+        Travelers <span class="gradient-text">Speak</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 stagger-children">
+      <div class="reveal group">
+        <div class="bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-mont-400/30 transition-all duration-500 guide-card h-full flex flex-col">
+          <div class="flex gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+          </div>
+          <p class="text-mont-200 italic font-cormorant text-lg leading-relaxed mb-6 flex-grow">"This guide turned our holiday into an adventure. We found a hidden beach near Sveti Stefan that wasn't in ANY other guidebook. Absolutely magical."</p>
+          <div class="flex items-center gap-4">
+            <img src="http://static.photos/people/200x200/10" alt="Sarah" class="w-12 h-12 rounded-full object-cover border-2 border-mont-400/30">
+            <div>
+              <div class="font-semibold text-sm">Sarah Mitchell</div>
+              <div class="text-mont-400 text-xs">London, UK</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal group">
+        <div class="bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-mont-400/30 transition-all duration-500 guide-card h-full flex flex-col">
+          <div class="flex gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+          </div>
+          <p class="text-mont-200 italic font-cormorant text-lg leading-relaxed mb-6 flex-grow">"The hiking trails in the Durmitor guide were worth every cent. The maps were incredibly detailed — we never got lost once. The photos are stunning too."</p>
+          <div class="flex items-center gap-4">
+            <img src="http://static.photos/people/200x200/25" alt="Marco" class="w-12 h-12 rounded-full object-cover border-2 border-mont-400/30">
+            <div>
+              <div class="font-semibold text-sm">Marco Bianchi</div>
+              <div class="text-mont-400 text-xs">Milan, Italy</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal group">
+        <div class="bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-mont-400/30 transition-all duration-500 guide-card h-full flex flex-col">
+          <div class="flex gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+          </div>
+          <p class="text-mont-200 italic font-cormorant text-lg leading-relaxed mb-6 flex-grow">"Bought the complete bundle before our 2-week trip. The food recommendations alone saved us from so many tourist traps. Best travel investment ever."</p>
+          <div class="flex items-center gap-4">
+            <img src="http://static.photos/people/200x200/47" alt="Emma" class="w-12 h-12 rounded-full object-cover border-2 border-mont-400/30">
+            <div>
+              <div class="font-semibold text-sm">Emma Johansson</div>
+              <div class="text-mont-400 text-xs">Stockholm, Sweden</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING SECTION ============ -->
+<section class="relative bg-pricing py-24 overflow-hidden" id="pricing">
+  <div class="absolute top-20 left-0 w-96 h-96 bg-mont-400/5 rounded-full blur-3xl orb-2"></div>
+  <div class="absolute bottom-0 right-0 w-80 h-80 bg-mont-500/8 rounded-full blur-3xl orb-1"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <span class="reveal inline-block text-mont-400 text-sm font-semibold tracking-widest uppercase mb-4">Pricing</span>
+      <h2 class="reveal font-playfair text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+        Choose Your <span class="gradient-text">Adventure</span>
+      </h2>
+      <p class="reveal text-mont-200 text-lg max-w-2xl mx-auto">Every guide comes with lifetime updates. Pick a single guide or save with our bundles.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto stagger-children">
+      <!-- Single Guide -->
+      <div class="reveal group">
+        <div class="bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-mont-400/30 transition-all duration-500 guide-card h-full flex flex-col relative overflow-hidden">
+          <div class="shimmer absolute inset-0 pointer-events-none"></div>
+          <div class="relative z-10 flex flex-col h-full">
+            <div class="mb-6">
+              <i data-lucide="book-open" class="w-10 h-10 text-mont-300 mb-4"></i>
+              <h3 class="font-playfair text-2xl font-bold mb-2">Single Guide</h3>
+              <p class="text-mont-300 text-sm">Pick any one guide</p>
+            </div>
+            <div class="mb-6">
+              <span class="text-5xl font-bold font-playfair">€17</span>
+              <span class="text-mont-400 text-sm">– €39</span>
+            </div>
+            <ul class="space-y-3 mb-8 flex-grow">
+              <li class="flex items-center gap-3 text-mont-200 text-sm"><i data-lucide="check" class="w-4 h-4 text-mont-400 flex-shrink-0"></i> Complete digital guide (PDF)</li>
+              <li class="flex items-center gap-3 text-mont-200 text-sm"><i data-lucide="check" class="w-4 h-4 text-mont-400 flex-shrink-0"></i> Custom illustrated maps</li>
+              <li class="flex items-center gap-3 text-mont-200 text-sm"><i data-lucide="check" class="w-4 h-4 text-mont-400 flex-shrink-0"></i> Offline access</li>
+              <li class="flex items-center gap-3 text-mont-200 text-sm"><i data-lucide="check" class="w-4 h-4 text-mont-400 flex-shrink-0"></i> Lifetime updates</li>
+            </ul>
+            <button class="w-full magnetic-btn ripple-container border border-mont-400/30 text-mont-200 py-3.5 rounded-full font-semibold hover:bg-mont-400/10 hover:border-mont-400/50 transition-all">
+              Browse Guides
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bundle - Featured -->
+      <div class="reveal group">
+        <div class="relative bg-gradient-to-b from-mont-500/20 to-mont-700/20 border-2 border-mont-400/40 rounded-3xl p-8 hover:border-mont-400/70 transition-all duration-500 guide-card h-full flex flex-col overflow-hidden pulse-glow">
+          <div class="absolute top-0 right-0 bg-gradient-to-l from-mont-400 to-mont-600 text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl">BEST VALUE</div>
+          <div class="shimmer absolute inset-0 pointer-events-none"></div>
+          <div class="relative z-10 flex flex-col h-full">
+            <div class="mb-6">
+              <i data-lucide="library" class="w-10 h-10 text-mont-300 mb-4"></i>
+              <h3 class="font-playfair text-2xl font-bold mb-2">Coastal Bundle</h3>
+              <p class="text-mont-300 text-sm">3 coastal guides</p>
+            </div>
+            <div class="mb-6">
+              <span class="text-5xl font-bold font-playfair">€49</span>
+              <span class="text-mont-400 text-sm line-through ml-2">€73</span>
+              <span class="bg-emerald-500/20 text-emerald-300 text-xs font-semibold px-2 py-1 rounded-full ml-2">Save 33%</span>
+            </div>
+            <ul class="space-y-3 mb-8 flex-grow">
+              <li class="flex items-center gap-3 text-mont-200 text-sm"><i data-lucide="check" class="w-4 h-4 text-mont-400 flex-shrink-0"></i> Coastal Journey guide</li>
+              <li class="flex items-center gap-3 text-mont-200 text-sm"><i data-lucide="check" class="w-4 h-4 text-mont-400 flex-shrink-0"></i> Historic Towns & Culture</li>
+              <li class="flex items-center gap-3 text-mont-200 text-sm"><i data-lucide="check" class="w-4 h-4 text-mont-400 flex-shrink-0"></i> Taste of Montenegro</li>
+              <li class="flex items-center gap-3 text-mont-200 text-sm"><i data-lucide="check" class="w-4 h-4 text-mont-400 flex-shrink-0"></i> Everything in Single +</li>
+              <li class="flex items-center gap-3 text-mont-200 text-sm"><i data-lucide="check" class="w-4 h-4 text-mont-400 flex-shrink-0"></i> Exclusive beach map</li>
+              <li class="flex items-center gap-3 text-mont-200 text-sm"><i data-lucide="check" class="w-4 h-4 text-mont-400 flex-shrink-0"></i> Priority email support</li>
+            </ul>
+            <button class="w-full magnetic-btn ripple-container bg-gradient-to-r from-mont-400 to-mont-600 text-white py-3.5 rounded-full font-semibold shadow-lg shadow-mont-500/25 hover:shadow-mont-500/40 transition-all">
+              Get Coastal Bundle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Complete Collection -->
+      <div class="reveal group">
+        <div class="bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-mont-400/30 transition-all duration-500 guide-card h-full flex flex-col relative overflow-hidden">
+          <div class="shimmer absolute inset-0 pointer-events-none"></div>
+          <div class="relative z-10 flex flex-col h-full">
+            <div class="mb-6">
+              <i data-lucide="crown" class="w-10 h-10 text-yellow-400 mb-4"></i>
+              <h3 class="font-playfair text-2xl font-bold mb-2">Complete Collection</h3>
+              <p class="text-mont-300 text-sm">All 6 guides</p>
+            </div>
+            <div class="mb-6">
+              <span class="text-5xl font-bold font-playfair">€89</span>
+              <span class="text-mont-400 text-sm line-through ml-2">€154</span>
+              <span class="bg-emerald-500/20 text-emerald-300 text-xs font-semibold px-2 py-1 rounded-full ml-2">Save 42%</span>
+            </div>
+            <ul class="space-y-3 mb-8 flex-grow">
+              <li class="flex items-center gap-3 text-mont-200 text-sm"><i data-lucide="check" class="w-4 h-4 text-mont-400 flex-shrink-0"></i> All 6 travel guides</li>
+              <li class="flex items-center gap-3 text-mont-200 text-sm"><i data-lucide="check" class="w-4 h-4 text-mont-400 flex-shrink-0"></i> Everything in Bundle +</li>
+              <li class="flex items-center gap-3 text-mont-200 text-sm"><i data-lucide="check" class="w-4 h-4 text-mont-400 flex-shrink-0"></i> Exclusive photo ebook</li>
+              <li class="flex items-center gap-3 text-mont-200 text-sm"><i data-lucide="check" class="w-4 h-4 text-mont-400 flex-shrink-0"></i> Packing checklist</li>
+              <li class="flex items-center gap-3 text-mont-200 text-sm"><i data-lucide="check" class="w-4 h-4 text-mont-400 flex-shrink-0"></i> Phrasebook (PDF)</li>
+              <li class="flex items-center gap-3 text-mont-200 text-sm"><i data-lucide="check" class="w-4 h-4 text-mont-400 flex-shrink-0"></i> VIP community access</li>
+            </ul>
+            <button class="w-full magnetic-btn ripple-container bg-gradient-to-r from-yellow-500 to-orange-500 text-mont-950 py-3.5 rounded-full font-semibold shadow-lg shadow-yellow-500/25 hover:shadow-yellow-500/40 transition-all">
+              Get Complete Collection
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wave divider -->
+  <div class="wave-divider" style="transform: rotate(180deg); top: 0; bottom: auto;">
+    <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+      <path d="M0,40 C200,80 400,0 600,40 C800,80 1000,0 1200,40 L1200,0 L0,0 Z" fill="#003fa0"></path>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ CTA SECTION ============ -->
+<section class="relative bg-cta py-24 overflow-hidden" id="cta">
+  <div class="absolute inset-0">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-mont-300/5 rounded-full blur-3xl morph-blob"></div>
+  </div>
+  <div class="absolute top-10 left-10 w-4 h-4 bg-mont-400/40 rounded-full float"></div>
+  <div class="absolute top-32 right-20 w-3 h-3 bg-mont-300/40 rounded-full float-reverse float-delay-1"></div>
+  <div class="absolute bottom-20 left-1/4 w-2 h-2 bg-white/30 rounded-full float-slow float-delay-2"></div>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+    <div class="reveal-scale">
+      <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 mb-8">
+        <i data-lucide="sparkles" class="w-4 h-4 text-mont-300"></i>
+        <span class="text-sm text-mont-200 font-medium">Limited Time — 20% Off Complete Collection</span>
+      </div>
+    </div>
+    <h2 class="reveal font-playfair text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+      Your Montenegro<br>Adventure <span class="gradient-text">Awaits</span>
+    </h2>
+    <p class="reveal text-mont-200 text-lg sm:text-xl max-w-2xl mx-auto mb-10 font-cormorant italic">Don't just visit Montenegro — experience it through the eyes of those who know it by heart. Your perfect trip is one click away.</p>
+    <div class="reveal flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#pricing" class="magnetic-btn ripple-container group bg-white text-mont-950 px-10 py-4 rounded-full font-bold text-lg shadow-2xl shadow-white/20 hover:shadow-white/30 transition-all flex items-center gap-2 justify-center">
+        Get Your Guide Now
+        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+      </a>
+      <a href="#guides" class="magnetic-btn ripple-container border border-white/30 text-white px-10 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all flex items-center gap-2 justify-center">
+        <i data-lucide="download" class="w-5 h-5"></i>
+        Free Sample
+      </a>
+    </div>
+    <p class="reveal text-mont-400 text-sm mt-6 flex items-center justify-center gap-2">
+      <i data-lucide="shield-check" class="w-4 h-4"></i>
+      30-day money-back guarantee · Instant download · Secure checkout
+    </p>
+  </div>
+</section>
+
+<!-- ============ NEWSLETTER SECTION ============ -->
+<section class="relative bg-mont-950 py-20 overflow-hidden">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+    <h3 class="reveal font-playfair text-3xl sm:text-4xl font-bold mb-4">Get Free Montenegro Tips</h3>
+    <p class="reveal text-mont-300 mb-8">Join 8,000+ travelers. Weekly tips, hidden gems, and exclusive discounts.</p>
+    <form class="reveal flex flex-col sm:flex-row gap-3 max-w-lg mx-auto" onsubmit="event.preventDefault(); handleNewsletter();">
+      <input type="email" id="newsletter-email" placeholder="Your email address" class="flex-grow bg-white/5 border border-white/10 rounded-full px-6 py-3.5 text-white placeholder-mont-400 focus:outline-none focus:border-mont-400/50 focus:ring-2 focus:ring-mont-400/20 transition-all" required>
+      <button type="submit" class="magnetic-btn ripple-container bg-gradient-to-r from-mont-400 to-mont-600 text-white px-8 py-3.5 rounded-full font-semibold shadow-lg shadow-mont-500/25 hover:shadow-mont-500/40 transition-all whitespace-nowrap">
+        Subscribe
+      </button>
+    </form>
+    <div id="newsletter-msg" class="mt-4 text-sm hidden"></div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="relative bg-mont-950 border-t border-white/5 pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-10 mb-12">
+      <div class="md:col-span-1">
+        <a href="#" class="flex items-center gap-2 mb-4">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-mont-400 to-mont-600 flex items-center justify-center">
+            <i data-lucide="mountain" class="w-5 h-5 text-white"></i>
+          </div>
+          <span class="font-playfair text-xl font-bold">Monté<span class="text-mont-400">Guide</span></span>
+        </a>
+        <p class="text-mont-400 text-sm leading-relaxed">Handcrafted travel guides for the curious explorer. Written by locals, loved by adventurers worldwide.</p>
+        <div class="flex gap-3 mt-4">
+          <a href="#" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-mont-400/20 hover:border-mont-400/30 transition-all">
+            <i data-lucide="instagram" class="w-4 h-4 text-mont-300"></i>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-mont-400/20 hover:border-mont-400/30 transition-all">
+            <i data-lucide="twitter" class="w-4 h-4 text-mont-300"></i>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-mont-400/20 hover:border-mont-400/30 transition-all">
+            <i data-lucide="youtube" class="w-4 h-4 text-mont-300"></i>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4 text-sm tracking-wider uppercase text-mont-300">Guides</h4>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-mont-400 text-sm hover:text-mont-200 transition-colors">Coastal Journey</a></li>
+          <li><a href="#" class="text-mont-400 text-sm hover:text-mont-200 transition-colors">Northern Peaks</a></li>
+          <li><a href="#" class="text-mont-400 text-sm hover:text-mont-200 transition-colors">Historic Towns</a></li>
+          <li><a href="#" class="text-mont-400 text-sm hover:text-mont-200 transition-colors">Taste of Montenegro</a></li>
+          <li><a href="#" class="text-mont-400 text-sm hover:text-mont-200 transition-colors">Adrenaline & Outdoors</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4 text-sm tracking-wider uppercase text-mont-300">Company</h4>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-mont-400 text-sm hover:text-mont-200 transition-colors">About Us</a></li>
+          <li><a href="#" class="text-mont-400 text-sm hover:text-mont-200 transition-colors">Our Writers</a></li>
+          <li><a href="#" class="text-mont-400 text-sm hover:text-mont-200 transition-colors">Blog</a></li>
+          <li><a href="#" class="text-mont-400 text-sm hover:text-mont-200 transition-colors">Careers</a></li>
+          <li><a href="#" class="text-mont-400 text-sm hover:text-mont-200 transition-colors">Press Kit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4 text-sm tracking-wider uppercase text-mont-300">Support</h4>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-mont-400 text-sm hover:text-mont-200 transition-colors">Help Center</a></li>
+          <li><a href="#" class="text-mont-400 text-sm hover:text-mont-200 transition-colors">Contact Us</a></li>
+          <li><a href="#" class="text-mont-400 text-sm hover:text-mont-200 transition-colors">Refund Policy</a></li>
+          <li><a href="#" class="text-mont-400 text-sm hover:text-mont-200 transition-colors">Privacy Policy</a></li>
+          <li><a href="#" class="text-mont-400 text-sm hover:text-mont-200 transition-colors">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-white/5 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="text-mont-500 text-xs">© 2025 MontéGuide. All rights reserved. Made with ❤️ in Montenegro.</p>
+      <div class="flex items-center gap-4 text-mont-500 text-xs">
+        <span class="flex items-center gap-1"><i data-lucide="lock" class="w-3 h-3"></i> Secure Payments</span>
+        <span class="flex items-center gap-1"><i data-lucide="credit-card" class="w-3 h-3"></i> Visa / MC / PayPal</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

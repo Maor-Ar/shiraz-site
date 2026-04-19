@@ -1,0 +1,284 @@
+build me a site that sells written traveling guides with beautiful sections that flows with animation and visualls that animate when scrolling with backgrounds and visualsmake sure each section has backgrounds that flow from section to sectionadd background and forground elements that animate on scroll and/or when touching them (tap on mobile hover on desktop)add as much as proffesional special and mesmerising sections wow me
+
+I'll create an absolutely stunning, mesmerizing travel guide website for Montenegro with scroll animations, flowing backgrounds, interactive elements, and jaw-dropping visuals. Let me build this! 🏔️✨
+
+
+Here's what I've built for you — an absolutely mesmerizing Montenegro travel guide website! 🏔️✨
+
+
+What's Inside:
+
+🎨 Visual Spectacles
+
+Particle system — interactive floating particles that react to your mouse cursor and connect with luminous lines
+Cursor follower — a soft glow that follows your mouse (desktop)
+Scroll progress bar — gradient indicator at the top
+Morphing blobs — organic shapes that endlessly transform
+Floating orbs — ambient background elements that drift with parallax on scroll
+
+🎬 Animations on Scroll
+
+Reveal — elements fade up as you scroll into view
+Reveal left/right — directional slide-in animations
+Reveal scale & rotate — dramatic entrance effects
+Staggered children — cards animate in sequence with delays
+Counter animation — stats count up when visible
+Parallax image — the immersive section shifts on scroll
+
+👆 Interactive Elements (Hover / Tap)
+
+3D tilt effect on guide cards — follows your cursor
+Magnetic buttons — subtly pull toward your mouse
+Ripple effect — click/tap creates a water ripple
+Card shine — a light sweep on hover
+Radial glow — follows cursor position on cards
+Image zoom — hover/tap zooms images smoothly
+Touch support — mobile tap triggers all interactive states
+
+📐 Flowing Sections
+
+Gradient backgrounds that blend seamlessly between sections
+Wave SVG dividers creating organic flow
+Marquee strip — auto-scrolling destination names
+Full-width parallax — immersive visual break section
+
+📱 Sections
+
+Hero — dramatic split layout with floating stat cards
+Marquee — scrolling destination strip
+6 Guide Cards — shop with pricing, ratings, and details
+Destinations Grid — masonry-style photo grid
+Why Us — features with animated icon boxes
+Immersive Parallax — full-viewport quote section
+Inside the Guide — horizontal scroll carousel
+Testimonials — 3-column review cards
+Pricing — 3-tier with featured bundle
+CTA — dramatic call-to-action
+Newsletter — email signup
+Footer — full site links
+
+i want it to be with green colors i want images of leavs or trees in the background .. i want a feelingof exploring a jungle animation on scroll and hover use what you already built but change / add what i asked for 
+I'll transform your site from ocean blue to a lush jungle green paradise with floating leaves, canopy light effects, mist layers, and vine decorations! 🌿🌴
+
+
+Let me make all the changes systematically:
+
+
+Now let me update the JavaScript for the green particle colors:
+
+
+Done! Your Montenegro travel guide site has been completely transformed into a lush jungle paradise! 🌿🌴✨
+
+
+What Changed:
+
+🎨 Color Theme
+
+All blues → rich greens — every gradient, shadow, border, text accent, and background now uses a deep forest green palette (#052e16 → #4ade80 spectrum)
+Scrollbar, progress bar, cursor follower — all green
+Particle system now renders green dots with green connection lines
+
+🍃 Leaf & Tree Decorations
+
+6 falling leaves in the hero section — each with different size, speed, and delay, gently drifting down like a jungle canopy
+Floating leaf SVGs throughout — hero, guides, experience, and CTA sections with swaying animations
+Vine decorations — SVG vines with leaf clusters creeping along the left edge of the Guides section and right edge of the Destinations section
+
+✨ Jungle Atmosphere
+
+Canopy light rays — soft radial green light filtering from the top (hero + experience sections)
+Mist layers — subtle drifting fog at the bottom of the hero
+Fireflies — 5+ glowing firefly dots that pulse in and out across hero, experience, and CTA sections
+Leaf sway animation — decorative leaves gently rock back and forth
+
+🖼️ Images
+
+All key images updated to nature/outdoor categories with seeds biased toward lush green landscapes and forests
+
+ falling leaves all over the site and more Vine decorations in the background over the site also Leaf sway animation make all of these elements bigger so i can see them clearlyalso make the whole site in hebrew
+ 
+ The .global-leaves container was position: fixed covering the entire viewport with z-index: 2, while the content <section> elements had position: relative but no z-index (defaults to auto/0). This meant the fixed leaf overlay was painting on top of ALL content, making everything invisible behind it.
+
+
+✅ The Fix
+
+Added z-index: 5 to all section, main, footer, header elements — this pushes all content above the decorative overlays
+Lowered .global-leaves z-index from 2 → 1 — leaves now sit between the particles canvas (z-index: 0) and content (z-index: 5)
+Set nav z-index to 100 — ensures navigation stays above everything
+Set cursor follower z-index to 50 — visible above content but below nav
+Set scroll progress z-index to 200 — always visible at top
+Set loader z-index to 9999 — covers everything during load
+
+The falling leaves will now appear beautifully in the background layer, and all your content will be fully visible and interactive! 🌿✨
+
+here is 
+
+קישור לפייסבוק - https://www.facebook.com/share/1GPdFNtnfF/?mibextid=wwXIfr
+
+קישור לאינסטגרם- https://www.instagram.com/shiraz_sanker?igsh=d3Vncm1ndDBiYXpy&utm_source=qr
+
+קישור לטיקטוק - https://www.tiktok.com/@shiraz_sanker?_r=1&_t=ZS-95MyjZcVljc
+
+בתכלס אני קוראת לזה digital Travel אין לי לוגו עדיין אבל יש בסוף העמוד איך שכתבתי את זה אני יכולה לשלוח לך את הסוג גופן 
+
+בנוסף אני רוצה שיבינו מזה אומר digital Travel 
+
+לרכישה מהירה לחצו כאן 
+
+הראשון מסוגו בישראל 
+
+מבוסס חוויה אמיתית, חיסכון עצום בזמן התכנון שלך !
+
+Digital Travel
+
+ המסלול המלא לשבעה ימים במונטנגרו
+
+
+במקום לבזבז שעות על תכנון, לקרוא מאות המלצות, ולהתלבט על כל צעד, 
+
+קבלו תכנון יומי מלא של 7 ימים מלאים עם נקודות עצירה, מסעדות, תצפיות, מקומות לינה מומלצים, קישורים נוחים הכול מסודר במדריך אחד ברור.
+
+זה לא עוד סתם מדריך, זה מסלול מדויק וחכם, שנבנה מתוך חוויה אמיתית שלי, עם הבנה ברורה של מה באמת שווה לראות, ואיך להספיק את זה בצורה הכי נעימה, יעילה ומרגיעה שיש.
+
+מתאים למשפחות, זוגות או קבוצות 
+
+אם אתם רוצים לטייל בלי לדלג על המקומות שבאמת שווה לראות, וליהנות מהמסלול שתוכנן כמו שצריך זה בדיוק בשבילכם.
+
+תכינו לעצמכם משהו חם לשתות, תתמקמו בנוח,ותנו לעצמכם רגע להיכנס למסלול שייקח את הטיול שלכם למונטנגרו כמה רמות קדימה.
+
+הגעתם עד מונטנגרו אבל מרגישים שפספסתם 
+
+את המקומות הכי שווים
+
+אתם שורפים שעות על תכנון הטיול ועדיין לא בטוחים אם זה באמת המסלול הכי טוב
+
+עברתם עשרות פוסטים והמלצות אבל 
+
+הכול מרגיש מבולגן ולא ברור 
+
+למי המדריך מתאים ?
+
+לרכישה מהירה לחצו כאן 
+
+מה מחכה לכם במדריך ?
+
+01
+
+02
+
+03
+
+04
+
+מפה מסודרת עם מסלול יומי מפורט.
+
+דרך גוגל מאפס  
+
+ לו״ז מסודר ל-7 ימים מלאים
+
+בלי לחץ להספיק הכל ביום אחד 
+
+ קישורים למסעדות מלונות ואטרקציות 
+
+קישורים וניווטים 
+
+טיפים שצריך לדעת על כל מקום 
+
+כניסות בתשלום , חניות ועוד…
+
+עכשיו אתם מוכנים לטיול ! 
+
+כל התמונות כאן צולמו במקומות שאני ביקרתי בהם בעצמי כולם מחכים לכם בתוך המדריך הזה, כולל הוראות הגעה ברורות לכל נקודה.
+
+הצצה קטנה לנופים שמחכים לכם ..
+
+שאלות נפוצות 
+
+ האם המדריך מתאים גם למי שלא נמצא במונטנגרו 7 ימים מלאים?
+
+בהחלט. גם אם יש לכם פחות מ-7 ימים, תוכלו להתאים את המסלול לפי הימים שברשותכם לבחור רק את המקומות שהכי מעניינים אתכם, לפי המלצות, אזורים ומרחקים.
+
+
+איך אדע אם המדריך הזה באמת מתאים לי?
+
+אם אתם מתכננים לטוס למונטנגרו, רוצים לחסוך זמן בחיפושים, לגלות מקומות מיוחדים וליהנות ממסלול ברור וקל המדריך הזה נבנה בדיוק בשבילכם. הוא נכתב מתוך חוויה אישית, אחרי שבדקתי מה באמת שווה ומה פחות .
+
+
+ומה אם לא אוהב את המסלול?
+
+המסלול נבנה בגמישות אתם יכולים לשנות, להזיז ולבחור רק את מה שמתאים לכם. הוא לא נוקשה, אלא נותן לכם חופש בחירה.
+
+
+האם יש אפשרות להחזר כספי?
+
+כמו ברוב המדריכים הדיגיטליים בשל האופי של המוצר, לאחר הרכישה והשליחה לא ניתן להחזיר ולקבל החזר. עם זאת, אני בטוחה שתמצאו בו ערך שישדרג לכם את כל החוויה! ותמיד זמינה לשאלות.
+
+ האם המדריך תקף גם לעונת החורף?
+
+המדריך שבניתי מתאים במיוחד לטיולים בקיץ ,
+
+אבל גם אם אתם מתכננים טיול בעונות אחרות יש בו המון המלצות שימושיות על לינה, נופים, מסעדות, מסלולים וטיפים אישיים!
+
+תוכלו פשוט לקחת משם את מה שרלוונטי עבורכם ולהתאים את זה לעונה שבה תטיילו .
+
+
+ מתי כדאי לטייל במונטנגרו?
+
+התקופה המומלצת לטיול יוני - ספטמבר שימו לב: אזור הצפון נגיש בעיקר מהקיץ ואילך, כאשר השלגים נמסים והכבישים נפתחים.
+
+בחורף, חלק מהמסלולים והכבישים באזור זה סגורים עקב שלג.
+
+בטח הייתם רוצים להכנס קצת לתוך המדריך 
+
+דוגמא ליום הראשון
+
+
+למה שווה לרכוש את המסלול שלי?
+
+אחרי שביקרתי במונטנגרו טיילתי, בדקתי, טעמתי, עצרתי וריכזתי את הכל למדריך פרקטי אמיתי, ומבוסס חוויה אישית ואמיתית!
+
+המדריך מגיע בקובץ PDF
+
+איך מקבלים את המדריך ?
+
+לוחצים על רכישה 
+
+מהירה 
+
+מזינים את הפרטים
+
+והתשלום
+
+מקבלים את המדריך
+
+במייל עד 24 שעות מרגע הרכישה 
+
+טסים בראש שקט
+
+לו״ז מסודר ל-7 ימים מלאים 
+
+קישורים לאטרקציות ועוד …
+
+מפה עם מסלול מפורט לכל יום 
+
+טיפים שצריך לדעת בכל יום
+
+לרכישה מהירה לחצו כאן 
+
+Digital Travel
+
+ המסלול המלא לשבעה ימים
+
+ מלאים במונטנגרו במבצע לזמן מוגבל !!
+
+99
+
+₪
+
+במקום 239 ₪
+
+© 2025 Shiraz Sanker. All rights reserved.
+
+F O L L O W  M E
+
+לתנאי שימוש נגישות ומדיניות רכישה

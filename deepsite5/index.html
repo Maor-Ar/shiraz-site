@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מדריכי מונטנגרו — גלו את פנינת הבלקן</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'playfair': ['Playfair Display', 'serif'],
+            'inter': ['Inter', 'sans-serif'],
+            'cormorant': ['Cormorant Garamond', 'serif'],
+            'heebo': ['Heebo', 'sans-serif'],
+          },
+          colors: {
+            'mont': {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+              950: '#052e16',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Heebo', 'Inter', sans-serif; background: #052e16; color: #fff; overflow-x: hidden; }
+
+    /* RTL adjustments */
+    [dir="rtl"] .gradient-text { direction: rtl; }
+    [dir="rtl"] .font-playfair { font-family: 'Heebo', 'Playfair Display', serif; }
+    [dir="rtl"] .font-cormorant { font-family: 'Heebo', 'Cormorant Garamond', serif; }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #14532d; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #4ade80, #22c55e); border-radius: 10px; }
+
+    /* Scroll animations */
+    .reveal { opacity: 0; transform: translateY(60px); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-80px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal-left.active { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(80px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal-right.active { opacity: 1; transform: translateX(0); }
+    .reveal-scale { opacity: 0; transform: scale(0.8); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal-scale.active { opacity: 1; transform: scale(1); }
+    .reveal-rotate { opacity: 0; transform: rotate(-5deg) scale(0.9); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal-rotate.active { opacity: 1; transform: rotate(0deg) scale(1); }
+
+    /* Stagger children */
+    .stagger-children .reveal:nth-child(1) { transition-delay: 0.1s; }
+    .stagger-children .reveal:nth-child(2) { transition-delay: 0.2s; }
+    .stagger-children .reveal:nth-child(3) { transition-delay: 0.3s; }
+    .stagger-children .reveal:nth-child(4) { transition-delay: 0.4s; }
+    .stagger-children .reveal:nth-child(5) { transition-delay: 0.5s; }
+    .stagger-children .reveal:nth-child(6) { transition-delay: 0.6s; }
+
+    /* Floating animation */
+    @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(2deg); } }
+    @keyframes floatSlow { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+    @keyframes floatReverse { 0%, 100% { transform: translateY(-15px) rotate(-1deg); } 50% { transform: translateY(5px) rotate(1deg); } }
+    .float { animation: float 6s ease-in-out infinite; }
+    .float-slow { animation: floatSlow 8s ease-in-out infinite; }
+    .float-reverse { animation: floatReverse 7s ease-in-out infinite; }
+    .float-delay-1 { animation-delay: 1s; }
+    .float-delay-2 { animation-delay: 2s; }
+    .float-delay-3 { animation-delay: 3s; }
+
+    /* Pulse glow */
+    @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 20px rgba(74, 222, 128, 0.3); } 50% { box-shadow: 0 0 40px rgba(74, 222, 128, 0.6), 0 0 80px rgba(74, 222, 128, 0.2); } }
+    .pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
+
+    /* Shimmer */
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    .shimmer { background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%); background-size: 200% 100%; animation: shimmer 3s ease-in-out infinite; }
+
+    /* Gradient text */
+    .gradient-text { background: linear-gradient(135deg, #86efac, #4ade80, #ffffff, #86efac); background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: gradientShift 6s ease-in-out infinite; }
+    @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+    /* Interactive hover cards */
+    .guide-card { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+    .guide-card:hover, .guide-card.touched { transform: translateY(-12px) scale(1.02); }
+    .guide-card:hover .card-shine, .guide-card.touched .card-shine { opacity: 1; transform: translateX(100%); }
+    .card-shine { position: absolute; inset: 0; background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.1) 55%, transparent 60%); opacity: 0; transform: translateX(-100%); transition: all 0.8s ease; pointer-events: none; }
+
+    /* Ripple effect */
+    .ripple-container { position: relative; overflow: hidden; }
+    .ripple { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.15); transform: scale(0); animation: rippleAnim 0.6s ease-out; pointer-events: none; }
+    @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+
+    /* Morph blob */
+    @keyframes morph { 0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; } 25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; } 50% { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; } 75% { border-radius: 60% 40% 60% 30% / 60% 40% 30% 60%; } }
+    .morph-blob { animation: morph 8s ease-in-out infinite; }
+
+    /* Wave divider */
+    .wave-divider { position: absolute; bottom: 0; left: 0; width: 100%; overflow: hidden; line-height: 0; }
+    .wave-divider svg { position: relative; display: block; width: calc(100% + 1.3px); height: 80px; }
+
+    /* Horizontal scroll */
+    .horizontal-scroll { display: flex; gap: 2rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 1rem; }
+    .horizontal-scroll::-webkit-scrollbar { display: none; }
+    .horizontal-scroll > * { scroll-snap-align: start; flex-shrink: 0; }
+
+    /* Magnetic button */
+    .magnetic-btn { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .magnetic-btn:hover { transform: scale(1.05); }
+    .magnetic-btn:active { transform: scale(0.98); }
+
+    /* Particle canvas */
+    #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+    /* Counter animation */
+    .counter-value { display: inline-block; }
+
+    /* Tilt effect */
+    .tilt-card { transition: transform 0.3s ease; transform-style: preserve-3d; }
+
+    /* Line drawing animation */
+    @keyframes drawLine { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
+    .draw-line { stroke-dasharray: 1000; stroke-dashoffset: 1000; }
+    .draw-line.active { animation: drawLine 2s ease forwards; }
+
+    /* Nav */
+    .nav-glass { backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); background: rgba(5, 46, 22, 0.7); border-bottom: 1px solid rgba(255,255,255,0.08); z-index: 100; }
+    .nav-scrolled { background: rgba(5, 46, 22, 0.95); box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
+
+    /* Loader */
+    @keyframes loaderSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes loaderFade { 0%, 80% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+    #loader { animation: loaderFade 2.5s ease forwards; z-index: 9999; }
+    .loader-ring { animation: loaderSpin 1.2s linear infinite; border: 3px solid transparent; border-top-color: #4ade80; border-radius: 50%; }
+
+    /* Section-specific backgrounds */
+    .bg-hero { background: linear-gradient(170deg, #052e16 0%, #14532d 30%, #166534 60%, #15803d 100%); }
+    .bg-guides { background: linear-gradient(175deg, #15803d 0%, #14532d 40%, #052e16 100%); }
+    .bg-destinations { background: linear-gradient(170deg, #052e16 0%, #0a3d1e 50%, #14532d 100%); }
+    .bg-experience { background: linear-gradient(175deg, #14532d 0%, #166534 40%, #15803d 70%, #14532d 100%); }
+    .bg-testimonials { background: linear-gradient(170deg, #14532d 0%, #052e16 50%, #0a3d1e 100%); }
+    .bg-pricing { background: linear-gradient(175deg, #0a3d1e 0%, #166534 40%, #14532d 100%); }
+    .bg-cta { background: linear-gradient(170deg, #14532d 0%, #15803d 50%, #16a34a 100%); }
+
+    /* Glowing orbs */
+    @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(30px, -50px) scale(1.1); } 66% { transform: translate(-20px, 20px) scale(0.9); } }
+    @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(-40px, 30px) scale(0.9); } 66% { transform: translate(20px, -40px) scale(1.1); } }
+    .orb-1 { animation: orbFloat1 15s ease-in-out infinite; }
+    .orb-2 { animation: orbFloat2 18s ease-in-out infinite; }
+
+    /* Image hover zoom */
+    .img-zoom { overflow: hidden; }
+    .img-zoom img { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    .img-zoom:hover img, .img-zoom.touched img { transform: scale(1.1); }
+
+    /* Marquee */
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    [dir="rtl"] .marquee-track { animation: marqueeRTL 30s linear infinite; }
+    @keyframes marqueeRTL { 0% { transform: translateX(0); } 100% { transform: translateX(50%); } }
+
+    /* Text stroke */
+    .text-stroke { -webkit-text-stroke: 2px rgba(134, 239, 172, 0.4); -webkit-text-fill-color: transparent; }
+
+    /* Breathing border */
+    @keyframes breatheBorder { 0%, 100% { border-color: rgba(74, 222, 128, 0.2); } 50% { border-color: rgba(74, 222, 128, 0.6); } }
+    .breathe-border { animation: breatheBorder 3s ease-in-out infinite; }
+
+    /* Progress bar for scroll */
+    #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #4ade80, #86efac, #ffffff); z-index: 200; transition: width 0.1s; }
+
+    /* Cursor follower */
+    #cursor-follower { position: fixed; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(74,222,128,0.08) 0%, transparent 70%); pointer-events: none; z-index: 50; transition: transform 0.3s ease-out, opacity 0.3s; transform: translate(-50%, -50%); }
+
+    /* Ensure content sections are above decorative overlays */
+    section, main, footer, header {
+      position: relative;
+      z-index: 5;
+    }
+
+    /* ===== JUNGLE THEME — ENHANCED & BIGGER ===== */
+
+    /* Falling leaves — BIGGER & MORE VISIBLE */
+    @keyframes leafFall {
+      0% { transform: translateY(-10vh) translateX(0) rotate(0deg) scale(0.8); opacity: 0; }
+      10% { opacity: 0.7; }
+      50% { transform: translateY(50vh) translateX(80px) rotate(360deg) scale(1); }
+      90% { opacity: 0.4; }
+      100% { transform: translateY(110vh) translateX(-40px) rotate(720deg) scale(0.6); opacity: 0; }
+    }
+
+    @keyframes leafFall2 {
+      0% { transform: translateY(-5vh) translateX(0) rotate(45deg) scale(0.9); opacity: 0; }
+      15% { opacity: 0.6; }
+      50% { transform: translateY(55vh) translateX(-60px) rotate(-270deg) scale(1.1); }
+      85% { opacity: 0.3; }
+      100% { transform: translateY(110vh) translateX(50px) rotate(-540deg) scale(0.7); opacity: 0; }
+    }
+
+    @keyframes leafFall3 {
+      0% { transform: translateY(-8vh) translateX(0) rotate(-30deg) scale(1); opacity: 0; }
+      12% { opacity: 0.5; }
+      40% { transform: translateY(40vh) translateX(100px) rotate(300deg) scale(1.2); }
+      70% { transform: translateY(70vh) translateX(20px) rotate(500deg) scale(0.9); }
+      100% { transform: translateY(115vh) translateX(-60px) rotate(720deg) scale(0.5); opacity: 0; }
+    }
+
+    .falling-leaf {
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0;
+    }
+
+    /* Global falling leaves container */
+    .global-leaves {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    /* Canopy light rays */
+    @keyframes lightRays {
+      0%, 100% { opacity: 0.04; }
+      50% { opacity: 0.12; }
+    }
+
+    .canopy-light {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 70%;
+      background:
+        radial-gradient(ellipse at 15% 0%, rgba(74,222,128,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 45% 0%, rgba(134,239,172,0.09) 0%, transparent 40%),
+        radial-gradient(ellipse at 75% 0%, rgba(74,222,128,0.1) 0%, transparent 45%),
+        radial-gradient(ellipse at 90% 5%, rgba(134,239,172,0.07) 0%, transparent 35%);
+      pointer-events: none;
+      z-index: 1;
+      animation: lightRays 8s ease-in-out infinite;
+    }
+
+    /* Mist layer */
+    @keyframes mistDrift {
+      0% { transform: translateX(-3%) scaleY(1); opacity: 0.3; }
+      50% { transform: translateX(3%) scaleY(1.1); opacity: 0.5; }
+      100% { transform: translateX(-3%) scaleY(1); opacity: 0.3; }
+    }
+
+    .mist-layer {
+      position: absolute;
+      bottom: 0;
+      left: -10%;
+      width: 120%;
+      height: 25%;
+      background: linear-gradient(to top, rgba(134,239,172,0.08), transparent);
+      pointer-events: none;
+      z-index: 2;
+      animation: mistDrift 12s ease-in-out infinite;
+    }
+
+    /* Leaf sway — BIGGER */
+    @keyframes leafSway {
+      0%, 100% { transform: rotate(-12deg) translateX(0); }
+      25% { transform: rotate(8deg) translateX(10px); }
+      50% { transform: rotate(-6deg) translateX(-6px); }
+      75% { transform: rotate(10deg) translateX(8px); }
+    }
+
+    .leaf-sway { animation: leafSway 5s ease-in-out infinite; }
+
+    /* Vine decoration — MORE VISIBLE */
+    .vine-left {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.18;
+    }
+
+    .vine-right {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.18;
+      transform: scaleX(-1);
+    }
+
+    /* Jungle glow pulse */
+    @keyframes jungleGlow {
+      0%, 100% { filter: drop-shadow(0 0 8px rgba(74,222,128,0.3)); }
+      50% { filter: drop-shadow(0 0 20px rgba(74,222,128,0.6)); }
+    }
+
+    .jungle-glow { animation: jungleGlow 4s ease-in-out infinite; }
+
+    /* Firefly effect */
+    @keyframes firefly {
+      0%, 100% { opacity: 0; transform: translate(0, 0); }
+      25% { opacity: 0.8; }
+      50% { opacity: 0.4; transform: translate(30px, -20px); }
+      75% { opacity: 0.9; }
+    }
+
+    .firefly {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: #bbf7d0;
+      border-radius: 50%;
+      box-shadow: 0 0 8px 3px rgba(187,247,208,0.5), 0 0 16px 6px rgba(74,222,128,0.3);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* Big leaf SVG styles */
+    .big-leaf {
+      filter: drop-shadow(0 0 8px rgba(74,222,128,0.2));
+    }
+
+    /* Vine branch */
+    @keyframes vineGrow {
+      0% { stroke-dashoffset: 600; }
+      100% { stroke-dashoffset: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Scroll Progress -->
+<div id="scroll-progress"></div>
+
+<!-- Cursor Follower (desktop) -->
+<div id="cursor-follower" class="hidden md:block"></div>
+
+<!-- Particles -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- ===== GLOBAL FALLING LEAVES — ALL OVER THE SITE ===== -->
+<div class="global-leaves" id="global-leaves">
+  <div class="falling-leaf" style="left: 3%; animation: leafFall 16s linear infinite; animation-delay: 0s;">
+    <svg class="big-leaf" width="50" height="50" viewBox="0 0 24 24" fill="rgba(74,222,128,0.25)" stroke="rgba(74,222,128,0.4)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="falling-leaf" style="left: 12%; animation: leafFall2 20s linear infinite; animation-delay: 2s;">
+    <svg class="big-leaf" width="40" height="40" viewBox="0 0 24 24" fill="rgba(134,239,172,0.2)" stroke="rgba(134,239,172,0.35)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="falling-leaf" style="left: 22%; animation: leafFall3 18s linear infinite; animation-delay: 5s;">
+    <svg class="big-leaf" width="60" height="60" viewBox="0 0 24 24" fill="rgba(74,222,128,0.18)" stroke="rgba(74,222,128,0.35)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="falling-leaf" style="left: 33%; animation: leafFall 22s linear infinite; animation-delay: 8s;">
+    <svg class="big-leaf" width="45" height="45" viewBox="0 0 24 24" fill="rgba(187,247,208,0.22)" stroke="rgba(187,247,208,0.35)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="falling-leaf" style="left: 44%; animation: leafFall2 19s linear infinite; animation-delay: 1s;">
+    <svg class="big-leaf" width="55" height="55" viewBox="0 0 24 24" fill="rgba(74,222,128,0.2)" stroke="rgba(74,222,128,0.4)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="falling-leaf" style="left: 55%; animation: leafFall3 24s linear infinite; animation-delay: 4s;">
+    <svg class="big-leaf" width="38" height="38" viewBox="0 0 24 24" fill="rgba(134,239,172,0.18)" stroke="rgba(134,239,172,0.3)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="falling-leaf" style="left: 65%; animation: leafFall 21s linear infinite; animation-delay: 7s;">
+    <svg class="big-leaf" width="48" height="48" viewBox="0 0 24 24" fill="rgba(74,222,128,0.22)" stroke="rgba(74,222,128,0.4)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="falling-leaf" style="left: 75%; animation: leafFall2 17s linear infinite; animation-delay: 3s;">
+    <svg class="big-leaf" width="52" height="52" viewBox="0 0 24 24" fill="rgba(187,247,208,0.2)" stroke="rgba(187,247,208,0.35)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="falling-leaf" style="left: 85%; animation: leafFall3 23s linear infinite; animation-delay: 6s;">
+    <svg class="big-leaf" width="42" height="42" viewBox="0 0 24 24" fill="rgba(74,222,128,0.25)" stroke="rgba(74,222,128,0.4)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="falling-leaf" style="left: 93%; animation: leafFall 25s linear infinite; animation-delay: 9s;">
+    <svg class="big-leaf" width="35" height="35" viewBox="0 0 24 24" fill="rgba(134,239,172,0.2)" stroke="rgba(134,239,172,0.35)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="falling-leaf" style="left: 8%; animation: leafFall3 26s linear infinite; animation-delay: 11s;">
+    <svg class="big-leaf" width="58" height="58" viewBox="0 0 24 24" fill="rgba(74,222,128,0.15)" stroke="rgba(74,222,128,0.3)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="falling-leaf" style="left: 50%; animation: leafFall2 20s linear infinite; animation-delay: 13s;">
+    <svg class="big-leaf" width="44" height="44" viewBox="0 0 24 24" fill="rgba(187,247,208,0.18)" stroke="rgba(187,247,208,0.3)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="falling-leaf" style="left: 70%; animation: leafFall 19s linear infinite; animation-delay: 15s;">
+    <svg class="big-leaf" width="36" height="36" viewBox="0 0 24 24" fill="rgba(74,222,128,0.22)" stroke="rgba(74,222,128,0.4)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="falling-leaf" style="left: 28%; animation: leafFall3 21s linear infinite; animation-delay: 10s;">
+    <svg class="big-leaf" width="46" height="46" viewBox="0 0 24 24" fill="rgba(134,239,172,0.2)" stroke="rgba(134,239,172,0.35)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="falling-leaf" style="left: 88%; animation: leafFall2 27s linear infinite; animation-delay: 14s;">
+    <svg class="big-leaf" width="54" height="54" viewBox="0 0 24 24" fill="rgba(74,222,128,0.17)" stroke="rgba(74,222,128,0.35)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+</div>
+
+<!-- Loader -->
+<div id="loader" class="fixed inset-0 z-[9999] bg-mont-950 flex items-center justify-center">
+  <div class="text-center">
+    <div class="loader-ring w-16 h-16 mx-auto mb-4"></div>
+    <p class="font-heebo text-2xl text-mont-300">חוקרים את הג'ונגל...</p>
+  </div>
+</div>
+
+<!-- Navigation -->
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 nav-glass transition-all duration-500">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 md:h-20">
+      <a href="#" class="flex items-center gap-2 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-mont-400 to-mont-600 flex items-center justify-center pulse-glow">
+          <i data-lucide="trees" class="w-5 h-5 text-white"></i>
+        </div>
+        <span class="font-heebo text-xl font-bold tracking-wide">מונטה<span class="text-mont-400">גייד</span></span>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#guides" class="text-sm text-mont-200 hover:text-white transition-colors relative group">
+          מדריכים
+          <span class="absolute -bottom-1 right-0 w-0 h-0.5 bg-mont-400 group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#destinations" class="text-sm text-mont-200 hover:text-white transition-colors relative group">
+          יעדים
+          <span class="absolute -bottom-1 right-0 w-0 h-0.5 bg-mont-400 group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#experience" class="text-sm text-mont-200 hover:text-white transition-colors relative group">
+          חוויה
+          <span class="absolute -bottom-1 right-0 w-0 h-0.5 bg-mont-400 group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#pricing" class="text-sm text-mont-200 hover:text-white transition-colors relative group">
+          מחירים
+          <span class="absolute -bottom-1 right-0 w-0 h-0.5 bg-mont-400 group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#pricing" class="magnetic-btn ripple-container bg-gradient-to-r from-mont-500 to-mont-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold shadow-lg shadow-mont-500/25 hover:shadow-mont-500/40 transition-shadow">
+          קבלו את המדריך
+        </a>
+      </div>
+      <button id="mobile-menu-btn" class="md:hidden text-white p-2">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="md:hidden hidden bg-mont-950/95 backdrop-blur-xl border-t border-white/5">
+    <div class="px-4 py-6 space-y-4">
+      <a href="#guides" class="block text-lg text-mont-200 hover:text-white py-2 transition-colors">מדריכים</a>
+      <a href="#destinations" class="block text-lg text-mont-200 hover:text-white py-2 transition-colors">יעדים</a>
+      <a href="#experience" class="block text-lg text-mont-200 hover:text-white py-2 transition-colors">חוויה</a>
+      <a href="#pricing" class="block text-lg text-mont-200 hover:text-white py-2 transition-colors">מחירים</a>
+      <a href="#pricing" class="block bg-gradient-to-r from-mont-500 to-mont-600 text-white px-6 py-3 rounded-full text-center font-semibold mt-4">קבלו את המדריך</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO SECTION ============ -->
+<section class="relative min-h-screen flex items-center bg-hero overflow-hidden" id="hero">
+  <!-- Canopy light rays -->
+  <div class="canopy-light"></div>
+  <!-- Mist layer -->
+  <div class="mist-layer"></div>
+
+  <!-- Animated orbs -->
+  <div class="absolute top-20 right-10 w-72 h-72 bg-mont-500/20 rounded-full blur-3xl orb-1"></div>
+  <div class="absolute bottom-20 left-10 w-96 h-96 bg-mont-400/10 rounded-full blur-3xl orb-2"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-mont-600/5 rounded-full blur-3xl morph-blob"></div>
+
+  <!-- BIG Floating leaf decorations -->
+  <div class="absolute top-32 left-20 float float-delay-1 leaf-sway hidden lg:block">
+    <svg class="big-leaf" width="90" height="90" viewBox="0 0 24 24" fill="rgba(74,222,128,0.15)" stroke="rgba(74,222,128,0.3)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="absolute bottom-40 right-20 float-reverse float-delay-2 leaf-sway hidden lg:block" style="animation-delay: 1s;">
+    <svg class="big-leaf" width="70" height="70" viewBox="0 0 24 24" fill="rgba(134,239,172,0.12)" stroke="rgba(134,239,172,0.25)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="absolute top-60 right-1/3 float-slow float-delay-3 leaf-sway hidden lg:block" style="animation-delay: 2s;">
+    <svg class="big-leaf" width="50" height="50" viewBox="0 0 24 24" fill="rgba(74,222,128,0.2)"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="absolute top-48 left-1/3 float leaf-delay-2 leaf-sway hidden lg:block" style="animation-delay: 3s;">
+    <svg class="big-leaf" width="60" height="60" viewBox="0 0 24 24" fill="rgba(187,247,208,0.18)"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="absolute bottom-60 left-1/2 float-reverse leaf-sway hidden lg:block" style="animation-delay: 0.5s;">
+    <svg class="big-leaf" width="80" height="80" viewBox="0 0 24 24" fill="rgba(74,222,128,0.1)" stroke="rgba(74,222,128,0.2)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+
+  <!-- Fireflies -->
+  <div class="firefly" style="top: 30%; left: 15%; animation: firefly 4s ease-in-out infinite; animation-delay: 0s;"></div>
+  <div class="firefly" style="top: 50%; left: 70%; animation: firefly 5s ease-in-out infinite; animation-delay: 2s;"></div>
+  <div class="firefly" style="top: 70%; left: 40%; animation: firefly 6s ease-in-out infinite; animation-delay: 1s;"></div>
+  <div class="firefly" style="top: 20%; left: 85%; animation: firefly 4.5s ease-in-out infinite; animation-delay: 3s;"></div>
+  <div class="firefly" style="top: 65%; left: 25%; animation: firefly 5.5s ease-in-out infinite; animation-delay: 4s;"></div>
+  <div class="firefly" style="top: 40%; left: 55%; animation: firefly 7s ease-in-out infinite; animation-delay: 5s;"></div>
+  <div class="firefly" style="top: 80%; left: 80%; animation: firefly 6.5s ease-in-out infinite; animation-delay: 6s;"></div>
+
+  <!-- Grid overlay -->
+  <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 60px 60px;"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 w-full">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+      <!-- Right content (RTL: appears on right) -->
+      <div class="text-center lg:text-right">
+        <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 mb-8 reveal" style="transition-delay: 0.2s">
+          <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+          <span class="text-sm text-mont-200 font-medium font-heebo">מהדורת 2025 — זמינה עכשיו</span>
+        </div>
+        <h1 class="font-heebo text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.95] mb-6 reveal" style="transition-delay: 0.4s">
+          גלו<br>
+          <span class="gradient-text">מונטנגרו</span><br>
+          <span class="text-mont-300 font-light text-4xl sm:text-5xl lg:text-6xl">כמו שלא חוויתם מעולם</span>
+        </h1>
+        <p class="text-lg text-mont-200 max-w-lg mx-auto lg:mx-0 mb-10 leading-relaxed font-heebo reveal" style="transition-delay: 0.6s">
+          טבלו במדריכי טיולים מעוצבים בקפידה שחושפים מפרצים נסתרים, עיירות עתיקות ושבילי הרים עוצרי נשימה. המסע שלכם מתחיל כאן.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start reveal" style="transition-delay: 0.8s">
+          <a href="#guides" class="magnetic-btn ripple-container group relative bg-gradient-to-r from-mont-400 to-mont-600 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-2xl shadow-mont-500/30 hover:shadow-mont-500/50 transition-all overflow-hidden font-heebo">
+            <span class="relative z-10 flex items-center gap-2 justify-center">
+              גלו את המדריכים
+              <i data-lucide="arrow-left" class="w-5 h-5 group-hover:-translate-x-1 transition-transform"></i>
+            </span>
+          </a>
+          <a href="#experience" class="magnetic-btn ripple-container group border border-white/20 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/5 transition-all flex items-center gap-2 justify-center font-heebo">
+            <i data-lucide="play-circle" class="w-5 h-5"></i>
+            צפו בתצוגה מקדימה
+          </a>
+        </div>
+        <!-- Stats -->
+        <div class="flex gap-8 mt-12 justify-center lg:justify-start reveal" style="transition-delay: 1s">
+          <div>
+            <div class="text-3xl font-bold font-heebo counter-value" data-target="12">0</div>
+            <div class="text-sm text-mont-300 mt-1 font-heebo">מדריכים</div>
+          </div>
+          <div class="w-px bg-white/10"></div>
+          <div>
+            <div class="text-3xl font-bold font-heebo counter-value" data-target="250">0</div>
+            <div class="text-sm text-mont-300 mt-1 font-heebo">יעדים</div>
+          </div>
+          <div class="w-px bg-white/10"></div>
+          <div>
+            <div class="text-3xl font-bold font-heebo counter-value" data-target="15000">0</div>
+            <div class="text-sm text-mont-300 mt-1 font-heebo">מטיילים מאושרים</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Left - Hero Image Collage -->
+      <div class="relative reveal-scale" style="transition-delay: 0.6s">
+        <div class="relative">
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-mont-900/50 img-zoom">
+            <img src="http://static.photos/nature/640x360/300" alt="יער מונטנגרו" class="w-full h-80 sm:h-96 object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-mont-950/60 via-transparent to-transparent"></div>
+            <div class="absolute bottom-6 right-6 left-6">
+              <div class="flex items-center gap-2 text-white/90">
+                <i data-lucide="map-pin" class="w-4 h-4 text-mont-400"></i>
+                <span class="text-sm font-medium font-heebo">ביוגרדסקה גורה, מונטנגרו</span>
+              </div>
+            </div>
+          </div>
+          <!-- Floating card 1 -->
+          <div class="absolute -top-4 -left-4 sm:-left-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 float-slow shadow-xl">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center">
+                <i data-lucide="star" class="w-5 h-5 text-white fill-current"></i>
+              </div>
+              <div>
+                <div class="text-sm font-bold font-heebo">דירוג 4.9</div>
+                <div class="text-xs text-mont-300 font-heebo">2.3K ביקורות</div>
+              </div>
+            </div>
+          </div>
+          <!-- Floating card 2 -->
+          <div class="absolute -bottom-4 -right-4 sm:-right-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 float-reverse shadow-xl">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-teal-600 rounded-xl flex items-center justify-center">
+                <i data-lucide="book-open" class="w-5 h-5 text-white"></i>
+              </div>
+              <div>
+                <div class="text-sm font-bold font-heebo">PDF מיידי</div>
+                <div class="text-xs text-mont-300 font-heebo">הורד עכשיו</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wave divider -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+      <path d="M0,40 C300,80 900,0 1200,40 L1200,80 L0,80 Z" fill="#15803d"></path>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ MARQUEE STRIP ============ -->
+<div class="relative bg-[#15803d] py-5 overflow-hidden z-10">
+  <div class="marquee-track flex items-center gap-12 whitespace-nowrap">
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2 font-heebo"><i data-lucide="compass" class="w-4 h-4"></i> מפרץ קוטור</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2 font-heebo"><i data-lucide="mountain" class="w-4 h-4"></i> דורמיטור</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2 font-heebo"><i data-lucide="waves" class="w-4 h-4"></i> ריביירה בודווה</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2 font-heebo"><i data-lucide="landmark" class="w-4 h-4"></i> מנזר אוסטרוג</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2 font-heebo"><i data-lucide="tree-pine" class="w-4 h-4"></i> ביוגרדסקה גורה</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2 font-heebo"><i data-lucide="sailboat" class="w-4 h-4"></i> סווטי סטפן</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2 font-heebo"><i data-lucide="camera" class="w-4 h-4"></i> פראסט</span>
+    <span class="text-mont-400">✦</span>
+    <!-- Duplicate -->
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2 font-heebo"><i data-lucide="compass" class="w-4 h-4"></i> מפרץ קוטור</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2 font-heebo"><i data-lucide="mountain" class="w-4 h-4"></i> דורמיטור</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2 font-heebo"><i data-lucide="waves" class="w-4 h-4"></i> ריביירה בודווה</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2 font-heebo"><i data-lucide="landmark" class="w-4 h-4"></i> מנזר אוסטרוג</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2 font-heebo"><i data-lucide="tree-pine" class="w-4 h-4"></i> ביוגרדסקה גורה</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2 font-heebo"><i data-lucide="sailboat" class="w-4 h-4"></i> סווטי סטפן</span>
+    <span class="text-mont-400">✦</span>
+    <span class="text-mont-200 text-sm font-medium flex items-center gap-2 font-heebo"><i data-lucide="camera" class="w-4 h-4"></i> פראסט</span>
+    <span class="text-mont-400">✦</span>
+  </div>
+</div>
+
+<!-- ============ FEATURED GUIDES SECTION ============ -->
+<section class="relative bg-guides py-24 overflow-hidden" id="guides">
+  <!-- Vine decoration LEFT -->
+  <svg class="vine-left" viewBox="0 0 120 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M60 0 C30 60 90 120 45 180 C0 240 100 300 55 360 C10 420 95 480 60 540 C25 600 85 660 60 720 C35 780 75 800 60 800" stroke="rgba(74,222,128,1)" stroke-width="2.5" fill="none"/>
+    <circle cx="45" cy="180" r="8" fill="rgba(74,222,128,0.5)"/>
+    <circle cx="55" cy="360" r="7" fill="rgba(134,239,172,0.5)"/>
+    <circle cx="60" cy="540" r="9" fill="rgba(74,222,128,0.4)"/>
+    <circle cx="35" cy="720" r="6" fill="rgba(134,239,172,0.4)"/>
+    <path d="M30 120 Q15 90 35 80 Q45 100 30 120Z" fill="rgba(74,222,128,0.6)"/>
+    <path d="M70 300 Q85 270 60 265 Q55 285 70 300Z" fill="rgba(134,239,172,0.5)"/>
+    <path d="M35 480 Q20 450 40 445 Q48 465 35 480Z" fill="rgba(74,222,128,0.5)"/>
+    <path d="M75 640 Q90 610 65 605 Q60 625 75 640Z" fill="rgba(134,239,172,0.4)"/>
+    <path d="M25 200 Q10 175 30 168 Q38 188 25 200Z" fill="rgba(74,222,128,0.4)"/>
+    <path d="M80 450 Q95 425 70 420 Q65 440 80 450Z" fill="rgba(134,239,172,0.3)"/>
+  </svg>
+
+  <!-- Vine decoration RIGHT -->
+  <svg class="vine-right" viewBox="0 0 120 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M60 0 C90 70 30 140 75 210 C120 280 20 350 65 420 C110 490 25 560 60 630 C95 700 40 750 60 800" stroke="rgba(74,222,128,1)" stroke-width="2.5" fill="none"/>
+    <circle cx="75" cy="210" r="7" fill="rgba(74,222,128,0.5)"/>
+    <circle cx="65" cy="420" r="8" fill="rgba(134,239,172,0.5)"/>
+    <circle cx="60" cy="630" r="6" fill="rgba(74,222,128,0.4)"/>
+    <path d="M90 150 Q105 120 80 115 Q75 135 90 150Z" fill="rgba(74,222,128,0.5)"/>
+    <path d="M40 350 Q25 320 50 315 Q55 335 40 350Z" fill="rgba(134,239,172,0.5)"/>
+    <path d="M85 560 Q100 530 75 525 Q70 545 85 560Z" fill="rgba(74,222,128,0.4)"/>
+  </svg>
+
+  <!-- Background decorations -->
+  <div class="absolute top-0 left-0 w-96 h-96 bg-mont-400/5 rounded-full blur-3xl orb-1"></div>
+  <div class="absolute bottom-0 right-0 w-80 h-80 bg-mont-500/5 rounded-full blur-3xl orb-2"></div>
+
+  <!-- BIG Floating leaves -->
+  <div class="absolute top-20 left-16 float-slow leaf-sway hidden lg:block">
+    <svg class="big-leaf" width="70" height="70" viewBox="0 0 24 24" fill="rgba(74,222,128,0.12)"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="absolute bottom-32 right-24 float-reverse leaf-sway hidden lg:block" style="animation-delay: 1.5s;">
+    <svg class="big-leaf" width="85" height="85" viewBox="0 0 24 24" fill="rgba(134,239,172,0.1)"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="absolute top-1/2 right-10 float leaf-sway hidden lg:block" style="animation-delay: 3s;">
+    <svg class="big-leaf" width="55" height="55" viewBox="0 0 24 24" fill="rgba(74,222,128,0.15)"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <span class="reveal inline-block text-mont-400 text-sm font-semibold tracking-widest uppercase mb-4 font-heebo">האוסף שלנו</span>
+      <h2 class="reveal font-heebo text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+        מדריכי טיולים <span class="gradient-text">מעוצבים בקפידה</span>
+      </h2>
+      <p class="reveal text-mont-200 text-lg max-w-2xl mx-auto font-heebo">כל מדריך הוא יצירת אהבה — נחקר בקפידה, כתוב ביופי, ומעוצב להפוך את ההרפתקה שלכם במונטנגרו.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
+      <!-- Guide Card 1 -->
+      <div class="guide-card ripple-container reveal group relative bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-mont-400/40 transition-all duration-500 cursor-pointer tilt-card">
+        <div class="card-shine"></div>
+        <div class="img-zoom">
+          <img src="http://static.photos/nature/640x360/310" alt="מדריך החוף" class="w-full h-56 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/80 via-mont-950/20 to-transparent"></div>
+        </div>
+        <div class="relative p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-mont-500/20 text-mont-300 text-xs font-semibold px-3 py-1 rounded-full border border-mont-400/20 font-heebo">רב מכר</span>
+            <span class="bg-yellow-500/20 text-yellow-300 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1">
+              <i data-lucide="star" class="w-3 h-3 fill-current"></i> 4.9
+            </span>
+          </div>
+          <h3 class="font-heebo text-xl font-bold mb-2 group-hover:text-mont-300 transition-colors">מסע החוף של מונטנגרו</h3>
+          <p class="text-mont-300 text-sm mb-4 line-clamp-2 font-heebo">מהמפרץ דמוי הפיורד של קוטור ועד לחולות הוורודים של אולצין — כל פנינת חוף נחשפת.</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 text-xs text-mont-400 font-heebo">
+              <span class="flex items-center gap-1"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> 186 עמודים</span>
+              <span class="flex items-center gap-1"><i data-lucide="map" class="w-3.5 h-3.5"></i> 24 מפות</span>
+            </div>
+            <span class="text-2xl font-bold font-heebo">€24<span class="text-sm text-mont-400 font-normal">.99</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide Card 2 -->
+      <div class="guide-card ripple-container reveal group relative bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-mont-400/40 transition-all duration-500 cursor-pointer tilt-card">
+        <div class="card-shine"></div>
+        <div class="img-zoom">
+          <img src="http://static.photos/nature/640x360/250" alt="מדריך הרים" class="w-full h-56 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/80 via-mont-950/20 to-transparent"></div>
+        </div>
+        <div class="relative p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-emerald-500/20 text-emerald-300 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-400/20 font-heebo">חדש</span>
+            <span class="bg-yellow-500/20 text-yellow-300 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1">
+              <i data-lucide="star" class="w-3 h-3 fill-current"></i> 4.8
+            </span>
+          </div>
+          <h3 class="font-heebo text-xl font-bold mb-2 group-hover:text-mont-300 transition-colors">דורמיטור והפסגות הצפוניות</h3>
+          <p class="text-mont-300 text-sm mb-4 line-clamp-2 font-heebo">כבשו את הצפון הפראי של מונטנגרו — אגמים קרחוניים, קניונים וכפרי רמה מחכים.</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 text-xs text-mont-400 font-heebo">
+              <span class="flex items-center gap-1"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> 214 עמודים</span>
+              <span class="flex items-center gap-1"><i data-lucide="map" class="w-3.5 h-3.5"></i> 31 מפות</span>
+            </div>
+            <span class="text-2xl font-bold font-heebo">€29<span class="text-sm text-mont-400 font-normal">.99</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide Card 3 -->
+      <div class="guide-card ripple-container reveal group relative bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-mont-400/40 transition-all duration-500 cursor-pointer tilt-card">
+        <div class="card-shine"></div>
+        <div class="img-zoom">
+          <img src="http://static.photos/outdoor/640x360/44" alt="מדריך תרבות" class="w-full h-56 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/80 via-mont-950/20 to-transparent"></div>
+        </div>
+        <div class="relative p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-purple-500/20 text-purple-300 text-xs font-semibold px-3 py-1 rounded-full border border-purple-400/20 font-heebo">תרבותי</span>
+            <span class="bg-yellow-500/20 text-yellow-300 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1">
+              <i data-lucide="star" class="w-3 h-3 fill-current"></i> 4.9
+            </span>
+          </div>
+          <h3 class="font-heebo text-xl font-bold mb-2 group-hover:text-mont-300 transition-colors">עיירות היסטוריות ותרבות</h3>
+          <p class="text-mont-300 text-sm mb-4 line-clamp-2 font-heebo">שוטטו בין מאות שנים — עיירות עתיקות, מנזרים וסיפורים חקוקים באבן.</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 text-xs text-mont-400 font-heebo">
+              <span class="flex items-center gap-1"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> 162 עמודים</span>
+              <span class="flex items-center gap-1"><i data-lucide="map" class="w-3.5 h-3.5"></i> 18 מפות</span>
+            </div>
+            <span class="text-2xl font-bold font-heebo">€19<span class="text-sm text-mont-400 font-normal">.99</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- More guides row -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 stagger-children">
+      <div class="guide-card ripple-container reveal group relative bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-mont-400/40 transition-all duration-500 cursor-pointer tilt-card">
+        <div class="card-shine"></div>
+        <div class="img-zoom">
+          <img src="http://static.photos/food/640x360/33" alt="מדריך אוכל" class="w-full h-56 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/80 via-mont-950/20 to-transparent"></div>
+        </div>
+        <div class="relative p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-orange-500/20 text-orange-300 text-xs font-semibold px-3 py-1 rounded-full border border-orange-400/20 font-heebo">גסטרונומיה</span>
+          </div>
+          <h3 class="font-heebo text-xl font-bold mb-2 group-hover:text-mont-300 transition-colors">הטעם של מונטנגרו</h3>
+          <p class="text-mont-300 text-sm mb-4 line-clamp-2 font-heebo">מנייגושקי פרשוט ועד הקונובות של קוטור — מסע קולינרי בטעמים מקומיים.</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 text-xs text-mont-400 font-heebo">
+              <span class="flex items-center gap-1"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> 128 עמודים</span>
+              <span class="flex items-center gap-1"><i data-lucide="utensils" class="w-3.5 h-3.5"></i> 45 מתכונים</span>
+            </div>
+            <span class="text-2xl font-bold font-heebo">€17<span class="text-sm text-mont-400 font-normal">.99</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-card ripple-container reveal group relative bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-mont-400/40 transition-all duration-500 cursor-pointer tilt-card">
+        <div class="card-shine"></div>
+        <div class="img-zoom">
+          <img src="http://static.photos/outdoor/640x360/88" alt="מדריך הרפתקה" class="w-full h-56 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/80 via-mont-950/20 to-transparent"></div>
+        </div>
+        <div class="relative p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-red-500/20 text-red-300 text-xs font-semibold px-3 py-1 rounded-full border border-red-400/20 font-heebo">הרפתקה</span>
+          </div>
+          <h3 class="font-heebo text-xl font-bold mb-2 group-hover:text-mont-300 transition-colors">אדרנלין וטבע</h3>
+          <p class="text-mont-300 text-sm mb-4 line-clamp-2 font-heebo">רפטינג בטארה, טיולים בפרוקלטיה, דאייה בבודווה — ללב הפראי.</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 text-xs text-mont-400 font-heebo">
+              <span class="flex items-center gap-1"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> 176 עמודים</span>
+              <span class="flex items-center gap-1"><i data-lucide="compass" class="w-3.5 h-3.5"></i> 38 מסלולים</span>
+            </div>
+            <span class="text-2xl font-bold font-heebo">€22<span class="text-sm text-mont-400 font-normal">.99</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-card ripple-container reveal group relative bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-mont-400/40 transition-all duration-500 cursor-pointer tilt-card">
+        <div class="card-shine"></div>
+        <div class="img-zoom">
+          <img src="http://static.photos/nature/640x360/350" alt="מדריך מלא" class="w-full h-56 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/80 via-mont-950/20 to-transparent"></div>
+        </div>
+        <div class="relative p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-mont-500/20 text-mont-300 text-xs font-semibold px-3 py-1 rounded-full border border-mont-400/20 font-heebo">שלם</span>
+            <span class="bg-yellow-500/20 text-yellow-300 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1">
+              <i data-lucide="star" class="w-3 h-3 fill-current"></i> 5.0
+            </span>
+          </div>
+          <h3 class="font-heebo text-xl font-bold mb-2 group-hover:text-mont-300 transition-colors">מונטנגרו האולטימטיבית</h3>
+          <p class="text-mont-300 text-sm mb-4 line-clamp-2 font-heebo">הכל בכרך אחד — חוף, הרים, תרבות, אוכל וסודות נסתרים.</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 text-xs text-mont-400 font-heebo">
+              <span class="flex items-center gap-1"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> 420 עמודים</span>
+              <span class="flex items-center gap-1"><i data-lucide="map" class="w-3.5 h-3.5"></i> 52 מפות</span>
+            </div>
+            <span class="text-2xl font-bold font-heebo">€39<span class="text-sm text-mont-400 font-normal">.99</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wave divider -->
+  <div class="wave-divider" style="transform: rotate(180deg); top: 0; bottom: auto;">
+    <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+      <path d="M0,40 C300,0 900,80 1200,40 L1200,0 L0,0 Z" fill="#052e16"></path>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ DESTINATIONS SECTION ============ -->
+<section class="relative bg-destinations py-24 overflow-hidden" id="destinations">
+  <div class="absolute top-1/4 right-0 w-72 h-72 bg-mont-400/5 rounded-full blur-3xl orb-2"></div>
+  <div class="absolute bottom-0 left-10 w-96 h-96 bg-mont-500/5 rounded-full blur-3xl orb-1"></div>
+
+  <!-- Vine right -->
+  <svg class="vine-right" viewBox="0 0 120 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M60 0 C90 60 30 120 75 180 C120 240 20 300 65 360 C110 420 25 480 60 540 C95 600 40 660 60 700" stroke="rgba(74,222,128,1)" stroke-width="2.5" fill="none"/>
+    <circle cx="75" cy="180" r="7" fill="rgba(74,222,128,0.5)"/>
+    <circle cx="65" cy="360" r="8" fill="rgba(134,239,172,0.5)"/>
+    <circle cx="60" cy="540" r="6" fill="rgba(74,222,128,0.4)"/>
+    <path d="M90 120 Q105 90 80 85 Q75 105 90 120Z" fill="rgba(74,222,128,0.5)"/>
+    <path d="M35 300 Q20 270 45 265 Q50 285 35 300Z" fill="rgba(134,239,172,0.5)"/>
+    <path d="M85 480 Q100 450 75 445 Q70 465 85 480Z" fill="rgba(74,222,128,0.4)"/>
+  </svg>
+
+  <!-- Vine left -->
+  <svg class="vine-left" viewBox="0 0 120 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M60 0 C30 70 90 140 45 210 C0 280 100 350 55 420 C10 490 95 560 60 630 C25 680 75 700 60 700" stroke="rgba(74,222,128,1)" stroke-width="2" fill="none"/>
+    <circle cx="45" cy="210" r="6" fill="rgba(74,222,128,0.4)"/>
+    <circle cx="55" cy="420" r="7" fill="rgba(134,239,172,0.4)"/>
+    <path d="M30 150 Q15 125 35 118 Q42 138 30 150Z" fill="rgba(74,222,128,0.4)"/>
+    <path d="M75 350 Q90 325 65 320 Q60 340 75 350Z" fill="rgba(134,239,172,0.3)"/>
+  </svg>
+
+  <!-- Big leaf decorations -->
+  <div class="absolute top-16 left-16 float leaf-sway hidden lg:block">
+    <svg class="big-leaf" width="80" height="80" viewBox="0 0 24 24" fill="rgba(74,222,128,0.12)"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="absolute bottom-20 right-16 float-reverse leaf-sway hidden lg:block" style="animation-delay: 2s;">
+    <svg class="big-leaf" width="65" height="65" viewBox="0 0 24 24" fill="rgba(134,239,172,0.1)"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+
+  <!-- Fireflies -->
+  <div class="firefly" style="top: 30%; left: 60%; animation: firefly 5s ease-in-out infinite; animation-delay: 0s;"></div>
+  <div class="firefly" style="top: 70%; left: 20%; animation: firefly 6s ease-in-out infinite; animation-delay: 3s;"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <span class="reveal inline-block text-mont-400 text-sm font-semibold tracking-widest uppercase mb-4 font-heebo">יעדים</span>
+      <h2 class="reveal font-heebo text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+        מקומות שייקחו את <span class="gradient-text">הנשימה</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 stagger-children">
+      <div class="col-span-2 row-span-2 reveal-rotate group">
+        <div class="relative h-full min-h-[400px] rounded-3xl overflow-hidden img-zoom cursor-pointer guide-card">
+          <img src="http://static.photos/nature/1024x576/300" alt="מפרץ קוטור" class="w-full h-full object-cover absolute inset-0">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/90 via-mont-950/30 to-transparent"></div>
+          <div class="absolute inset-0 shimmer"></div>
+          <div class="absolute bottom-6 right-6 left-6">
+            <span class="bg-mont-500/30 text-mont-200 text-xs font-semibold px-3 py-1 rounded-full border border-mont-400/30 backdrop-blur-sm font-heebo">הכי פופולרי</span>
+            <h3 class="font-heebo text-3xl sm:text-4xl font-bold mt-3 mb-2">מפרץ קוטור</h3>
+            <p class="text-mont-200 text-sm sm:text-base max-w-md font-heebo">הפיורד הדרומי ביותר באירופה, עטוף בחומות ימי הביניים ויופי נצחי.</p>
+            <div class="flex items-center gap-2 mt-4 text-mont-300 group-hover:text-mont-200 transition-colors">
+              <span class="text-sm font-medium font-heebo">גלו במדריך</span>
+              <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-2 transition-transform"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal group">
+        <div class="relative h-full min-h-[190px] rounded-3xl overflow-hidden img-zoom cursor-pointer guide-card">
+          <img src="http://static.photos/nature/640x360/320" alt="סווטי סטפן" class="w-full h-full object-cover absolute inset-0">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/90 via-mont-950/20 to-transparent"></div>
+          <div class="absolute bottom-4 right-4 left-4">
+            <h3 class="font-heebo text-lg font-bold">סווטי סטפן</h3>
+            <p class="text-mont-300 text-xs font-heebo">מלון אי אייקוני</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal group">
+        <div class="relative h-full min-h-[190px] rounded-3xl overflow-hidden img-zoom cursor-pointer guide-card">
+          <img src="http://static.photos/nature/640x360/280" alt="דורמיטור" class="w-full h-full object-cover absolute inset-0">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/90 via-mont-950/20 to-transparent"></div>
+          <div class="absolute bottom-4 right-4 left-4">
+            <h3 class="font-heebo text-lg font-bold">דורמיטור</h3>
+            <p class="text-mont-300 text-xs font-heebo">פארק לאומי אונסק"ו</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal group">
+        <div class="relative h-full min-h-[190px] rounded-3xl overflow-hidden img-zoom cursor-pointer guide-card">
+          <img src="http://static.photos/travel/640x360/99" alt="פראסט" class="w-full h-full object-cover absolute inset-0">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/90 via-mont-950/20 to-transparent"></div>
+          <div class="absolute bottom-4 right-4 left-4">
+            <h3 class="font-heebo text-lg font-bold">פראסט</h3>
+            <p class="text-mont-300 text-xs font-heebo">פנינת הבארוק</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal group">
+        <div class="relative h-full min-h-[190px] rounded-3xl overflow-hidden img-zoom cursor-pointer guide-card">
+          <img src="http://static.photos/nature/640x360/340" alt="קניון טארה" class="w-full h-full object-cover absolute inset-0">
+          <div class="absolute inset-0 bg-gradient-to-t from-mont-950/90 via-mont-950/20 to-transparent"></div>
+          <div class="absolute bottom-4 right-4 left-4">
+            <h3 class="font-heebo text-lg font-bold">קניון טארה</h3>
+            <p class="text-mont-300 text-xs font-heebo">העמוק באירופה</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE / WHY US SECTION ============ -->
+<section class="relative bg-experience py-24 overflow-hidden" id="experience">
+  <div class="canopy-light"></div>
+  <div class="absolute top-20 left-0 w-[500px] h-[500px] bg-mont-400/5 rounded-full blur-3xl morph-blob"></div>
+  <div class="absolute bottom-0 right-20 w-64 h-64 bg-mont-500/8 rounded-full blur-3xl orb-2"></div>
+
+  <!-- Vine left -->
+  <svg class="vine-left" viewBox="0 0 120 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M60 0 C30 50 90 100 45 150 C0 200 100 250 55 300 C10 350 95 400 60 450 C25 500 75 550 60 600" stroke="rgba(74,222,128,1)" stroke-width="2" fill="none"/>
+    <circle cx="45" cy="150" r="7" fill="rgba(74,222,128,0.5)"/>
+    <circle cx="55" cy="300" r="6" fill="rgba(134,239,172,0.4)"/>
+    <path d="M30 100 Q15 75 35 68 Q42 88 30 100Z" fill="rgba(74,222,128,0.5)"/>
+    <path d="M75 250 Q90 225 65 220 Q60 240 75 250Z" fill="rgba(134,239,172,0.4)"/>
+  </svg>
+
+  <!-- Big floating leaves -->
+  <div class="absolute top-40 right-10 float leaf-sway hidden lg:block">
+    <svg class="big-leaf" width="75" height="75" viewBox="0 0 24 24" fill="rgba(74,222,128,0.12)" stroke="rgba(74,222,128,0.25)" stroke-width="0.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+  <div class="absolute bottom-32 left-20 float-reverse float-delay-2 leaf-sway hidden lg:block" style="animation-delay: 1s;">
+    <svg class="big-leaf" width="90" height="90" viewBox="0 0 24 24" fill="rgba(134,239,172,0.1)"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+  </div>
+
+  <!-- Fireflies -->
+  <div class="firefly" style="top: 25%; left: 80%; animation: firefly 5s ease-in-out infinite; animation-delay: 0s;"></div>
+  <div class="firefly" style="top: 60%; left: 10%; animation: firefly 6s ease-in-out infinite; animation-delay: 2s;"></div>
+  <div class="firefly" style="top: 80%; left: 50%; animation: firefly 4s ease-in-out infinite; animation-delay: 1s;"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Right - Visual -->
+      <div class="relative reveal-left">
+        <div class="relative">
+          <div class="rounded-3xl overflow-hidden shadow-2xl shadow-mont-900/50 img-zoom">
+            <img src="http://static.photos/nature/1200x630/180" alt="חוויית מונטנגרו" class="w-full h-72 sm:h-96 object-cover">
+            <div class="absolute inset-0 bg-gradient-to-l from-mont-950/40 to-transparent"></div>
+          </div>
+          <div class="absolute -top-6 -right-6 sm:-right-10 bg-gradient-to-br from-mont-500 to-mont-700 p-5 rounded-2xl shadow-xl float-slow cursor-pointer guide-card">
+            <div class="text-center">
+              <div class="text-3xl font-bold font-heebo">7</div>
+              <div class="text-xs text-mont-200 mt-1 font-heebo">שנות<br>מחקר</div>
+            </div>
+          </div>
+          <div class="absolute -bottom-6 -left-6 sm:-left-10 bg-white/10 backdrop-blur-xl border border-white/20 p-5 rounded-2xl shadow-xl float-reverse cursor-pointer guide-card">
+            <div class="text-center">
+              <div class="text-3xl font-bold font-heebo text-mont-300">100%</div>
+              <div class="text-xs text-mont-200 mt-1 font-heebo">נכתב<br>באופן עצמאי</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Left - Content -->
+      <div class="reveal-right">
+        <span class="inline-block text-mont-400 text-sm font-semibold tracking-widest uppercase mb-4 font-heebo">למה המדריכים שלנו</span>
+        <h2 class="font-heebo text-4xl sm:text-5xl font-bold mb-8">
+          לא סתם מדריכים.<br><span class="gradient-text">הדרכון שלכם לפלא.</span>
+        </h2>
+        <p class="text-mont-200 text-lg mb-10 leading-relaxed font-heebo">אנחנו לא עושים מלכודות תיירים. הכותבים שלנו חיים במונטנגרו, מדברים את השפה, וחושפים מה ששום חיפוש בגוגל לא יגלה.</p>
+
+        <div class="space-y-6">
+          <div class="flex items-start gap-4 group cursor-pointer">
+            <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-mont-400/20 to-mont-600/20 rounded-2xl flex items-center justify-center border border-mont-400/20 group-hover:border-mont-400/50 group-hover:bg-mont-400/30 transition-all duration-300 breathe-border">
+              <i data-lucide="pen-tool" class="w-6 h-6 text-mont-300 group-hover:text-mont-200 transition-colors"></i>
+            </div>
+            <div>
+              <h3 class="font-heebo font-semibold text-lg mb-1 group-hover:text-mont-300 transition-colors">כתוב על ידי מקומיים</h3>
+              <p class="text-mont-300 text-sm leading-relaxed font-heebo">כל מילה נוצרה על ידי אנשים שקוראים למונטנגרו בית. בלי AI, בלי העתק-הדבק — תובנה מקומית טהורה.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 group cursor-pointer">
+            <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-emerald-400/20 to-emerald-600/20 rounded-2xl flex items-center justify-center border border-emerald-400/20 group-hover:border-emerald-400/50 group-hover:bg-emerald-400/30 transition-all duration-300">
+              <i data-lucide="camera" class="w-6 h-6 text-emerald-300 group-hover:text-emerald-200 transition-colors"></i>
+            </div>
+            <div>
+              <h3 class="font-heebo font-semibold text-lg mb-1 group-hover:text-emerald-300 transition-colors">צילום מרהיב</h3>
+              <p class="text-mont-300 text-sm leading-relaxed font-heebo">תמונות בצבע מלא שתופסות את הנשמה של מונטנגרו — מזריחה מעל לובצ'ן ועד חצות בקוטור.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 group cursor-pointer">
+            <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-purple-400/20 to-purple-600/20 rounded-2xl flex items-center justify-center border border-purple-400/20 group-hover:border-purple-400/50 group-hover:bg-purple-400/30 transition-all duration-300">
+              <i data-lucide="map" class="w-6 h-6 text-purple-300 group-hover:text-purple-200 transition-colors"></i>
+            </div>
+            <div>
+              <h3 class="font-heebo font-semibold text-lg mb-1 group-hover:text-purple-300 transition-colors">מפות מאוירות מותאמות</h3>
+              <p class="text-mont-300 text-sm leading-relaxed font-heebo">מפות מצוירות ביד עם נקודות עניין, מסלולים מומלצים וטיפים שרק מקומיים יודעים.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING / CTA (מחירים) ============ -->
+<section class="relative bg-pricing py-24 overflow-hidden" id="pricing">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <h2 class="reveal font-heebo text-3xl sm:text-4xl font-bold mb-4">מוכנים לצאת לדרך?</h2>
+    <p class="reveal text-mont-200 text-lg mb-8 font-heebo">בחרו מדריך והתחילו לתכנן את הטיול הבלתי נשכח שלכם במונטנגרו.</p>
+    <a href="#guides" class="reveal magnetic-btn inline-flex bg-gradient-to-r from-mont-500 to-mont-600 text-white px-8 py-4 rounded-full font-semibold font-heebo shadow-lg">חזרה למדריכים</a>
+  </div>
+</section>
+
+<footer class="relative bg-mont-950 border-t border-white/10 py-12 z-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-mont-400 text-sm font-heebo">
+    <p>מונטהגייד — מדריכי מונטנגרו</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

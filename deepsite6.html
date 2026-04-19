@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Travel - המסלול המלא לשבעה ימים במונטנגרו</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { heebo: ['Heebo', 'sans-serif'] },
+                    colors: {
+                        jungle: {
+                            50: '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0',
+                            300: '#86efac', 400: '#4ade80', 500: '#22c55e',
+                            600: '#16a34a', 700: '#15803d', 800: '#166534',
+                            900: '#14532d', 950: '#052e16'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Heebo', sans-serif; overflow-x: hidden; background: #052e16; color: #f0fdf4; }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #052e16; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #22c55e, #15803d); border-radius: 4px; }
+
+        .scroll-progress { position: fixed; top: 0; right: 0; height: 4px; background: linear-gradient(90deg, #4ade80, #22c55e, #15803d); z-index: 200; width: 0%; transition: width 0.1s; }
+
+        .cursor-follower { position: fixed; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(34,197,94,0.15), transparent 70%); pointer-events: none; z-index: 50; transform: translate(-50%, -50%); transition: transform 0.3s ease-out; }
+
+        .loader { position: fixed; inset: 0; background: #052e16; z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity 0.8s, visibility 0.8s; }
+        .loader.hidden { opacity: 0; visibility: hidden; }
+        .loader-leaf { font-size: 60px; animation: loaderSpin 1.5s infinite ease-in-out; }
+        @keyframes loaderSpin { 0%,100% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(1.2); } }
+
+        /* Global falling leaves */
+        .global-leaves { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+        .falling-leaf { position: absolute; top: -80px; animation: leafFall linear infinite; pointer-events: auto; cursor: pointer; transition: transform 0.3s, filter 0.3s; }
+        .falling-leaf:hover { transform: scale(1.8) rotate(30deg) !important; filter: brightness(1.5) drop-shadow(0 0 15px rgba(74,222,128,0.8)); }
+        @keyframes leafFall {
+            0% { transform: translateY(-80px) rotate(0deg) translateX(0); opacity: 0; }
+            5% { opacity: 0.9; }
+            25% { transform: translateY(25vh) rotate(90deg) translateX(80px); }
+            50% { transform: translateY(50vh) rotate(180deg) translateX(-60px); }
+            75% { transform: translateY(75vh) rotate(270deg) translateX(100px); }
+            100% { transform: translateY(110vh) rotate(360deg) translateX(20px); opacity: 0; }
+        }
+
+        .swaying-leaf { animation: leafSway 4s ease-in-out infinite alternate; }
+        @keyframes leafSway { 0% { transform: rotate(-15deg) translateX(-10px); } 100% { transform: rotate(15deg) translateX(10px); } }
+
+        .vine-deco { position: absolute; z-index: 2; pointer-events: none; opacity: 0.15; }
+
+        /* Section z-index */
+        header, section, main, footer { position: relative; z-index: 5; }
+        nav { z-index: 100 !important; }
+
+        /* Reveal animations */
+        .reveal { opacity: 0; transform: translateY(60px); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-left { opacity: 0; transform: translateX(80px); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-left.active { opacity: 1; transform: translateX(0); }
+        .reveal-right { opacity: 0; transform: translateX(-80px); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-right.active { opacity: 1; transform: translateX(0); }
+        .reveal-scale { opacity: 0; transform: scale(0.7); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-scale.active { opacity: 1; transform: scale(1); }
+        .reveal-rotate { opacity: 0; transform: rotate(-10deg) scale(0.8); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-rotate.active { opacity: 1; transform: rotate(0) scale(1); }
+
+        .stagger-1 { transition-delay: 0.1s !important; }
+        .stagger-2 { transition-delay: 0.2s !important; }
+        .stagger-3 { transition-delay: 0.3s !important; }
+        .stagger-4 { transition-delay: 0.4s !important; }
+        .stagger-5 { transition-delay: 0.5s !important; }
+        .stagger-6 { transition-delay: 0.6s !important; }
+
+        /* Parallax */
+        .parallax-bg { background-attachment: fixed; background-size: cover; background-position: center; }
+
+        /* Magnetic button */
+        .magnetic-btn { position: relative; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        /* Ripple */
+        .ripple-container { position: relative; overflow: hidden; }
+        .ripple { position: absolute; border-radius: 50%; background: rgba(74,222,128,0.4); transform: scale(0); animation: rippleAnim 0.7s ease-out; pointer-events: none; }
+        @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+
+        /* Card shine */
+        .card-shine { position: relative; overflow: hidden; }
+        .card-shine::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 40%, rgba(74,222,128,0.15) 50%, transparent 60%); transform: translateX(-100%) rotate(0deg); transition: transform 0.8s; z-index: 10; pointer-events: none; }
+        .card-shine:hover::before { transform: translateX(100%) rotate(0deg); }
+
+        /* 3D tilt */
+        .tilt-card { transform-style: preserve-3d; transition: transform 0.1s; }
+
+        /* Morphing blob */
+        .morph-blob { animation: morphBlob 12s ease-in-out infinite; }
+        @keyframes morphBlob {
+            0%,100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            50% { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; }
+            75% { border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%; }
+        }
+
+        /* Floating orbs */
+        .float-orb { position: absolute; border-radius: 50%; filter: blur(60px); animation: floatOrb 8s ease-in-out infinite alternate; pointer-events: none; }
+        @keyframes floatOrb { 0% { transform: translateY(0) translateX(0); } 100% { transform: translateY(-50px) translateX(30px); } }
+
+        /* Firefly */
+        .firefly { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: #bbf7d0; box-shadow: 0 0 15px 6px rgba(187,247,208,0.6); animation: fireflyPulse 3s ease-in-out infinite alternate, fireflyDrift 10s ease-in-out infinite; pointer-events: none; }
+        @keyframes fireflyPulse { 0% { opacity: 0.2; transform: scale(0.5); } 100% { opacity: 1; transform: scale(1.2); } }
+        @keyframes fireflyDrift { 0% { transform: translate(0,0); } 25% { transform: translate(40px,-30px); } 50% { transform: translate(-20px,40px); } 75% { transform: translate(30px,20px); } 100% { transform: translate(0,0); } }
+
+        /* Canopy light */
+        .canopy-light { position: absolute; top: -20%; width: 100%; height: 70%; background: radial-gradient(ellipse at 50% 0%, rgba(74,222,128,0.08) 0%, transparent 70%); pointer-events: none; }
+
+        /* Mist */
+        .mist { position: absolute; bottom: 0; width: 200%; height: 150px; background: linear-gradient(to top, rgba(5,46,22,0.8), transparent); animation: mistDrift 15s linear infinite; pointer-events: none; }
+        @keyframes mistDrift { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Marquee */
+        .marquee-track { display: flex; animation: marqueeScroll 30s linear infinite; }
+        @keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(50%); } }
+
+        /* Number counter */
+        .counter-num { font-variant-numeric: tabular-nums; }
+
+        /* Glow text */
+        .glow-text { text-shadow: 0 0 40px rgba(34,197,94,0.5), 0 0 80px rgba(34,197,94,0.3); }
+
+        /* Section flow backgrounds */
+        .flow-section { position: relative; }
+        .flow-section::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+
+        /* Pulse ring */
+        .pulse-ring { animation: pulseRing 2s ease-out infinite; }
+        @keyframes pulseRing { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(2); opacity: 0; } }
+
+        /* Horizontal scroll */
+        .h-scroll-container { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+        .h-scroll-container::-webkit-scrollbar { display: none; }
+        .h-scroll-item { scroll-snap-align: start; }
+
+        /* FAQ */
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s; }
+        .faq-answer.open { max-height: 300px; }
+
+        /* Gradient border */
+        .gradient-border { position: relative; }
+        .gradient-border::before { content: ''; position: absolute; inset: 0; padding: 2px; border-radius: inherit; background: linear-gradient(135deg, #4ade80, #15803d, #4ade80); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+
+        /* Image zoom */
+        .img-zoom { overflow: hidden; }
+        .img-zoom img { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+        .img-zoom:hover img, .img-zoom:active img { transform: scale(1.15); }
+
+        /* Tactile press */
+        .tactile { transition: transform 0.15s, box-shadow 0.15s; }
+        .tactile:active { transform: scale(0.96) !important; box-shadow: none !important; }
+
+        .text-gradient { background: linear-gradient(135deg, #4ade80, #22c55e, #86efac); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+        /* Wave dividers */
+        .wave-divider { position: relative; }
+        .wave-divider::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 80px; background: inherit; clip-path: polygon(0 100%, 0 60%, 5% 55%, 10% 50%, 15% 48%, 20% 52%, 25% 58%, 30% 55%, 35% 45%, 40% 40%, 45% 42%, 50% 50%, 55% 55%, 60% 52%, 65% 48%, 70% 45%, 75% 48%, 80% 55%, 85% 58%, 90% 52%, 95% 48%, 100% 50%, 100% 100%); }
+
+        @media (max-width: 768px) {
+            .falling-leaf { animation-duration: 12s !important; }
+            .cursor-follower { display: none !important; }
+        }
+    </style>
+</head>
+<body class="font-heebo">
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="text-center">
+            <div class="loader-leaf">🍃</div>
+            <p class="text-jungle-300 mt-4 text-lg">טוען את ההרפתקה...</p>
+        </div>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Cursor Follower -->
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
+
+    <!-- Global Falling Leaves -->
+    <div class="global-leaves" id="globalLeaves"></div>
+
+    <!-- NAV -->
+    <nav class="fixed top-0 right-0 left-0 z-[100] backdrop-blur-xl bg-jungle-950/70 border-b border-jungle-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <a href="#" class="text-2xl sm:text-3xl font-black text-gradient tracking-wide">Digital Travel</a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#guide" class="text-jungle-200 hover:text-jungle-300 transition-colors">המדריך</a>
+                    <a href="#features" class="text-jungle-200 hover:text-jungle-300 transition-colors">מה בפנים</a>
+                    <a href="#gallery" class="text-jungle-200 hover:text-jungle-300 transition-colors">גלריה</a>
+                    <a href="#faq" class="text-jungle-200 hover:text-jungle-300 transition-colors">שאלות</a>
+                    <a href="#pricing" class="magnetic-btn ripple-container bg-jungle-500 hover:bg-jungle-400 text-jungle-950 font-bold px-6 py-2.5 rounded-full transition-all shadow-lg shadow-jungle-500/30 hover:shadow-jungle-400/50">לרכישה מהירה</a>
+                </div>
+                <button id="mobileMenuBtn" class="md:hidden text-jungle-200 hover:text-white transition-colors">
+                    <i data-lucide="menu" class="w-7 h-7"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="md:hidden hidden bg-jungle-950/95 backdrop-blur-xl border-t border-jungle-800/50">
+            <div class="px-6 py-4 flex flex-col gap-4">
+                <a href="#guide" class="text-jungle-200 hover:text-white py-2 transition-colors">המדריך</a>
+                <a href="#features" class="text-jungle-200 hover:text-white py-2 transition-colors">מה בפנים</a>
+                <a href="#gallery" class="text-jungle-200 hover:text-white py-2 transition-colors">גלריה</a>
+                <a href="#faq" class="text-jungle-200 hover:text-white py-2 transition-colors">שאלות</a>
+                <a href="#pricing" class="bg-jungle-500 text-jungle-950 font-bold px-6 py-3 rounded-full text-center">לרכישה מהירה</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="min-h-screen relative overflow-hidden wave-divider" style="background: linear-gradient(180deg, #052e16 0%, #14532d 40%, #166534 100%);">
+        <!-- Canopy light -->
+        <div class="canopy-light"></div>
+        <!-- Mist -->
+        <div class="mist"></div>
+        <!-- Floating orbs -->
+        <div class="float-orb w-72 h-72 bg-jungle-500/20 top-20 right-10" style="animation-delay: 0s;"></div>
+        <div class="float-orb w-96 h-96 bg-jungle-400/10 top-40 left-0" style="animation-delay: 3s;"></div>
+        <div class="float-orb w-64 h-64 bg-jungle-300/15 bottom-20 right-1/3" style="animation-delay: 5s;"></div>
+        <!-- Fireflies -->
+        <div class="firefly" style="top:15%;right:20%;animation-delay:0s;"></div>
+        <div class="firefly" style="top:30%;right:70%;animation-delay:1.5s;"></div>
+        <div class="firefly" style="top:55%;right:40%;animation-delay:0.8s;"></div>
+        <div class="firefly" style="top:70%;right:15%;animation-delay:2.2s;"></div>
+        <div class="firefly" style="top:40%;right:85%;animation-delay:3s;"></div>
+        <!-- Morphing blob -->
+        <div class="morph-blob absolute w-[500px] h-[500px] bg-jungle-500/10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+
+        <!-- Hero Content -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-40 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Text -->
+                <div class="text-center lg:text-right">
+                    <div class="reveal inline-flex items-center gap-2 bg-jungle-800/60 backdrop-blur-sm border border-jungle-600/40 rounded-full px-5 py-2 mb-6">
+                        <span class="w-2 h-2 bg-jungle-400 rounded-full animate-pulse"></span>
+                        <span class="text-jungle-300 text-sm font-medium">הראשון מסוגו בישראל</span>
+                    </div>
+                    <h1 class="reveal stagger-1 text-4xl sm:text-5xl lg:text-7xl font-black leading-tight mb-6">
+                        <span class="text-gradient glow-text">Digital Travel</span>
+                        <br>
+                        <span class="text-white">המסלול המלא לשבעה ימים</span>
+                        <br>
+                        <span class="text-jungle-300">במונטנגרו</span>
+                    </h1>
+                    <p class="reveal stagger-2 text-lg sm:text-xl text-jungle-200/90 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        במקום לבזבז שעות על תכנון, לקרוא מאות המלצות, ולהתלבט על כל צעד — קבלו תכנון יומי מלא של 7 ימים עם נקודות עצירה, מסעדות, תצפיות, מקומות לינה מומלצים וקישורים נוחים. הכול מסודר במדריך אחד ברור.
+                    </p>
+                    <div class="reveal stagger-3 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#pricing" class="magnetic-btn ripple-container bg-gradient-to-l from-jungle-400 to-jungle-600 hover:from-jungle-300 hover:to-jungle-500 text-jungle-950 font-bold px-8 py-4 rounded-full text-lg transition-all shadow-2xl shadow-jungle-500/40 hover:shadow-jungle-400/60 tactile">
+                            🍃 לרכישה מהירה לחצו כאן
+                        </a>
+                        <a href="#guide" class="magnetic-btn ripple-container border-2 border-jungle-400/50 text-jungle-200 hover:bg-jungle-400/10 hover:border-jungle-400 px-8 py-4 rounded-full text-lg transition-all tactile">
+                            גלו עוד
+                        </a>
+                    </div>
+                </div>
+                <!-- Hero Image -->
+                <div class="reveal-left relative">
+                    <div class="relative rounded-3xl overflow-hidden img-zoom shadow-2xl shadow-jungle-900/60">
+                        <img src="http://static.photos/nature/640x360/42" alt="מונטנגרו" class="w-full h-80 sm:h-[450px] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-jungle-950/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 right-6 left-6">
+                            <div class="bg-jungle-900/70 backdrop-blur-md rounded-2xl p-4 border border-jungle-600/30">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-xl bg-jungle-500/20 flex items-center justify-center text-2xl">🏔️</div>
+                                    <div>
+                                        <p class="font-bold text-white">מונטנגרו</p>
+                                        <p class="text-jungle-300 text-sm">7 ימים של הרפתקה</p>
+                                    </div>
+                                    <div class="mr-auto flex items-center gap-1 text-yellow-400">
+                                        <span>★★★★★</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Floating stat cards -->
+                    <div class="absolute -top-4 -right-4 sm:-right-8 bg-jungle-800/80 backdrop-blur-md rounded-2xl p-4 border border-jungle-600/30 shadow-xl animate-bounce" style="animation-duration: 3s;">
+                        <p class="text-3xl font-black text-jungle-400">7</p>
+                        <p class="text-xs text-jungle-300">ימים מלאים</p>
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 sm:-left-8 bg-jungle-800/80 backdrop-blur-md rounded-2xl p-4 border border-jungle-600/30 shadow-xl" style="animation: floatOrb 4s ease-in-out infinite alternate;">
+                        <p class="text-3xl font-black text-jungle-400">50+</p>
+                        <p class="text-xs text-jungle-300">נקודות עצירה</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative leaves -->
+        <div class="swaying-leaf absolute top-32 left-10 text-6xl opacity-40" style="animation-delay: 0.5s;">🌿</div>
+        <div class="swaying-leaf absolute top-60 right-20 text-5xl opacity-30" style="animation-delay: 1.5s;">🍃</div>
+        <div class="swaying-leaf absolute bottom-40 left-1/4 text-7xl opacity-25" style="animation-delay: 2s;">🌴</div>
+    </section>
+
+    <!-- ==================== MARQUEE ==================== -->
+    <section class="py-6 bg-jungle-800/80 border-y border-jungle-700/40 overflow-hidden relative z-10">
+        <div class="marquee-track whitespace-nowrap">
+            <span class="inline-block mx-8 text-jungle-300/70 text-lg font-medium">🏔️ קוטור •</span>
+            <span class="inline-block mx-8 text-jungle-300/70 text-lg font-medium">🌊 בודווה •</span>
+            <span class="inline-block mx-8 text-jungle-300/70 text-lg font-medium">🏞️ דורמיטור •</span>
+            <span class="inline-block mx-8 text-jungle-300/70 text-lg font-medium">🛥️ סבניק •</span>
+            <span class="inline-block mx-8 text-jungle-300/70 text-lg font-medium">🌅 סטיווה •</span>
+            <span class="inline-block mx-8 text-jungle-300/70 text-lg font-medium">🏕️ זאבלאק •</span>
+            <span class="inline-block mx-8 text-jungle-300/70 text-lg font-medium">🏖️ בראנה •</span>
+            <span class="inline-block mx-8 text-jungle-300/70 text-lg font-medium">🏰 אולצין •</span>
+            <span class="inline-block mx-8 text-jungle-300/70 text-lg font-medium">🏔️ קוטור •</span>
+            <span class="inline-block mx-8 text-jungle-300/70 text-lg font-medium">🌊 בודווה •</span>
+            <span class="inline-block mx-8 text-jungle-300/70 text-lg font-medium">🏞️ דורמיטור •</span>
+            <span class="inline-block mx-8 text-jungle-300/70 text-lg font-medium">🛥️ סבניק •</span>
+            <span class="inline-block mx-8 text-jungle-300/70 text-lg font-medium">🌅 סטיווה •</span>
+            <span class="inline-block mx-8 text-jungle-300/70 text-lg font-medium">🏕️ זאבלאק •</span>
+            <span class="inline-block mx-8 text-jungle-300/70 text-lg font-medium">🏖️ בראנה •</span>
+            <span class="inline-block mx-8 text-jungle-300/70 text-lg font-medium">🏰 אולצין •</span>
+        </div>
+    </section>
+
+    <!-- ==================== PROBLEM SECTION ==================== -->
+    <section class="py-20 sm:py-28 relative overflow-hidden" style="background: linear-gradient(180deg, #14532d 0%, #166534 50%, #14532d 100%);">
+        <div class="canopy-light"></div>
+        <div class="firefly" style="top:20%;right:30%;animation-delay:1s;"></div>
+        <div class="firefly" style="top:60%;right:70%;animation-delay:2.5s;"></div>
+        <div class="swaying-leaf absolute top-20 right-10 text-8xl opacity-10" style="animation-delay:0.8s;">🍃</div>
+        <div class="swaying-leaf absolute bottom-20 left-10 text-9xl opacity-10" style="animation-delay:2s;">🌿</div>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="reveal text-3xl sm:text-5xl font-black text-white mb-6">
+                    הגעתם עד מונטנגרו <span class="text-gradient">אבל מרגישים שפספסתם</span> את המקומות הכי שווים?
+                </h2>
+            </div>
+            <div class="grid sm:grid-cols-3 gap-6">
+                <div class="reveal stagger-1 card-shine bg-jungle-900/60 backdrop-blur-sm rounded-2xl p-6 border border-jungle-700/30 text-center hover:border-jungle-500/50 transition-all group tactile">
+                    <div class="text-5xl mb-4 group-hover:scale-125 transition-transform">😰</div>
+                    <h3 class="text-xl font-bold text-white mb-2">שורפים שעות על תכנון</h3>
+                    <p class="text-jungle-300/80">ועדיין לא בטוחים אם זה באמת המסלול הכי טוב</p>
+                </div>
+                <div class="reveal stagger-2 card-shine bg-jungle-900/60 backdrop-blur-sm rounded-2xl p-6 border border-jungle-700/30 text-center hover:border-jungle-500/50 transition-all group tactile">
+                    <div class="text-5xl mb-4 group-hover:scale-125 transition-transform">😵</div>
+                    <h3 class="text-xl font-bold text-white mb-2">עברתם עשרות פוסטים</h3>
+                    <p class="text-jungle-300/80">והמלצות אבל הכול מרגיש מבולגן ולא ברור</p>
+                </div>
+                <div class="reveal stagger-3 card-shine bg-jungle-900/60 backdrop-blur-sm rounded-2xl p-6 border border-jungle-700/30 text-center hover:border-jungle-500/50 transition-all group tactile">
+                    <div class="text-5xl mb-4 group-hover:scale-125 transition-transform">😤</div>
+                    <h3 class="text-xl font-bold text-white mb-2">מתלבטים על כל צעד</h3>
+                    <p class="text-jungle-300/80">במקום ליהנות מהטיול באמת</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== GUIDE SECTION ==================== -->
+    <section id="guide" class="py-20 sm:py-28 relative overflow-hidden" style="background: linear-gradient(180deg, #14532d 0%, #052e16 50%, #14532d 100%);">
+        <!-- Vine decoration -->
+        <svg class="vine-deco absolute top-0 right-0 h-full w-40 opacity-20" viewBox="0 0 120 900" fill="none">
+            <path d="M60 0 C60 100, 20 150, 60 200 C100 250, 20 300, 60 350 C100 400, 20 450, 60 500 C100 550, 20 600, 60 650 C100 700, 20 750, 60 800 C100 850, 60 900, 60 900" stroke="#4ade80" stroke-width="3" fill="none"/>
+            <ellipse cx="40" cy="150" rx="15" ry="8" fill="#22c55e" transform="rotate(-30 40 150)"/>
+            <ellipse cx="80" cy="250" rx="15" ry="8" fill="#22c55e" transform="rotate(30 80 250)"/>
+            <ellipse cx="35" cy="400" rx="15" ry="8" fill="#22c55e" transform="rotate(-20 35 400)"/>
+            <ellipse cx="85" cy="500" rx="15" ry="8" fill="#22c55e" transform="rotate(25 85 500)"/>
+            <ellipse cx="45" cy="650" rx="15" ry="8" fill="#22c55e" transform="rotate(-35 45 650)"/>
+            <ellipse cx="75" cy="780" rx="15" ry="8" fill="#22c55e" transform="rotate(20 75 780)"/>
+        </svg>
+
+        <div class="swaying-leaf absolute top-40 left-10 text-8xl opacity-15" style="animation-delay:1s;">🌿</div>
+        <div class="swaying-leaf absolute bottom-20 right-20 text-7xl opacity-15" style="animation-delay:2.5s;">🍃</div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-16">
+                <div class="reveal inline-flex items-center gap-2 bg-jungle-800/60 backdrop-blur-sm border border-jungle-600/40 rounded-full px-5 py-2 mb-6">
+                    <span class="text-jungle-400">🌿</span>
+                    <span class="text-jungle-300 text-sm font-medium">זה לא עוד סתם מדריך</span>
+                </div>
+                <h2 class="reveal text-3xl sm:text-5xl font-black text-white mb-6">
+                    זה <span class="text-gradient">מסלול מדויק וחכם</span>
+                </h2>
+                <p class="reveal stagger-1 text-lg text-jungle-200/80 max-w-2xl mx-auto leading-relaxed">
+                    שנבנה מתוך חוויה אמיתית שלי, עם הבנה ברורה של מה באמת שווה לראות, ואיך להספיק את זה בצורה הכי נעימה, יעילה ומרגיעה שיש.
+                </p>
+                <p class="reveal stagger-2 text-lg text-jungle-300 font-bold mt-4">מתאים למשפחות, זוגות או קבוצות</p>
+            </div>
+
+            <div class="reveal stagger-3 bg-jungle-900/40 backdrop-blur-sm border border-jungle-700/30 rounded-3xl p-8 sm:p-10 text-center">
+                <p class="text-xl sm:text-2xl text-jungle-100 leading-relaxed mb-6">
+                    תכינו לעצמכם משהו חם לשתות, תתמקמו בנוח, ותנו לעצמכם רגע להיכנס למסלול שייקח את הטיול שלכם למונטנגרו כמה רמות קדימה 🍃
+                </p>
+                <a href="#pricing" class="magnetic-btn ripple-container inline-flex items-center gap-2 bg-gradient-to-l from-jungle-400 to-jungle-600 hover:from-jungle-300 hover:to-jungle-500 text-jungle-950 font-bold px-8 py-4 rounded-full text-lg transition-all shadow-2xl shadow-jungle-500/30 tactile">
+                    לרכישה מהירה לחצו כאן
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FEATURES / WHAT'S INSIDE ==================== -->
+    <section id="features" class="py-20 sm:py-28 relative overflow-hidden" style="background: linear-gradient(180deg, #14532d 0%, #166534 50%, #14532d 100%);">
+        <div class="canopy-light"></div>
+        <div class="firefly" style="top:15%;right:50%;animation-delay:0.5s;"></div>
+        <div class="firefly" style="top:70%;right:25%;animation-delay:2s;"></div>
+        <div class="firefly" style="top:45%;right:80%;animation-delay:3.5s;"></div>
+        <div class="swaying-leaf absolute top-10 left-20 text-8xl opacity-15" style="animation-delay:0.5s;">🌴</div>
+        <div class="swaying-leaf absolute bottom-10 right-10 text-7xl opacity-15" style="animation-delay:1.8s;">🍃</div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="reveal text-3xl sm:text-5xl font-black text-white mb-4">
+                    מה <span class="text-gradient">מחכה לכם</span> במדריך?
+                </h2>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Feature 1 -->
+                <div class="reveal stagger-1 tilt-card card-shine bg-jungle-900/60 backdrop-blur-sm rounded-2xl p-6 border border-jungle-700/30 hover:border-jungle-500/50 transition-all group tactile">
+                    <div class="text-5xl font-black text-gradient mb-4">01</div>
+                    <div class="w-14 h-14 rounded-xl bg-jungle-500/20 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">🗺️</div>
+                    <h3 class="text-xl font-bold text-white mb-2">מפה מסודרת עם מסלול יומי מפורט</h3>
+                    <p class="text-jungle-300/80">דרך גוגל מאפס</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="reveal stagger-2 tilt-card card-shine bg-jungle-900/60 backdrop-blur-sm rounded-2xl p-6 border border-jungle-700/30 hover:border-jungle-500/50 transition-all group tactile">
+                    <div class="text-5xl font-black text-gradient mb-4">02</div>
+                    <div class="w-14 h-14 rounded-xl bg-jungle-500/20 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">📅</div>
+                    <h3 class="text-xl font-bold text-white mb-2">לו״ז מסודר ל-7 ימים מלאים</h3>
+                    <p class="text-jungle-300/80">בלי לחץ להספיק הכל ביום אחד</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="reveal stagger-3 tilt-card card-shine bg-jungle-900/60 backdrop-blur-sm rounded-2xl p-6 border border-jungle-700/30 hover:border-jungle-500/50 transition-all group tactile">
+                    <div class="text-5xl font-black text-gradient mb-4">03</div>
+                    <div class="w-14 h-14 rounded-xl bg-jungle-500/20 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">🔗</div>
+                    <h3 class="text-xl font-bold text-white mb-2">קישורים למסעדות מלונות ואטרקציות</h3>
+                    <p class="text-jungle-300/80">קישורים וניווטים</p>
+                </div>
+                <!-- Feature 4 -->
+                <div class="reveal stagger-4 tilt-card card-shine bg-jungle-900/60 backdrop-blur-sm rounded-2xl p-6 border border-jungle-700/30 hover:border-jungle-500/50 transition-all group tactile">
+                    <div class="text-5xl font-black text-gradient mb-4">04</div>
+                    <div class="w-14 h-14 rounded-xl bg-jungle-500/20 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">💡</div>
+                    <h3 class="text-xl font-bold text-white mb-2">טיפים שצריך לדעת על כל מקום</h3>
+                    <p class="text-jungle-300/80">כניסות בתשלום, חניות ועוד…</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== WHO IS IT FOR ==================== -->
+    <section class="py-20 sm:py-28 relative overflow-hidden" style="background: linear-gradient(180deg, #14532d 0%, #052e16 100%);">
+        <div class="swaying-leaf absolute top-20 right-10 text-8xl opacity-10" style="animation-delay:1.2s;">🌿</div>
+        <!-- Vine decoration -->
+        <svg class="vine-deco absolute top-0 left-0 h-full w-40 opacity-20" viewBox="0 0 120 900" fill="none" style="transform: scaleX(-1);">
+            <path d="M60 0 C60 100, 20 150, 60 200 C100 250, 20 300, 60 350 C100 400, 20 450, 60 500 C100 550, 20 600, 60 650 C100 700, 20 750, 60 800 C100 850, 60 900, 60 900" stroke="#4ade80" stroke-width="3" fill="none"/>
+            <ellipse cx="40" cy="180" rx="18" ry="10" fill="#22c55e" transform="rotate(-30 40 180)"/>
+            <ellipse cx="80" cy="320" rx="18" ry="10" fill="#22c55e" transform="rotate(30 80 320)"/>
+            <ellipse cx="35" cy="480" rx="18" ry="10" fill="#22c55e" transform="rotate(-20 35 480)"/>
+            <ellipse cx="85" cy="600" rx="18" ry="10" fill="#22c55e" transform="rotate(25 85 600)"/>
+            <ellipse cx="45" cy="750" rx="18" ry="10" fill="#22c55e" transform="rotate(-35 45 750)"/>
+        </svg>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="reveal text-3xl sm:text-5xl font-black text-white mb-6">
+                    למי <span class="text-gradient">המדריך מתאים?</span>
+                </h2>
+            </div>
+            <div class="reveal bg-gradient-to-bl from-jungle-800/60 to-jungle-900/60 backdrop-blur-sm border border-jungle-600/30 rounded-3xl p-8 sm:p-12">
+                <div class="grid sm:grid-cols-2 gap-8">
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-jungle-500/20 flex items-center justify-center text-2xl">✅</div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-1">רוצים לטייל בלי לדלג על מקומות שווים</h3>
+                            <p class="text-jungle-300/80">אם אתם רוצים לגלות את המקומות שבאמת שווה לראות</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-jungle-500/20 flex items-center justify-center text-2xl">✅</div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-1">רוצים מסלול שתוכנן כמו שצריך</h3>
+                            <p class="text-jungle-300/80">ליהנות מהנסיעה בלי לחץ ובלי לבזבז זמן</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-jungle-500/20 flex items-center justify-center text-2xl">✅</div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-1">משפחות, זוגות או קבוצות</h3>
+                            <p class="text-jungle-300/80">המדריך מותאם לכל סוגי הטיולים</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-jungle-500/20 flex items-center justify-center text-2xl">✅</div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-1">רוצים לחסוך שעות של תכנון</h3>
+                            <p class="text-jungle-300/80">מבוסס חוויה אמיתית, חיסכון עצום בזמן</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-10">
+                    <a href="#pricing" class="magnetic-btn ripple-container inline-flex items-center gap-2 bg-gradient-to-l from-jungle-400 to-jungle-600 hover:from-jungle-300 hover:to-jungle-500 text-jungle-950 font-bold px-8 py-4 rounded-full text-lg transition-all shadow-2xl shadow-jungle-500/30 tactile">
+                        לרכישה מהירה לחצו כאן
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== GALLERY ==================== -->
+    <section id="gallery" class="py-20 sm:py-28 relative overflow-hidden" style="background: linear-gradient(180deg, #052e16 0%, #14532d 50%, #166534 100%);">
+        <div class="canopy-light"></div>
+        <div class="firefly" style="top:25%;right:60%;animation-delay:1.2s;"></div>
+        <div class="firefly" style="top:65%;right:20%;animation-delay:2.8s;"></div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-6">
+                <h2 class="reveal text-3xl sm:text-5xl font-black text-white mb-4">
+                    הצצה קטנה לנופים <span class="text-gradient">שמחכים לכם</span> ..
+                </h2>
+                <p class="reveal stagger-1 text-lg text-jungle-300/80 max-w-2xl mx-auto">
+                    כל התמונות כאן צולמו במקומות שאני ביקרתי בהם בעצמי. כולם מחכים לכם בתוך המדריך, כולל הוראות הגעה ברורות לכל נקודה.
+                </p>
+            </div>
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="reveal stagger-1 img-zoom rounded-2xl overflow-hidden shadow-lg group relative">
+                    <img src="http://static.photos/nature/320x240/10" alt="מונטנגרו" class="w-full h-48 sm:h-64 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-jungle-950/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                        <span class="text-white font-bold">🏔️ הרי דורמיטור</span>
+                    </div>
+                </div>
+                <div class="reveal stagger-2 img-zoom rounded-2xl overflow-hidden shadow-lg group relative">
+                    <img src="http://static.photos/nature/320x240/25" alt="מונטנגרו" class="w-full h-48 sm:h-64 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-jungle-950/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                        <span class="text-white font-bold">🌊 מפרץ קוטור</span>
+                    </div>
+                </div>
+                <div class="reveal stagger-3 img-zoom rounded-2xl overflow-hidden shadow-lg group relative">
+                    <img src="http://static.photos/nature/320x240/33" alt="מונטנגרו" class="w-full h-48 sm:h-64 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-jungle-950/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                        <span class="text-white font-bold">🌅 סטיווה</span>
+                    </div>
+                </div>
+                <div class="reveal stagger-4 img-zoom rounded-2xl overflow-hidden shadow-lg group relative">
+                    <img src="http://static.photos/nature/320x240/44" alt="מונטנגרו" class="w-full h-48 sm:h-64 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-jungle-950/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                        <span class="text-white font-bold">🏖️ בראנה</span>
+                    </div>
+                </div>
+                <div class="reveal stagger-5 img-zoom rounded-2xl overflow-hidden shadow-lg group relative">
+                    <img src="http://static.photos/nature/320x240/55" alt="מונטנגרו" class="w-full h-48 sm:h-64 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-jungle-950/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                        <span class="text-white font-bold">🛥️ סבניק</span>
+                    </div>
+                </div>
+                <div class="reveal stagger-6 img-zoom rounded-2xl overflow-hidden shadow-lg group relative">
+                    <img src="http://static.photos/nature/320x240/66" alt="מונטנגרו" class="w-full h-48 sm:h-64 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-jungle-950/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                        <span class="text-white font-bold">🏰 אולצין</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== IMMERSIVE PARALLAX ==================== -->
+    <section class="relative h-[60vh] sm:h-[70vh] overflow-hidden flex items-center justify-center" style="background: linear-gradient(180deg, #166534, #052e16);">
+        <div class="absolute inset-0 opacity-30">
+            <img src="http://static.photos/nature/1200x630/42" alt="" class="w-full h-full object-cover" style="filter: brightness(0.4) saturate(1.5) hue-rotate(20deg);">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-b from-jungle-900/80 via-transparent to-jungle-950/80"></div>
+        <div class="firefly" style="top:30%;right:20%;animation-delay:0.3s;"></div>
+        <div class="firefly" style="top:50%;right:75%;animation-delay:1.8s;"></div>
+        <div class="firefly" style="top:70%;right:40%;animation-delay:3s;"></div>
+        <div class="relative z-10 text-center px-6">
+            <p class="reveal text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight glow-text max-w-4xl mx-auto">
+                "אם אתם רוצים לטייל בלי לדלג על המקומות שבאמת שווה לראות — זה בדיוק בשבילכם"
+            </p>
+        </div>
+    </section>
+
+    <!-- ==================== DAY PREVIEW ==================== -->
+    <section class="py-20 sm:py-28 relative overflow-hidden" style="background: linear-gradient(180deg, #052e16 0%, #14532d 100%);">
+        <div class="swaying-leaf absolute top-10 right-10 text-7xl opacity-15" style="animation-delay:0.3s;">🍃</div>
+        <div class="swaying-leaf absolute bottom-10 left-10 text-8xl opacity-15" style="animation-delay:1.5s;">🌿</div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-12">
+                <div class="reveal inline-flex items-center gap-2 bg-jungle-800/60 backdrop-blur-sm border border-jungle-600/40 rounded-full px-5 py-2 mb-6">
+                    <span class="text-jungle-400">🔍</span>
+                    <span class="text-jungle-300 text-sm font-medium">בטח הייתם רוצים להכנס קצת לתוך המדריך</span>
+                </div>
+                <h2 class="reveal text-3xl sm:text-5xl font-black text-white">
+                    דוגמא ל<span class="text-gradient">יום הראשון</span>
+                </h2>
+            </div>
+
+            <div class="reveal stagger-1 bg-jungle-900/50 backdrop-blur-sm border border-jungle-700/30 rounded-3xl overflow-hidden">
+                <div class="relative">
+                    <img src="http://static.photos/nature/1024x576/77" alt="יום 1" class="w-full h-64 sm:h-80 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-jungle-950/90 via-jungle-950/30 to-transparent"></div>
+                    <div class="absolute bottom-6 right-6">
+                        <span class="bg-jungle-500/20 backdrop-blur-md text-jungle-300 border border-jungle-500/30 rounded-full px-4 py-2 text-sm font-bold">יום 1</span>
+                    </div>
+                </div>
+                <div class="p-6 sm:p-8">
+                    <h3 class="text-2xl font-bold text-white mb-3">קוטור — העיר העתיקה והמפרץ</h3>
+                    <p class="text-jungle-200/80 mb-4 leading-relaxed">יום ראשון מתחיל בסיור בעיר העתיקה של קוטור, אחת מערי הנמל היפות ביותר באירופה. נעלה לתצפית מהחומה, נבקר בכנסיות ההיסטוריות, ונאכל במסעדה מקומית מומלצת.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-jungle-800/50 text-jungle-300 rounded-full px-3 py-1 text-sm">🏛️ עיר עתיקה</span>
+                        <span class="bg-jungle-800/50 text-jungle-300 rounded-full px-3 py-1 text-sm">🌄 תצפית</span>
+                        <span class="bg-jungle-800/50 text-jungle-300 rounded-full px-3 py-1 text-sm">🍽️ מסעדה</span>
+                        <span class="bg-jungle-800/50 text-jungle-300 rounded-full px-3 py-1 text-sm">🗺️ מפה</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== WHY BUY ==================== -->
+    <section class="py-20 sm:py-28 relative overflow-hidden" style="background: linear-gradient(180deg, #14532d 0%, #166534 50%, #14532d 100%);">
+        <div class="canopy-light"></div>
+        <div class="firefly" style="top:20%;right:40%;animation-delay:0.7s;"></div>
+        <div class="firefly" style="top:75%;right:70%;animation-delay:2.3s;"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="reveal text-3xl sm:text-5xl font-black text-white mb-6">
+                    למה שווה <span class="text-gradient">לרכוש</span> את המסלול שלי?
+                </h2>
+                <p class="reveal stagger-1 text-lg text-jungle-200/80 max-w-2xl mx-auto leading-relaxed">
+                    אחרי שביקרתי במונטנגרו טיילתי, בדקתי, טעמתי, עצרתי וריכזתי את הכל למדריך פרקטי, אמיתי, ומבוסס חוויה אישית ואמיתית!
+                </p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="reveal stagger-1 card-shine bg-jungle-900/60 backdrop-blur-sm rounded-2xl p-6 border border-jungle-700/30 hover:border-jungle-500/50 transition-all group tactile text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-jungle-500/20 flex items-center justify-center text-4xl mb-4 mx-auto group-hover:scale-110 transition-transform">✈️</div>
+                    <h3 class="text-xl font-bold text-white mb-2">טסים בראש שקט</h3>
+                    <p class="text-jungle-300/80">תכנון מלא מראש, בלי הפתעות</p>
+                </div>
+                <div class="reveal stagger-2 card-shine bg-jungle-900/60 backdrop-blur-sm rounded-2xl p-6 border border-jungle-700/30 hover:border-jungle-500/50 transition-all group tactile text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-jungle-500/20 flex items-center justify-center text-4xl mb-4 mx-auto group-hover:scale-110 transition-transform">⏰</div>
+                    <h3 class="text-xl font-bold text-white mb-2">חיסכון עצום בזמן</h3>
+                    <p class="text-jungle-300/80">במקום שעות של חיפוש — הכל מוכן</p>
+                </div>
+                <div class="reveal stagger-3 card-shine bg-jungle-900/60 backdrop-blur-sm rounded-2xl p-6 border border-jungle-700/30 hover:border-jungle-500/50 transition-all group tactile text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-jungle-500/20 flex items-center justify-center text-4xl mb-4 mx-auto group-hover:scale-110 transition-transform">💎</div>
+                    <h3 class="text-xl font-bold text-white mb-2">חוויה אמיתית</h3>
+                    <p class="text-jungle-300/80">לא עוד העתקה מהאינטרנט</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== HOW IT WORKS ==================== -->
+    <section class="py-20 sm:py-28 relative overflow-hidden" style="background: linear-gradient(180deg, #14532d 0%, #052e16 100%);">
+        <div class="swaying-leaf absolute top-20 left-10 text-8xl opacity-10" style="animation-delay:0.5s;">🌴</div>
+        <div class="swaying-leaf absolute bottom-20 right-10 text-7xl opacity-10" style="animation-delay:2s;">🍃</div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="reveal text-3xl sm:text-5xl font-black text-white mb-4">
+                    איך <span class="text-gradient">מקבלים</span> את המדריך?
+                </h2>
+                <p class="reveal stagger-1 text-lg text-jungle-300/80">המדריך מגיע בקובץ PDF</p>
+            </div>
+            <div class="grid sm:grid-cols-3 gap-8">
+                <div class="reveal stagger-1 text-center">
+                    <div class="w-20 h-20 rounded-full bg-gradient-to-bl from-jungle-400 to-jungle-600 flex items-center justify-center text-jungle-950 text-3xl font-black mx-auto mb-4 shadow-lg shadow-jungle-500/30">1</div>
+                    <h3 class="text-xl font-bold text-white mb-2">לוחצים על רכישה מהירה</h3>
+                    <p class="text-jungle-300/80">ומזינים את הפרטים</p>
+                </div>
+                <div class="reveal stagger-2 text-center">
+                    <div class="w-20 h-20 rounded-full bg-gradient-to-bl from-jungle-400 to-jungle-600 flex items-center justify-center text-jungle-950 text-3xl font-black mx-auto mb-4 shadow-lg shadow-jungle-500/30">2</div>
+                    <h3 class="text-xl font-bold text-white mb-2">מבצעים את התשלום</h3>
+                    <p class="text-jungle-300/80">תשלום מאובטח ומהיר</p>
+                </div>
+                <div class="reveal stagger-3 text-center">
+                    <div class="w-20 h-20 rounded-full bg-gradient-to-bl from-jungle-400 to-jungle-600 flex items-center justify-center text-jungle-950 text-3xl font-black mx-auto mb-4 shadow-lg shadow-jungle-500/30">3</div>
+                    <h3 class="text-xl font-bold text-white mb-2">מקבלים במייל</h3>
+                    <p class="text-jungle-300/80">עד 24 שעות מרגע הרכישה</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FAQ ==================== -->
+    <section id="faq" class="py-20 sm:py-28 relative overflow-hidden" style="background: linear-gradient(180deg, #052e16 0%, #14532d 50%, #166534 100%);">
+        <div class="canopy-light"></div>
+        <div class="firefly" style="top:15%;right:55%;animation-delay:1s;"></div>
+        <div class="firefly" style="top:80%;right:30%;animation-delay:2.5s;"></div>
+        <div class="swaying-leaf absolute top-10 left-20 text-7xl opacity-15" style="animation-delay:1s;">🍃</div>
+        <div class="swaying-leaf absolute bottom-10 right-20 text-6xl opacity-15" style="animation-delay:2.2s;">🌿</div>
+
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="reveal text-3xl sm:text-5xl font-black text-white mb-4">
+                    שאלות <span class="text-gradient">נפוצות</span>
+                </h2>
+            </div>
+
+            <div class="space-y-4" id="faqContainer">
+                <!-- FAQ 1 -->
+                <div class="reveal stagger-1 faq-item bg-jungle-900/60 backdrop-blur-sm border border-jungle-700/30 rounded-2xl overflow-hidden hover:border-jungle-600/50 transition-all">
+                    <button class="faq-toggle w-full flex items-center justify-between p-6 text-right">
+                        <span class="text-lg font-bold text-white">האם המדריך מתאים גם למי שלא נמצא במונטנגרו 7 ימים מלאים?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-jungle-400 transition-transform flex-shrink-0 mr-4"></i>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <p class="text-jungle-200/80 pb-6 leading-relaxed">בהחלט. גם אם יש לכם פחות מ-7 ימים, תוכלו להתאים את המסלול לפי הימים שברשותכם — לבחור רק את המקומות שהכי מעניינים אתכם, לפי המלצות, אזורים ומרחקים.</p>
+                    </div>
+                </div>
+                <!-- FAQ 2 -->
+                <div class="reveal stagger-2 faq-item bg-jungle-900/60 backdrop-blur-sm border border-jungle-700/30 rounded-2xl overflow-hidden hover:border-jungle-600/50 transition-all">
+                    <button class="faq-toggle w-full flex items-center justify-between p-6 text-right">
+                        <span class="text-lg font-bold text-white">איך אדע אם המדריך הזה באמת מתאים לי?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-jungle-400 transition-transform flex-shrink-0 mr-4"></i>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <p class="text-jungle-200/80 pb-6 leading-relaxed">אם אתם מתכננים לטוס למונטנגרו, רוצים לחסוך זמן בחיפושים, לגלות מקומות מיוחדים וליהנות ממסלול ברור וקל — המדריך הזה נבנה בדיוק בשבילכם. הוא נכתב מתוך חוויה אישית, אחרי שבדקתי מה באמת שווה ומה פחות.</p>
+                    </div>
+                </div>
+                <!-- FAQ 3 -->
+                <div class="reveal stagger-3 faq-item bg-jungle-900/60 backdrop-blur-sm border border-jungle-700/30 rounded-2xl overflow-hidden hover:border-jungle-600/50 transition-all">
+                    <button class="faq-toggle w-full flex items-center justify-between p-6 text-right">
+                        <span class="text-lg font-bold text-white">ומה אם לא אוהבים את המסלול?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-jungle-400 transition-transform flex-shrink-0 mr-4"></i>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <p class="text-jungle-200/80 pb-6 leading-relaxed">המסלול נבנה בגמישות — אתם יכולים לשנות, להזיז ולבחור רק את מה שמתאים לכם. הוא לא נוקשה, אלא נותן לכם חופש בחירה.</p>
+                    </div>
+                </div>
+                <!-- FAQ 4 -->
+                <div class="reveal stagger-4 faq-item bg-jungle-900/60 backdrop-blur-sm border border-jungle-700/30 rounded-2xl overflow-hidden hover:border-jungle-600/50 transition-all">
+                    <button class="faq-toggle w-full flex items-center justify-between p-6 text-right">
+                        <span class="text-lg font-bold text-white">האם יש אפשרות להחזר כספי?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-jungle-400 transition-transform flex-shrink-0 mr-4"></i>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <p class="text-jungle-200/80 pb-6 leading-relaxed">כמו ברוב המדריכים הדיגיטליים בשל האופי של המוצר, לאחר הרכישה והשליחה לא ניתן להחזיר ולקבל החזר. עם זאת, אני בטוחה שתמצאו בו ערך שישדרג לכם את כל החוויה! ותמיד זמינה לשאלות.</p>
+                    </div>
+                </div>
+                <!-- FAQ 5 -->
+                <div class="reveal stagger-5 faq-item bg-jungle-900/60 backdrop-blur-sm border border-jungle-700/30 rounded-2xl overflow-hidden hover:border-jungle-600/50 transition-all">
+                    <button class="faq-toggle w-full flex items-center justify-between p-6 text-right">
+                        <span class="text-lg font-bold text-white">האם המדריך תקף גם לעונת החורף?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-jungle-400 transition-transform flex-shrink-0 mr-4"></i>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <p class="text-jungle-200/80 pb-6 leading-relaxed">המדריך שבניתי מתאים במיוחד לטיולים בקיץ, אבל גם אם אתם מתכננים טיול בעונות אחרות יש בו המון המלצות שימושיות על לינה, נופים, מסעדות, מסלולים וטיפים אישיים! תוכלו פשוט לקחת משם את מה שרלוונטי עבורכם ולהתאים את זה לעונה שבה תטיילו.</p>
+                    </div>
+                </div>
+                <!-- FAQ 6 -->
+                <div class="reveal stagger-6 faq-item bg-jungle-900/60 backdrop-blur-sm border border-jungle-700/30 rounded-2xl overflow-hidden hover:border-jungle-600/50 transition-all">
+                    <button class="faq-toggle w-full flex items-center justify-between p-6 text-right">
+                        <span class="text-lg font-bold text-white">מתי כדאי לטייל במונטנגרו?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-jungle-400 transition-transform flex-shrink-0 mr-4"></i>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <p class="text-jungle-200/80 pb-6 leading-relaxed">התקופה המומלצת לטיול: יוני - ספטמבר. שימו לב: אזור הצפון נגיש בעיקר מהקיץ ואילך, כאשר השלגים נמסים והכבישים נפתחים. בחורף, חלק מהמסלולים והכבישים באזור זה סגורים עקב שלג.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PRICING ==================== -->
+    <section id="pricing" class="py-20 sm:py-28 relative overflow-hidden" style="background: linear-gradient(180deg, #166534 0%, #052e16 100%);">
+        <div class="swaying-leaf absolute top-20 left-10 text-9xl opacity-10" style="animation-delay:0.5s;">🌿</div>
+        <div class="swaying-leaf absolute bottom-20 right-10 text-8xl opacity-10" style="animation-delay:1.8s;">🍃</div>
+        <div class="morph-blob absolute w-[400px] h-[400px] bg-jungle-500/10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="reveal text-3xl sm:text-5xl font-black text-white mb-6">
+                    <span class="text-gradient">Digital Travel</span>
+                    <br>המסלול המלא לשבעה ימים מלאים במונטנגרו
+                </h2>
+                <div class="reveal stagger-1 inline-flex items-center gap-2 bg-red-500/20 border border-red-500/40 rounded-full px-5 py-2 mb-6">
+                    <span class="w-2 h-2 bg-red-400 rounded-full animate-pulse"></span>
+                    <span class="text-red-300 text-sm font-bold">🔥 במבצע לזמן מוגבל !!</span>
+                </div>
+            </div>
+
+            <div class="reveal stagger-2 max-w-lg mx-auto">
+                <div class="relative bg-gradient-to-bl from-jungle-800/80 to-jungle-900/80 backdrop-blur-md border-2 border-jungle-500/50 rounded-3xl p-8 sm:p-12 text-center shadow-2xl shadow-jungle-500/20">
+                    <!-- Pulse rings -->
+                    <div class="absolute inset-0 rounded-3xl border-2 border-jungle-400/30 pulse-ring"></div>
+                    
+                    <div class="text-6xl mb-6">🏔️</div>
+                    <h3 class="text-2xl font-bold text-white mb-4">המדריך המלא</h3>
+                    
+                    <div class="mb-6">
+                        <span class="text-jungle-400/60 text-2xl line-through">₪239</span>
+                        <div class="mt-2">
+                            <span class="text-7xl font-black text-gradient glow-text">99</span>
+                            <span class="text-3xl font-bold text-jungle-300">₪</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 text-right mb-8">
+                        <div class="flex items-center gap-3">
+                            <span class="text-jungle-400 text-lg">✓</span>
+                            <span class="text-jungle-200">לו״ז מסודר ל-7 ימים מלאים</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-jungle-400 text-lg">✓</span>
+                            <span class="text-jungle-200">קישורים לאטרקציות ועוד …</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-jungle-400 text-lg">✓</span>
+                            <span class="text-jungle-200">מפה עם מסלול מפורט לכל יום</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-jungle-400 text-lg">✓</span>
+                            <span class="text-jungle-200">טיפים שצריך לדעת בכל יום</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="magnetic-btn ripple-container block w-full bg-gradient-to-l from-jungle-400 to-jungle-600 hover:from-jungle-300 hover:to-jungle-500 text-jungle-950 font-bold py-5 rounded-full text-xl transition-all shadow-2xl shadow-jungle-500/40 hover:shadow-jungle-400/60 tactile">
+                        🍃 לרכישה מהירה לחצו כאן
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA ==================== -->
+    <section class="py-20 sm:py-28 relative overflow-hidden" style="background: linear-gradient(180deg, #052e16 0%, #14532d 50%, #166534 100%);">
+        <div class="canopy-light"></div>
+        <div class="mist"></div>
+        <div class="firefly" style="top:20%;right:25%;animation-delay:0.4s;"></div>
+        <div class="firefly" style="top:40%;right:65%;animation-delay:1.8s;"></div>
+        <div class="firefly" style="top:70%;right:40%;animation-delay:3.2s;"></div>
+        <div class="swaying-leaf absolute top-10 right-10 text-9xl opacity-10" style="animation-delay:0.5s;">🌿</div>
+        <div class="swaying-leaf absolute bottom-10 left-10 text-8xl opacity-10" style="animation-delay:1.5s;">🍃</div>
+
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+            <h2 class="reveal text-3xl sm:text-5xl font-black text-white mb-6">
+                מוכנים לצאת <span class="text-gradient">להרפתקה?</span>
+            </h2>
+            <p class="reveal stagger-1 text-xl text-jungle-200/80 mb-8 leading-relaxed">
+                טסים בראש שקט עם מסלול מדויק, טיפים שחוסכים זמן, וכל המידע שצריך — במקום אחד.
+            </p>
+            <a href="#pricing" class="reveal stagger-2 magnetic-btn ripple-container inline-flex items-center gap-3 bg-gradient-to-l from-jungle-400 to-jungle-600 hover:from-jungle-300 hover:to-jungle-500 text-jungle-950 font-bold px-10 py-5 rounded-full text-xl transition-all shadow-2xl shadow-jungle-500/40 tactile">
+                🍃 לרכישה מהירה לחצו כאן
+                <i data-lucide="arrow-left" class="w-6 h-6"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="py-16 relative overflow-hidden border-t border-jungle-800/50" style="background: #052e16;">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                <!-- Brand -->
+                <div>
+                    <h3 class="text-2xl font-black text-gradient mb-4">Digital Travel</h3>
+                    <p class="text-jungle-300/80 leading-relaxed">מבוסס חוויה אמיתית, חיסכון עצום בזמן התכנון שלך!</p>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">ניווט מהיר</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#guide" class="text-jungle-300/80 hover:text-jungle-400 transition-colors">המדריך</a></li>
+                        <li><a href="#features" class="text-jungle-300/80 hover:text-jungle-400 transition-colors">מה בפנים</a></li>
+                        <li><a href="#gallery" class="text-jungle-300/80 hover:text-jungle-400 transition-colors">גלריה</a></li>
+                        <li><a href="#faq" class="text-jungle-300/80 hover:text-jungle-400 transition-colors">שאלות נפוצות</a></li>
+                        <li><a href="#pricing" class="text-jungle-300/80 hover:text-jungle-400 transition-colors">רכישה</a></li>
+                    </ul>
+                </div>
+                <!-- Social -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">FOLLOW ME</h4>
+                    <div class="flex gap-4">
+                        <a href="https://www.facebook.com/share/1GPdFNtnfF/?mibextid=wwXIfr" target="_blank" class="w-12 h-12 rounded-xl bg-jungle-800/50 border border-jungle-700/30 flex items-center justify-center hover:bg-jungle-500/20 hover:border-jungle-500/50 transition-all tactile">
+                            <svg class="w-6 h-6 text-jungle-300" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/shiraz_sanker?igsh=d3Vncm1ndDBiYXpy&utm_source=qr" target="_blank" class="w-12 h-12 rounded-xl bg-jungle-800/50 border border-jungle-700/30 flex items-center justify-center hover:bg-jungle-500/20 hover:border-jungle-500/50 transition-all tactile">
+                            <svg class="w-6 h-6 text-jungle-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@shiraz_sanker?_r=1&_t=ZS-95MyjZcVljc" target="_blank" class="w-12 h-12 rounded-xl bg-jungle-800/50 border border-jungle-700/30 flex items-center justify-center hover:bg-jungle-500/20 hover:border-jungle-500/50 transition-all tactile">
+                            <svg class="w-6 h-6 text-jungle-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.98-.71-.32-1.37-.74-1.98-1.22-.01 2.08.01 4.16 0 6.24-.04 1.44-.4 2.87-1.12 4.12-1.12 1.93-3.07 3.35-5.27 3.78-1.35.27-2.76.2-4.07-.19-1.75-.53-3.28-1.7-4.28-3.24-.84-1.28-1.3-2.81-1.35-4.36v-.67c.05-1.56.53-3.1 1.4-4.38 1.08-1.6 2.77-2.77 4.67-3.2 1.2-.28 2.46-.26 3.65-.01v4.03c-1.07-.24-2.27-.17-3.2.44-.91.56-1.54 1.49-1.75 2.53-.16.73-.13 1.49.08 2.2.39 1.31 1.41 2.4 2.71 2.83.96.32 2.04.3 2.99-.07 1.12-.44 2.01-1.38 2.41-2.52.19-.56.28-1.15.28-1.74V.02h-1.78z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <!-- Legal -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">מידע</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-jungle-300/80 hover:text-jungle-400 transition-colors">תנאי שימוש</a></li>
+                        <li><a href="#" class="text-jungle-300/80 hover:text-jungle-400 transition-colors">נגישות</a></li>
+                        <li><a href="#" class="text-jungle-300/80 hover:text-jungle-400 transition-colors">מדיניות רכישה</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-jungle-800/50 pt-8 text-center">
+                <p class="text-jungle-400/60 text-sm">© 2025 Shiraz Sanker. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // === LOADER ===
+        window.addEventListener('load', () => {
+            setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1200);
+        });
+
+        // === SCROLL PROGRESS ===
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement;
+            const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+            document.getElementById('scrollProgress').style.width = pct + '%';
+        });
+
+        // === CURSOR FOLLOWER ===
+        const cursor = document.getElementById('cursorFollower');
+        let cursorX = 0, cursorY = 0;
+        document.addEventListener('mousemove', e => {
+            cursorX = e.clientX; cursorY = e.clientY;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+        });
+
+        // === PARTICLE SYSTEM ===
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2.5 + 1;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+            update() {
+                this.x += this.vx; this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                // Mouse interaction
+                const dx = this.x - cursorX; const dy = this.y - cursorY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 150) {
+                    this.x += dx * 0.02; this.y += dy * 0.02;
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(74, 222, 128, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 60; i++) particles.push(new Particle());
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            // Draw connections
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(34, 197, 94, ${0.15 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // === FALLING LEAVES ===
+        const leafEmojis = ['🍃', '🌿', '🍂', '🌱', '☘️'];
+        const leavesContainer = document.getElementById('globalLeaves');
+        function createLeaf() {
+            const leaf = document.createElement('div');
+            leaf.className = 'falling-leaf';
+            leaf.textContent = leafEmojis[Math.floor(Math.random() * leafEmojis.length)];
+            leaf.style.right = Math.random() * 100 + '%';
+            leaf.style.fontSize = (Math.random() * 30 + 24) + 'px';
+            leaf.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            leaf.style.animationDelay = Math.random() * 5 + 's';
+            leaf.style.opacity = Math.random() * 0.5 + 0.3;
+            leavesContainer.appendChild(leaf);
+            leaf.addEventListener('animationend', () => {
+                leaf.remove();
+                createLeaf();
+            });
+        }
+        for (let i = 0; i < 15; i++) createLeaf();
+
+        // === SCROLL REVEAL ===
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-rotate').forEach(el => observer.observe(el));
+
+        // === FAQ TOGGLE ===
+        document.querySelectorAll('.faq-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const answer = btn.nextElementSibling;
+                const icon = btn.querySelector('[data-lucide]');
+                const isOpen = answer.classList.contains('open');
+                // Close all
+                document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+                document.querySelectorAll('.faq-toggle [data-lucide]').forEach(i => i.style.transform = 'rotate(0deg)');
+                // Toggle current
+                if (!isOpen) {
+                    answer.classList.add('open');
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // === MAGNETIC BUTTONS ===
+        document.querySelectorAll('.magnetic-btn').forEach(btn => {
+            btn.addEventListener('mousemove', e => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0)';
+            });
+        });
+
+        // === RIPPLE EFFECT ===
+        document.querySelectorAll('.ripple-container').forEach(el => {
+            el.addEventListener('click', e => {
+                const rect = el.getBoundingClientRect();
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple';
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+                ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+                el.appendChild(ripple);
+                ripple.addEventListener('animationend', () => ripple.remove());
+            });
+        });
+
+        // === 3D TILT CARDS ===
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                card.style.transform = `perspective(800px) rotateY(${-x * 15}deg) rotateX(${y * 15}deg) scale(1.02)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(800px) rotateY(0) rotateX(0) scale(1)';
+            });
+        });
+
+        // === MOBILE MENU ===
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let menuOpen = false;
+        mobileMenuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuOpen = false;
+            });
+        });
+
+        // === SMOOTH SCROLL ===
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // === PARALLAX ON SCROLL ===
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            document.querySelectorAll('.float-orb').forEach((orb, i) => {
+                const speed = 0.03 + (i * 0.01);
+                orb.style.transform = `translateY(${scrollY * speed}px)`;
+            });
+            document.querySelectorAll('.swaying-leaf').forEach((leaf, i) => {
+                const speed = 0.02 + (i * 0.005);
+                leaf.style.transform = `translateY(${scrollY * speed}px)`;
+            });
+        });
+
+        // === TOUCH INTERACTIONS (mobile) ===
+        document.querySelectorAll('.card-shine, .tilt-card, .img-zoom').forEach(el => {
+            el.addEventListener('touchstart', () => {
+                el.classList.add('touch-active');
+            }, { passive: true });
+            el.addEventListener('touchend', () => {
+                setTimeout(() => el.classList.remove('touch-active'), 500);
+            }, { passive: true });
+        });
+
+        // Leaf tap interaction
+        document.addEventListener('click', e => {
+            if (e.target.classList.contains('falling-leaf')) {
+                e.target.style.transform = 'scale(2) rotate(360deg)';
+                e.target.style.filter = 'brightness(1.5) drop-shadow(0 0 20px rgba(74,222,128,0.9))';
+                e.target.style.transition = 'all 0.5s';
+                setTimeout(() => {
+                    e.target.style.transform = '';
+                    e.target.style.filter = '';
+                    e.target.style.transition = '';
+                }, 600);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מדריך לשבעה ימים מלאים במונטנגרו | Digital Travel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'heebo': ['Heebo', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: { 50: '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0', 300: '#86efac', 400: '#4ade80', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d' },
+                        ocean: { 50: '#f0f9ff', 100: '#e0f2fe', 200: '#bae6fd', 300: '#7dd3fc', 400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1', 800: '#075985', 900: '#0c4a6e' },
+                        warm: { 50: '#fff7ed', 100: '#ffedd5', 200: '#fed7aa', 300: '#fdba74', 400: '#fb923c', 500: '#f97316', 600: '#ea580c' },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'Heebo', sans-serif; }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0c4a6e; }
+        ::-webkit-scrollbar-thumb { background: #38bdf8; border-radius: 10px; }
+        
+        /* Scroll animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-80px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(80px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.85);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .stagger-1 { transition-delay: 0.1s !important; }
+        .stagger-2 { transition-delay: 0.2s !important; }
+        .stagger-3 { transition-delay: 0.3s !important; }
+        .stagger-4 { transition-delay: 0.4s !important; }
+        .stagger-5 { transition-delay: 0.5s !important; }
+        .stagger-6 { transition-delay: 0.6s !important; }
+
+        /* Hero parallax */
+        .hero-bg {
+            background-image: url('https://shirazsanker.com/digital-travel-montenegro/_assets/video/25dc265609b60faa81ab704b7abe9f43.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .float { animation: float 6s ease-in-out infinite; }
+        .float-delay { animation: float 6s ease-in-out 2s infinite; }
+        .float-delay-2 { animation: float 6s ease-in-out 4s infinite; }
+
+        /* Pulse glow */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(14, 165, 233, 0.6), 0 0 80px rgba(14, 165, 233, 0.2); }
+        }
+        .pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #38bdf8, #22c55e, #fdba74);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glass effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-light {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* Image hover */
+        .img-hover {
+            overflow: hidden;
+            border-radius: 16px;
+        }
+        .img-hover img {
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .img-hover:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Gradient borders */
+        .gradient-border {
+            position: relative;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, #0ea5e9, #22c55e);
+        }
+        .gradient-border-inner {
+            border-radius: 18px;
+        }
+
+        /* Counter animation */
+        .counter-btn {
+            transition: all 0.3s ease;
+        }
+        .counter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+        }
+
+        /* Smooth scroll */
+        html { scroll-behavior: smooth; }
+
+        /* Section divider wave */
+        .wave-divider {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        .wave-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 80px;
+        }
+
+        /* Marquee */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .marquee { animation: marquee 30s linear infinite; }
+
+        /* Noise overlay */
+        .noise::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Number counter */
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Sticky nav */
+        .nav-scrolled {
+            background: rgba(7, 28, 51, 0.95) !important;
+            backdrop-filter: blur(20px) !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* FAQ */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+        }
+        .faq-answer.open {
+            max-height: 300px;
+        }
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        .faq-icon.rotated {
+            transform: rotate(45deg);
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #0ea5e9, #22c55e);
+            z-index: 9999;
+            transition: width 0.1s linear;
+        }
+
+        /* Particle dots */
+        @keyframes particleFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+            25% { transform: translate(10px, -20px) scale(1.2); opacity: 0.6; }
+            50% { transform: translate(-5px, -40px) scale(0.8); opacity: 0.4; }
+            75% { transform: translate(-15px, -20px) scale(1.1); opacity: 0.5; }
+        }
+
+        /* Image gallery masonry-like */
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 16px;
+        }
+
+        /* Cursor glow effect - desktop only */
+        @media (min-width: 768px) {
+            .cursor-glow {
+                position: fixed;
+                width: 300px;
+                height: 300px;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%);
+                pointer-events: none;
+                z-index: 9998;
+                transform: translate(-50%, -50%);
+                transition: opacity 0.3s ease;
+            }
+        }
+
+        /* Pricing card shine */
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+        .pricing-shine::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 4s ease-in-out infinite;
+        }
+
+        /* Day card timeline */
+        .timeline-line {
+            position: absolute;
+            right: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #0ea5e9, #22c55e, #fdba74);
+        }
+    </style>
+</head>
+<body class="bg-ocean-900 text-white overflow-x-hidden">
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Cursor Glow -->
+    <div class="cursor-glow hidden md:block" id="cursorGlow"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-ocean-400 to-primary-500 flex items-center justify-center pulse-glow">
+                        <i data-lucide="compass" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold text-white">Digital Travel</span>
+                </div>
+                <div class="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
+                    <a href="#about" class="hover:text-white transition-colors">על המדריך</a>
+                    <a href="#gallery" class="hover:text-white transition-colors">גלריה</a>
+                    <a href="#features" class="hover:text-white transition-colors">מה בפנים</a>
+                    <a href="#faq" class="hover:text-white transition-colors">שאלות נפוצות</a>
+                    <a href="#pricing" class="bg-gradient-to-l from-ocean-500 to-primary-500 text-white px-5 py-2.5 rounded-full font-bold hover:shadow-lg hover:shadow-ocean-500/30 transition-all hover:-translate-y-0.5">רכישה ₪99</a>
+                </div>
+                <button id="mobileMenuBtn" class="md:hidden text-white">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden glass-dark mx-4 mb-4 rounded-2xl overflow-hidden">
+            <div class="flex flex-col p-4 gap-3 text-center text-white/90 font-medium">
+                <a href="#about" class="py-2 hover:text-white">על המדריך</a>
+                <a href="#gallery" class="py-2 hover:text-white">גלריה</a>
+                <a href="#features" class="py-2 hover:text-white">מה בפנים</a>
+                <a href="#faq" class="py-2 hover:text-white">שאלות נפוצות</a>
+                <a href="#pricing" class="bg-gradient-to-l from-ocean-500 to-primary-500 text-white px-5 py-3 rounded-xl font-bold">רכישה ₪99</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center hero-bg noise">
+        <div class="absolute inset-0 bg-gradient-to-b from-ocean-900/70 via-ocean-900/50 to-ocean-900/90 z-0"></div>
+        
+        <!-- Floating particles -->
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <div class="absolute top-1/4 right-1/4 w-2 h-2 bg-ocean-400/40 rounded-full float"></div>
+            <div class="absolute top-1/3 left-1/3 w-3 h-3 bg-primary-400/30 rounded-full float-delay"></div>
+            <div class="absolute bottom-1/3 right-1/3 w-2 h-2 bg-warm-400/30 rounded-full float-delay-2"></div>
+            <div class="absolute top-1/2 left-1/4 w-1.5 h-1.5 bg-white/20 rounded-full float"></div>
+            <div class="absolute bottom-1/4 left-1/2 w-2.5 h-2.5 bg-ocean-300/20 rounded-full float-delay"></div>
+        </div>
+
+        <div class="relative z-10 text-center max-w-5xl mx-auto px-4 sm:px-6 pt-20 pb-16">
+            <div class="reveal stagger-1">
+                <span class="inline-flex items-center gap-2 glass px-4 py-2 rounded-full text-sm text-ocean-300 font-medium mb-6">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    הראשון מסוגו בישראל
+                </span>
+            </div>
+            
+            <h1 class="reveal stagger-2 text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-tight mb-6">
+                <span class="gradient-text">מונטנגרו</span>
+                <br>
+                <span class="text-white">ב-7 ימים</span>
+            </h1>
+
+            <p class="reveal stagger-3 text-lg sm:text-xl md:text-2xl text-white/70 max-w-3xl mx-auto mb-4 font-light leading-relaxed">
+                המסלול המלא לשבעה ימים במונטנגרו
+            </p>
+            <p class="reveal stagger-4 text-base sm:text-lg text-white/50 max-w-2xl mx-auto mb-10 font-light">
+                מבוסס חוויה אמיתית, חיסכון עצום בזמן התכנון שלך!
+            </p>
+
+            <div class="reveal stagger-5 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#pricing" class="group relative inline-flex items-center gap-2 bg-gradient-to-l from-ocean-500 to-primary-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:shadow-ocean-500/30 transition-all hover:-translate-y-1">
+                    <span>רוצים לקבל את המדריך?</span>
+                    <i data-lucide="arrow-left" class="w-5 h-5 transition-transform group-hover:-translate-x-1"></i>
+                </a>
+                <a href="#about" class="inline-flex items-center gap-2 glass px-6 py-4 rounded-full font-medium text-white/80 hover:text-white transition-all hover:-translate-y-1">
+                    <i data-lucide="play-circle" class="w-5 h-5"></i>
+                    <span>גלו עוד</span>
+                </a>
+            </div>
+
+            <!-- Stats -->
+            <div class="reveal stagger-6 grid grid-cols-3 gap-4 sm:gap-8 max-w-lg mx-auto mt-16">
+                <div class="text-center">
+                    <div class="text-3xl sm:text-4xl font-black gradient-text">7</div>
+                    <div class="text-sm text-white/50 mt-1">ימים מלאים</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl sm:text-4xl font-black gradient-text">∞</div>
+                    <div class="text-sm text-white/50 mt-1">חוויות</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl sm:text-4xl font-black gradient-text">PDF</div>
+                    <div class="text-sm text-white/50 mt-1">מדריך דיגיטלי</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-bounce">
+            <span class="text-white/40 text-xs">גלו עוד</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-white/40"></i>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="about" class="relative py-20 sm:py-32 bg-gradient-to-b from-ocean-900 via-ocean-800 to-ocean-900 noise overflow-hidden">
+        <!-- Decorative shapes -->
+        <div class="absolute top-0 left-0 w-96 h-96 bg-ocean-600/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-primary-600/10 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="reveal text-3xl sm:text-4xl md:text-5xl font-black mb-6">
+                    מרגישים ש<span class="gradient-text">פספסתם</span>?
+                </h2>
+                <p class="reveal stagger-1 text-xl text-white/60 max-w-2xl mx-auto">
+                    הגעתם עד מונטנגרו אבל מרגישים שפספסתם את המקומות הכי שווים
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
+                <!-- Pain Point 1 -->
+                <div class="reveal stagger-1 glass rounded-2xl p-8 text-center hover:bg-white/10 transition-all duration-500 group">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-red-500/20 to-red-600/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="clock" class="w-8 h-8 text-red-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">שורפים שעות על תכנון</h3>
+                    <p class="text-white/50 text-sm leading-relaxed">אתם שורפים שעות על תכנון הטיול ועדיין לא בטוחים אם זה באמת המסלול הכי טוב</p>
+                </div>
+
+                <!-- Pain Point 2 -->
+                <div class="reveal stagger-2 glass rounded-2xl p-8 text-center hover:bg-white/10 transition-all duration-500 group">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-600/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="search" class="w-8 h-8 text-amber-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">עשרות פוסטים והמלצות</h3>
+                    <p class="text-white/50 text-sm leading-relaxed">עברתם על עשרות פוסטים והמלצות אבל הכול מרגיש מבולגן ולא ברור</p>
+                </div>
+
+                <!-- Pain Point 3 -->
+                <div class="reveal stagger-3 glass rounded-2xl p-8 text-center hover:bg-white/10 transition-all duration-500 group">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-600/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="map-pin-off" class="w-8 h-8 text-purple-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">מפספסים מקומות</h3>
+                    <p class="text-white/50 text-sm leading-relaxed">הגעתם עד מונטנגרו אבל מרגישים שפספסתם את המקומות הכי שווים</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="relative py-20 sm:py-32 bg-gradient-to-b from-ocean-900 to-ocean-950 overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-ocean-500/5 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="reveal-right relative rounded-3xl overflow-hidden shadow-2xl shadow-ocean-500/10">
+                        <img src="https://shirazsanker.com/digital-travel-montenegro/_assets/media/fe9af314d10415e5223c2df5a3a7ff27.jpg" 
+                             alt="מסלול מונטנגרו" 
+                             class="w-full h-auto object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-ocean-900/60 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 right-6 left-6">
+                            <div class="glass px-4 py-3 rounded-xl inline-flex items-center gap-2 text-sm">
+                                <i data-lucide="map" class="w-4 h-4 text-primary-400"></i>
+                                <span class="text-white/80">מסלול מתוכנן בקפידה</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2">
+                    <span class="reveal inline-flex items-center gap-2 bg-primary-500/20 text-primary-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                        <i data-lucide="check-circle" class="w-4 h-4"></i>
+                        הפתרון
+                    </span>
+                    
+                    <h2 class="reveal stagger-1 text-3xl sm:text-4xl md:text-5xl font-black leading-tight mb-6">
+                        במקום לבזבז שעות,
+                        <br>
+                        <span class="gradient-text">קבלו הכל מסודר</span>
+                    </h2>
+
+                    <p class="reveal stagger-2 text-lg text-white/60 leading-relaxed mb-8">
+                        במקום לבזבז שעות על תכנון, לקרוא מאות המלצות, ולהתלבט על כל צעד, קבלו תכנון יומי מלא של 7 ימים מלאים עם נקודות עצירה, מסעדות, תצפיות, מקומות לינה מומלצים, קישורים נוחים — הכול מסודר במדריך אחד ברור.
+                    </p>
+
+                    <div class="reveal stagger-3 space-y-4 mb-8">
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 mt-0.5 rounded-full bg-primary-500/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-primary-400"></i>
+                            </div>
+                            <p class="text-white/70">זה לא עוד סתם מדריך, זה מסלול מדויק וחכם</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 mt-0.5 rounded-full bg-primary-500/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-primary-400"></i>
+                            </div>
+                            <p class="text-white/70">נבנה מתוך חוויה אמיתית עם הבנה ברורה של מה שווה לראות</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 mt-0.5 rounded-full bg-primary-500/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-primary-400"></i>
+                            </div>
+                            <p class="text-white/70">מתאים למשפחות, זוגות או קבוצות</p>
+                        </div>
+                    </div>
+
+                    <p class="reveal stagger-4 text-white/40 italic text-sm border-r-2 border-ocean-500/40 pr-4">
+                        תכינו לעצמכם משהו חם לשתות, תתמקמו בנוח, ותנו לעצמכם רגע להיכנס למסלול שייקח את הטיול שלכם כמה רמות קדימה 🏔️
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who Is This For Section -->
+    <section class="relative py-20 sm:py-32 bg-gradient-to-b from-ocean-950 via-ocean-900 to-ocean-900 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="reveal inline-flex items-center gap-2 bg-warm-500/20 text-warm-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                    <i data-lucide="users" class="w-4 h-4"></i>
+                    למי המדריך מתאים?
+                </span>
+                <h2 class="reveal stagger-1 text-3xl sm:text-4xl md:text-5xl font-black">
+                    המדריך מתאים <span class="gradient-text">בדיוק לכם</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
+                <!-- Card 1 -->
+                <div class="reveal stagger-1 glass rounded-2xl p-8 text-center hover:bg-white/10 transition-all duration-500 group cursor-default">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-ocean-500/20 to-ocean-600/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                        <i data-lucide="heart" class="w-10 h-10 text-ocean-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">זוגות</h3>
+                    <p class="text-white/50 text-sm leading-relaxed">רוצים לטייל ביחד בלי לדלג על המקומות ששווים לראות</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="reveal stagger-2 glass rounded-2xl p-8 text-center hover:bg-white/10 transition-all duration-500 group cursor-default">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-primary-500/20 to-primary-600/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                        <i data-lucide="baby" class="w-10 h-10 text-primary-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">משפחות</h3>
+                    <p class="text-white/50 text-sm leading-relaxed">מסלול מתוכנן שמתאים גם לילדים עם קצב נעים ונוח</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="reveal stagger-3 glass rounded-2xl p-8 text-center hover:bg-white/10 transition-all duration-500 group cursor-default sm:col-span-2 lg:col-span-1">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-warm-500/20 to-warm-600/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                        <i data-lucide="users-round" class="w-10 h-10 text-warm-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">קבוצות</h3>
+                    <p class="text-white/50 text-sm leading-relaxed">רוצים ליהנות ממסלול ברור שכולם יכולים לעקוב אחריו</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="relative py-20 sm:py-32 bg-gradient-to-b from-ocean-900 to-ocean-950 overflow-hidden">
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-500/5 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="reveal inline-flex items-center gap-2 bg-ocean-500/20 text-ocean-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                    <i data-lucide="package-open" class="w-4 h-4"></i>
+                    מה מחכה לכם?
+                </span>
+                <h2 class="reveal stagger-1 text-3xl sm:text-4xl md:text-5xl font-black">
+                    מה <span class="gradient-text">מחכה לכם</span> במדריך?
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+                <!-- Feature 1 -->
+                <div class="reveal stagger-1 group">
+                    <div class="gradient-border">
+                        <div class="gradient-border-inner bg-ocean-950 p-8 rounded-[18px]">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-ocean-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <span class="text-2xl font-black gradient-text">01</span>
+                                </div>
+                                <div class="w-10 h-10 rounded-lg bg-ocean-500/20 flex items-center justify-center">
+                                    <i data-lucide="map" class="w-5 h-5 text-ocean-400"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">מפה מסודרת עם מסלול יומי מפורט</h3>
+                            <p class="text-white/50 text-sm">דרך גוגל מאפס — ניווט קל ונוח לכל נקודה</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="reveal stagger-2 group">
+                    <div class="gradient-border">
+                        <div class="gradient-border-inner bg-ocean-950 p-8 rounded-[18px]">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-primary-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <span class="text-2xl font-black gradient-text">02</span>
+                                </div>
+                                <div class="w-10 h-10 rounded-lg bg-primary-500/20 flex items-center justify-center">
+                                    <i data-lucide="calendar-days" class="w-5 h-5 text-primary-400"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">לו״ז מסודר ל-7 ימים מלאים</h3>
+                            <p class="text-white/50 text-sm">בלי לחץ להספיק הכל ביום אחד — קצב נעים ומרגיע</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="reveal stagger-3 group">
+                    <div class="gradient-border">
+                        <div class="gradient-border-inner bg-ocean-950 p-8 rounded-[18px]">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-warm-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <span class="text-2xl font-black gradient-text">03</span>
+                                </div>
+                                <div class="w-10 h-10 rounded-lg bg-warm-500/20 flex items-center justify-center">
+                                    <i data-lucide="link" class="w-5 h-5 text-warm-400"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">קישורים למסעדות, מלונות ואטרקציות</h3>
+                            <p class="text-white/50 text-sm">קישורים וניווטים מוכנים — רק לוחצים ונוסעים</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="reveal stagger-4 group">
+                    <div class="gradient-border">
+                        <div class="gradient-border-inner bg-ocean-950 p-8 rounded-[18px]">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <span class="text-2xl font-black gradient-text">04</span>
+                                </div>
+                                <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                                    <i data-lucide="lightbulb" class="w-5 h-5 text-purple-400"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">טיפים שצריך לדעת על כל מקום</h3>
+                            <p class="text-white/50 text-sm">כניסות בתשלום, חניות ועוד — הכל מרוכז</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="relative py-20 sm:py-32 bg-gradient-to-b from-ocean-950 to-ocean-900 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="reveal inline-flex items-center gap-2 bg-primary-500/20 text-primary-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                    <i data-lucide="camera" class="w-4 h-4"></i>
+                    הצצה קטנה
+                </span>
+                <h2 class="reveal stagger-1 text-3xl sm:text-4xl md:text-5xl font-black mb-4">
+                    הנופים ש<span class="gradient-text">מחכים לכם</span>
+                </h2>
+                <p class="reveal stagger-2 text-white/50 max-w-xl mx-auto">
+                    כל התמונות כאן צולמו במקומות שביקרתי בהם בעצמי — כולם מחכים לכם בתוך המדריך
+                </p>
+            </div>
+
+            <!-- Bento Grid Gallery -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                <div class="reveal stagger-1 img-hover col-span-2 row-span-2">
+                    <img src="https://shirazsanker.com/digital-travel-montenegro/_assets/media/838762f4271545f01f7a8742fb6a92c8.jpg" 
+                         alt="מונטנגרו" class="w-full h-full object-cover rounded-2xl aspect-square">
+                </div>
+                <div class="reveal stagger-2 img-hover">
+                    <img src="https://shirazsanker.com/digital-travel-montenegro/_assets/media/40877a0d2cac9e03d0a95903d5439a2f.jpg" 
+                         alt="מונטנגרו" class="w-full h-full object-cover rounded-2xl aspect-square">
+                </div>
+                <div class="reveal stagger-3 img-hover">
+                    <img src="https://shirazsanker.com/digital-travel-montenegro/_assets/media/1279f5322ba1a5d33614d474316eb75c.jpg" 
+                         alt="מונטנגרו" class="w-full h-full object-cover rounded-2xl aspect-square">
+                </div>
+                <div class="reveal stagger-4 img-hover">
+                    <img src="https://shirazsanker.com/digital-travel-montenegro/_assets/media/1f20685fb5886b5ebfcc14781d0fff06.jpg" 
+                         alt="מונטנגרו" class="w-full h-full object-cover rounded-2xl aspect-square">
+                </div>
+                <div class="reveal stagger-5 img-hover">
+                    <img src="https://shirazsanker.com/digital-travel-montenegro/_assets/media/a749fecfb0cef57367ec97ba208cc908.jpg" 
+                         alt="מונטנגרו" class="w-full h-full object-cover rounded-2xl aspect-square">
+                </div>
+                <div class="reveal stagger-1 img-hover col-span-2">
+                    <img src="https://shirazsanker.com/digital-travel-montenegro/_assets/media/cf68a0dbd7126662891f072afda7d583.jpg" 
+                         alt="מונטנגרו" class="w-full h-64 sm:h-80 object-cover rounded-2xl">
+                </div>
+                <div class="reveal stagger-2 img-hover">
+                    <img src="https://shirazsanker.com/digital-travel-montenegro/_assets/media/0208483614fb281402c8639925a9b724.jpg" 
+                         alt="מונטנגרו" class="w-full h-full object-cover rounded-2xl aspect-square">
+                </div>
+                <div class="reveal stagger-3 img-hover">
+                    <img src="https://shirazsanker.com/digital-travel-montenegro/_assets/media/a00d07adbe2ef6d5301aa70933415a7c.jpg" 
+                         alt="מונטנגרו" class="w-full h-full object-cover rounded-2xl aspect-square">
+                </div>
+                <div class="reveal stagger-4 img-hover">
+                    <img src="https://shirazsanker.com/digital-travel-montenegro/_assets/media/9279a983cc3a2f78342e618d40fe2842.jpg" 
+                         alt="מונטנגרו" class="w-full h-full object-cover rounded-2xl aspect-square">
+                </div>
+                <div class="reveal stagger-5 img-hover col-span-2">
+                    <img src="https://shirazsanker.com/digital-travel-montenegro/_assets/media/50b5c282b72d68a1f2861801911e5020.jpg" 
+                         alt="מונטנגרו" class="w-full h-64 sm:h-80 object-cover rounded-2xl">
+                </div>
+                <div class="reveal stagger-6 img-hover">
+                    <img src="https://shirazsanker.com/digital-travel-montenegro/_assets/media/bf92fb5f58a0e18710554dac03e6fc11.jpg" 
+                         alt="מונטנגרו" class="w-full h-full object-cover rounded-2xl aspect-square">
+                </div>
+                <div class="reveal stagger-1 img-hover">
+                    <img src="https://shirazsanker.com/digital-travel-montenegro/_assets/media/056048c5de9d16a7463cbae9581dd344.jpg" 
+                         alt="מונטנגרו" class="w-full h-full object-cover rounded-2xl aspect-square">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preview Section (Day 1) -->
+    <section class="relative py-20 sm:py-32 bg-gradient-to-b from-ocean-900 via-ocean-950 to-ocean-900 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="reveal inline-flex items-center gap-2 bg-warm-500/20 text-warm-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                    <i data-lucide="eye" class="w-4 h-4"></i>
+                    דוגמא ליום הראשון
+                </span>
+                <h2 class="reveal stagger-1 text-3xl sm:text-4xl md:text-5xl font-black mb-4">
+                    בטח רציתם <span class="gradient-text">להציץ</span>
+                </h2>
+                <p class="reveal stagger-2 text-white/50">בטח הייתם רוצים להכנס קצת לתוך המדריך</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="reveal-left">
+                    <div class="img-hover rounded-2xl overflow-hidden shadow-2xl shadow-black/30">
+                        <img src="https://shirazsanker.com/digital-travel-montenegro/_assets/media/eee13325b193026258fd0918120c77c0.jpg" 
+                             alt="מה תמצאו בתוך המסלול" class="w-full h-auto object-cover">
+                    </div>
+                </div>
+                <div class="reveal-right flex flex-col justify-center">
+                    <div class="glass rounded-2xl p-8 space-y-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-ocean-500 to-primary-500 flex items-center justify-center flex-shrink-0">
+                                <span class="text-2xl font-black text-white">1</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">יום ראשון</h3>
+                                <p class="text-white/50 text-sm">התחלה מושלמת</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="sunrise" class="w-5 h-5 text-warm-400 mt-0.5 flex-shrink-0"></i>
+                                <div>
+                                    <p class="text-white/80 font-medium">בוקר: הגעה והתמקמות</p>
+                                    <p class="text-white/40 text-sm">התארגנות ויציאה לדרך</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="mountain-snow" class="w-5 h-5 text-ocean-400 mt-0.5 flex-shrink-0"></i>
+                                <div>
+                                    <p class="text-white/80 font-medium">צהריים: תצפית מרהיבות</p>
+                                    <p class="text-white/40 text-sm">נקודות תצפית עוצרות נשימה</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="sunset" class="w-5 h-5 text-primary-400 mt-0.5 flex-shrink-0"></i>
+                                <div>
+                                    <p class="text-white/80 font-medium">ערב: ארוחת ערב מקומית</p>
+                                    <p class="text-white/40 text-sm">מסעדות מומלצות עם נוף</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-white/10">
+                            <p class="text-white/30 text-xs flex items-center gap-1">
+                                <i data-lucide="lock" class="w-3 h-3"></i>
+                                הפרטים המלאים זמינים במדריך השלם
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why This Guide Section -->
+    <section class="relative py-20 sm:py-32 bg-gradient-to-b from-ocean-900 to-ocean-950 overflow-hidden">
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-ocean-500/5 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="reveal inline-flex items-center gap-2 bg-primary-500/20 text-primary-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                    <i data-lucide="award" class="w-4 h-4"></i>
+                    למה המדריך שלי?
+                </span>
+                <h2 class="reveal stagger-1 text-3xl sm:text-4xl md:text-5xl font-black">
+                    למה שווה <span class="gradient-text">לרכוש</span> את המסלול?
+                </h2>
+            </div>
+
+            <div class="reveal grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
+                <div class="glass rounded-2xl p-6 flex items-start gap-4 hover:bg-white/10 transition-all duration-500">
+                    <div class="w-10 h-10 rounded-xl bg-ocean-500/20 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="footprints" class="w-5 h-5 text-ocean-400"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-1">חוויה אמיתית</h4>
+                        <p class="text-white/50 text-sm">ביקרתי, טיילתי, בדקתי, טעמתי, עצרתי — וריכזתי הכל</p>
+                    </div>
+                </div>
+                <div class="glass rounded-2xl p-6 flex items-start gap-4 hover:bg-white/10 transition-all duration-500">
+                    <div class="w-10 h-10 rounded-xl bg-primary-500/20 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="file-text" class="w-5 h-5 text-primary-400"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-1">מדריך פרקטי</h4>
+                        <p class="text-white/50 text-sm">מבוסס חוויה אישית ואמיתית — לא עוד העתקה</p>
+                    </div>
+                </div>
+                <div class="glass rounded-2xl p-6 flex items-start gap-4 hover:bg-white/10 transition-all duration-500">
+                    <div class="w-10 h-10 rounded-xl bg-warm-500/20 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="clock" class="w-5 h-5 text-warm-400"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-1">חיסכון בזמן</h4>
+                        <p class="text-white/50 text-sm">במקום שעות של חיפוש — הכל מוכן ומסודר</p>
+                    </div>
+                </div>
+                <div class="glass rounded-2xl p-6 flex items-start gap-4 hover:bg-white/10 transition-all duration-500">
+                    <div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="shield-check" class="w-5 h-5 text-purple-400"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-1">מדויק ואמין</h4>
+                        <p class="text-white/50 text-sm">מה שבאמת שווה — בלי בזבוז זמן על מה שלא</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal text-center">
+                <p class="text-white/40 text-sm mb-4">המדריך מגיע בקובץ PDF — נוח לקריאה בכל מכשיר</p>
+                <div class="inline-flex items-center gap-2 glass px-4 py-2 rounded-full">
+                    <i data-lucide="file" class="w-4 h-4 text-ocean-400"></i>
+                    <span class="text-sm text-white/60">PDF דיגיטלי</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="relative py-20 sm:py-32 bg-gradient-to-b from-ocean-950 to-ocean-900 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="reveal inline-flex items-center gap-2 bg-ocean-500/20 text-ocean-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                    <i data-lucide="rocket" class="w-4 h-4"></i>
+                    איך מקבלים?
+                </span>
+                <h2 class="reveal stagger-1 text-3xl sm:text-4xl md:text-5xl font-black">
+                    <span class="gradient-text">3 צעדים</span> ואתם מוכנים
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <!-- Step 1 -->
+                <div class="reveal stagger-1 text-center relative">
+                    <div class="hidden md:block absolute top-12 -left-8 w-16 h-0.5 bg-gradient-to-l from-ocean-500/50 to-transparent"></div>
+                    <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-ocean-500/20 to-ocean-600/20 flex items-center justify-center relative">
+                        <div class="absolute inset-0 rounded-full bg-ocean-500/10 animate-ping"></div>
+                        <i data-lucide="shopping-cart" class="w-10 h-10 text-ocean-400"></i>
+                    </div>
+                    <div class="inline-block bg-ocean-500/20 text-ocean-400 px-3 py-1 rounded-full text-xs font-bold mb-3">צעד 1</div>
+                    <h3 class="text-lg font-bold mb-2">לוחצים על רכישה</h3>
+                    <p class="text-white/50 text-sm">רכישה מהירה ובטוחה</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="reveal stagger-2 text-center relative">
+                    <div class="hidden md:block absolute top-12 -left-8 w-16 h-0.5 bg-gradient-to-l from-primary-500/50 to-transparent"></div>
+                    <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-primary-500/20 to-primary-600/20 flex items-center justify-center relative">
+                        <div class="absolute inset-0 rounded-full bg-primary-500/10 animate-ping" style="animation-delay: 0.5s;"></div>
+                        <i data-lucide="credit-card" class="w-10 h-10 text-primary-400"></i>
+                    </div>
+                    <div class="inline-block bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-xs font-bold mb-3">צעד 2</div>
+                    <h3 class="text-lg font-bold mb-2">מזינים פרטים ומשלמים</h3>
+                    <p class="text-white/50 text-sm">תהליך פשוט ומאובטח</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="reveal stagger-3 text-center">
+                    <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-warm-500/20 to-warm-600/20 flex items-center justify-center relative">
+                        <div class="absolute inset-0 rounded-full bg-warm-500/10 animate-ping" style="animation-delay: 1s;"></div>
+                        <i data-lucide="mail-check" class="w-10 h-10 text-warm-400"></i>
+                    </div>
+                    <div class="inline-block bg-warm-500/20 text-warm-400 px-3 py-1 rounded-full text-xs font-bold mb-3">צעד 3</div>
+                    <h3 class="text-lg font-bold mb-2">מקבלים במייל</h3>
+                    <p class="text-white/50 text-sm">עד 24 שעות מרגע הרכישה</p>
+                </div>
+            </div>
+
+            <div class="reveal mt-12 text-center">
+                <div class="inline-flex items-center gap-3 glass px-6 py-4 rounded-2xl">
+                    <i data-lucide="plane" class="w-6 h-6 text-ocean-400"></i>
+                    <span class="text-white/70 font-medium">טסים בראש שקט 🧘</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Marquee -->
+    <section class="py-8 bg-gradient-to-l from-ocean-600 to-primary-600 overflow-hidden">
+        <div class="flex whitespace-nowrap">
+            <div class="marquee flex items-center gap-8 text-white/90 font-bold text-lg">
+                <span class="flex items-center gap-2"><i data-lucide="calendar-check" class="w-5 h-5"></i> לו״ז מסודר ל-7 ימים</span>
+                <span>•</span>
+                <span class="flex items-center gap-2"><i data-lucide="link" class="w-5 h-5"></i> קישורים לאטרקציות ועוד</span>
+                <span>•</span>
+                <span class="flex items-center gap-2"><i data-lucide="map" class="w-5 h-5"></i> מפה עם מסלול מפורט</span>
+                <span>•</span>
+                <span class="flex items-center gap-2"><i data-lucide="lightbulb" class="w-5 h-5"></i> טיפים שצריך לדעת</span>
+                <span>•</span>
+                <span class="flex items-center gap-2"><i data-lucide="calendar-check" class="w-5 h-5"></i> לו״ז מסודר ל-7 ימים</span>
+                <span>•</span>
+                <span class="flex items-center gap-2"><i data-lucide="link" class="w-5 h-5"></i> קישורים לאטרקציות ועוד</span>
+                <span>•</span>
+                <span class="flex items-center gap-2"><i data-lucide="map" class="w-5 h-5"></i> מפה עם מסלול מפורט</span>
+                <span>•</span>
+                <span class="flex items-center gap-2"><i data-lucide="lightbulb" class="w-5 h-5"></i> טיפים שצריך לדעת</span>
+                <span>•</span>
+            </div>
+            <div class="marquee flex items-center gap-8 text-white/90 font-bold text-lg" aria-hidden="true">
+                <span class="flex items-center gap-2"><i data-lucide="calendar-check" class="w-5 h-5"></i> לו״ז מסודר ל-7 ימים</span>
+                <span>•</span>
+                <span class="flex items-center gap-2"><i data-lucide="link" class="w-5 h-5"></i> קישורים לאטרקציות ועוד</span>
+                <span>•</span>
+                <span class="flex items-center gap-2"><i data-lucide="map" class="w-5 h-5"></i> מפה עם מסלול מפורט</span>
+                <span>•</span>
+                <span class="flex items-center gap-2"><i data-lucide="lightbulb" class="w-5 h-5"></i> טיפים שצריך לדעת</span>
+                <span>•</span>
+                <span class="flex items-center gap-2"><i data-lucide="calendar-check" class="w-5 h-5"></i> לו״ז מסודר ל-7 ימים</span>
+                <span>•</span>
+                <span class="flex items-center gap-2"><i data-lucide="link" class="w-5 h-5"></i> קישורים לאטרקציות ועוד</span>
+                <span>•</span>
+                <span class="flex items-center gap-2"><i data-lucide="map" class="w-5 h-5"></i> מפה עם מסלול מפורט</span>
+                <span>•</span>
+                <span class="flex items-center gap-2"><i data-lucide="lightbulb" class="w-5 h-5"></i> טיפים שצריך לדעת</span>
+                <span>•</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="relative py-20 sm:py-32 bg-gradient-to-b from-ocean-900 via-ocean-950 to-ocean-950 overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-ocean-500/5 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="reveal inline-flex items-center gap-2 bg-warm-500/20 text-warm-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                    <i data-lucide="tag" class="w-4 h-4"></i>
+                    מבצע לזמן מוגבל
+                </span>
+                <h2 class="reveal stagger-1 text-3xl sm:text-4xl md:text-5xl font-black">
+                    טסו בראש <span class="gradient-text">שקט</span>
+                </h2>
+            </div>
+
+            <div class="reveal-scale max-w-md mx-auto">
+                <div class="relative pricing-shine overflow-hidden">
+                    <!-- Glow effect -->
+                    <div class="absolute -inset-1 bg-gradient-to-l from-ocean-500 to-primary-500 rounded-3xl blur-lg opacity-30"></div>
+                    
+                    <div class="relative glass rounded-3xl p-8 sm:p-10 text-center">
+                        <!-- Badge -->
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-l from-warm-500 to-warm-600 text-white text-sm font-bold px-4 py-1.5 rounded-full shadow-lg shadow-warm-500/30">
+                            🔥 מבצע לזמן מוגבל
+                        </div>
+
+                        <div class="mb-6 pt-2">
+                            <i data-lucide="compass" class="w-12 h-12 text-ocean-400 mx-auto mb-4"></i>
+                            <h3 class="text-2xl font-bold">Digital Travel</h3>
+                            <p class="text-white/50 text-sm mt-1">המסלול המלא לשבעה ימים במונטנגרו</p>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="mb-8">
+                            <div class="flex items-center justify-center gap-3">
+                                <span class="text-white/40 line-through text-2xl font-bold">₪239</span>
+                                <span class="text-5xl sm:text-6xl font-black gradient-text">₪99</span>
+                            </div>
+                            <p class="text-white/40 text-sm mt-2">חד פעמי — בלי מנוי</p>
+                        </div>
+
+                        <!-- Features -->
+                        <div class="space-y-3 mb-8 text-right">
+                            <div class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-primary-500/20 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="check" class="w-3 h-3 text-primary-400"></i>
+                                </div>
+                                <span class="text-white/70 text-sm">לו״ז מסודר ל-7 ימים מלאים</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-primary-500/20 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="check" class="w-3 h-3 text-primary-400"></i>
+                                </div>
+                                <span class="text-white/70 text-sm">קישורים לאטרקציות ועוד…</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-primary-500/20 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="check" class="w-3 h-3 text-primary-400"></i>
+                                </div>
+                                <span class="text-white/70 text-sm">מפה עם מסלול מפורט לכל יום</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded-full bg-primary-500/20 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="check" class="w-3 h-3 text-primary-400"></i>
+                                </div>
+                                <span class="text-white/70 text-sm">טיפים שצריך לדעת בכל יום</span>
+                            </div>
+                        </div>
+
+                        <!-- CTA Button -->
+                        <a href="#" class="counter-btn block w-full bg-gradient-to-l from-ocean-500 to-primary-500 text-white py-4 rounded-2xl font-bold text-lg shadow-lg shadow-ocean-500/20 text-center">
+                            רכישה מהירה 🚀
+                        </a>
+
+                        <p class="text-white/30 text-xs mt-4">קבלה במייל עד 24 שעות מרגע הרכישה</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="relative py-20 sm:py-32 bg-gradient-to-b from-ocean-950 to-ocean-900 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="reveal inline-flex items-center gap-2 bg-ocean-500/20 text-ocean-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                    <i data-lucide="help-circle" class="w-4 h-4"></i>
+                    שאלות נפוצות
+                </span>
+                <h2 class="reveal stagger-1 text-3xl sm:text-4xl md:text-5xl font-black">
+                    יש <span class="gradient-text">שאלות?</span>
+                </h2>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-4">
+                <!-- FAQ 1 -->
+                <div class="reveal stagger-1 glass rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full flex items-center justify-between p-6 text-right hover:bg-white/5 transition-colors">
+                        <span class="font-bold text-lg pl-4">האם המדריך מתאים גם למי שלא נמצא במונטנגרו 7 ימים מלאים?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-ocean-400 faq-icon flex-shrink-0"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="px-6 pb-6 text-white/60 leading-relaxed">בהחלט! גם אם יש לכם פחות מ-7 ימים, תוכלו להתאים את המסלול לפי הימים שברשותכם — לבחור רק את המקומות שהכי מעניינים אתכם, לפי המלצות, אזורים ומרחקים.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="reveal stagger-2 glass rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full flex items-center justify-between p-6 text-right hover:bg-white/5 transition-colors">
+                        <span class="font-bold text-lg pl-4">איך אדע אם המדריך הזה באמת מתאים לי?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-ocean-400 faq-icon flex-shrink-0"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="px-6 pb-6 text-white/60 leading-relaxed">אם אתם מתכננים לטוס למונטנגרו, רוצים לחסוך זמן בחיפושים, לגלות מקומות מיוחדים וליהנות ממסלול ברור וקל — המדריך הזה נבנה בדיוק בשבילכם. הוא נכתב מתוך חוויה אישית, אחרי שבדקתי מה באמת שווה ומה פחות.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="reveal stagger-3 glass rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full flex items-center justify-between p-6 text-right hover:bg-white/5 transition-colors">
+                        <span class="font-bold text-lg pl-4">ומה אם לא אוהב את המסלול?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-ocean-400 faq-icon flex-shrink-0"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="px-6 pb-6 text-white/60 leading-relaxed">המסלול נבנה בגמישות — אתם יכולים לשנות, להזיז ולבחור רק את מה שמתאים לכם. הוא לא נוקשה, אלא נותן לכם חופש בחירה.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="reveal stagger-4 glass rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full flex items-center justify-between p-6 text-right hover:bg-white/5 transition-colors">
+                        <span class="font-bold text-lg pl-4">האם יש אפשרות להחזר כספי?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-ocean-400 faq-icon flex-shrink-0"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="px-6 pb-6 text-white/60 leading-relaxed">כמו ברוב המדריכים הדיגיטליים, בשל האופי של המוצר, לאחר הרכישה והשליחה לא ניתן להחזיר ולקבל החזר. עם זאת, אני בטוחה שתמצאו בו ערך שישדרג לכם את כל החוויה! ותמיד זמינה לשאלות.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="reveal stagger-5 glass rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full flex items-center justify-between p-6 text-right hover:bg-white/5 transition-colors">
+                        <span class="font-bold text-lg pl-4">האם המדריך תקף גם לעונת החורף?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-ocean-400 faq-icon flex-shrink-0"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="px-6 pb-6 text-white/60 leading-relaxed">המדריך שבניתי מתאים במיוחד לטיולים בקיץ, אבל גם אם אתם מתכננים טיול בעונות אחרות יש בו המון המלצות שימושיות על לינה, נופים, מסעדות, מסלולים וטיפים אישיים! תוכלו פשוט לקחת משם את מה שרלוונטי עבורכם ולהתאים את זה לעונה שבה תטיילו.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 6 -->
+                <div class="reveal stagger-6 glass rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full flex items-center justify-between p-6 text-right hover:bg-white/5 transition-colors">
+                        <span class="font-bold text-lg pl-4">מתי כדאי לטייל במונטנגרו?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-ocean-400 faq-icon flex-shrink-0"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="px-6 pb-6 text-white/60 leading-relaxed">התקופה המומלצת לטיול היא יוני - ספטמבר. שימו לב: אזור הצפון נגיש בעיקר מהקיץ ואילך, כאשר השלגים נמסים והכבישים נפתחים. בחורף, חלק מהמסלולים והכבישים באזור זה סגורים עקב שלג.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final Section -->
+    <section class="relative py-20 sm:py-32 overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="https://shirazsanker.com/digital-travel-montenegro/_assets/media/0208483614fb281402c8639925a9b724.jpg" 
+                 alt="מונטנגרו" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-ocean-900/80 via-ocean-900/70 to-ocean-950/95"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="reveal text-3xl sm:text-4xl md:text-6xl font-black mb-6">
+                מוכנים לטיול <span class="gradient-text">של פעם</span>?
+            </h2>
+            <p class="reveal stagger-1 text-lg sm:text-xl text-white/60 mb-10 max-w-2xl mx-auto">
+                אל תבזבזו עוד שעות על תכנון. קבלו את המדריך וצאו לדרך עם מסלול מושלם.
+            </p>
+            <div class="reveal stagger-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#pricing" class="group inline-flex items-center gap-2 bg-gradient-to-l from-ocean-500 to-primary-500 text-white px-10 py-5 rounded-full font-bold text-lg shadow-2xl shadow-ocean-500/30 hover:shadow-ocean-500/50 transition-all hover:-translate-y-1">
+                    <span>רכישה עכשיו — ₪99</span>
+                    <i data-lucide="arrow-left" class="w-5 h-5 transition-transform group-hover:-translate-x-1"></i>
+                </a>
+            </div>
+            <p class="reveal stagger-3 text-white/30 text-sm mt-6">במקום ₪239 • חיסכון של ₪140</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative py-16 bg-ocean-950 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-ocean-400 to-primary-500 flex items-center justify-center">
+                            <i data-lucide="compass" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold">Digital Travel</span>
+                    </div>
+                    <p class="text-white/40 text-sm leading-relaxed">המסלול המלא לשבעה ימים מלאים במונטנגרו — מבוסס חוויה אמיתית.</p>
+                </div>
+                <!-- Links -->
+                <div>
+                    <h4 class="font-bold mb-4 text-white/70">ניווט</h4>
+                    <ul class="space-y-2 text-white/40 text-sm">
+                        <li><a href="#about" class="hover:text-white/70 transition-colors">על המדריך</a></li>
+                        <li><a href="#gallery" class="hover:text-white/70 transition-colors">גלריה</a></li>
+                        <li><a href="#features" class="hover:text-white/70 transition-colors">מה בפנים</a></li>
+                        <li><a href="#faq" class="hover:text-white/70 transition-colors">שאלות נפוצות</a></li>
+                        <li><a href="#pricing" class="hover:text-white/70 transition-colors">רכישה</a></li>
+                    </ul>
+                </div>
+                <!-- Social -->
+                <div>
+                    <h4 class="font-bold mb-4 text-white/70">עקבו אחריי</h4>
+                    <div class="flex items-center gap-3">
+                        <a href="#" class="w-10 h-10 rounded-xl glass flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5 text-white/60"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-xl glass flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <i data-lucide="facebook" class="w-5 h-5 text-white/60"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-xl glass flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <i data-lucide="youtube" class="w-5 h-5 text-white/60"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-white/30 text-sm">© 2025 Shiraz Sanker. All rights reserved.</p>
+                <div class="flex items-center gap-2 text-white/30 text-sm">
+                    <span>Made with</span>
+                    <i data-lucide="heart" class="w-3.5 h-3.5 text-red-400 fill-red-400"></i>
+                    <span>in Israel</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let menuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuOpen = false;
+            });
+        });
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const answer = btn.nextElementSibling;
+                const icon = btn.querySelector('.faq-icon');
+                const isOpen = answer.classList.contains('open');
+
+                // Close all
+                document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+                document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('rotated'));
+
+                // Toggle current
+                if (!isOpen) {
+                    answer.classList.add('open');
+                    icon.classList.add('rotated');
+                }
+            });
+        });
+
+        // Progress bar
+        const progressBar = document.getElementById('progressBar');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            progressBar.style.width = scrollPercent + '%';
+        });
+
+        // Cursor glow effect (desktop only)
+        const cursorGlow = document.getElementById('cursorGlow');
+        if (cursorGlow && window.innerWidth >= 768) {
+            document.addEventListener('mousemove', (e) => {
+                cursorGlow.style.left = e.clientX + 'px';
+                cursorGlow.style.top = e.clientY + 'px';
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const bodyRect = document.body.getBoundingClientRect().top;
+                    const elementRect = target.getBoundingClientRect().top;
+                    const elementPosition = elementRect - bodyRect;
+                    const offsetPosition = elementPosition - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-bg');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
+            }
+        });
+    </script>
+</body>
+</html>

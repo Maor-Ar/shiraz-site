@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wanderlust Guides — Written Travel Guides for the Curious Soul</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            sand: { 50: '#fdf8f0', 100: '#f9edda', 200: '#f2d7b0', 300: '#e9bb7e', 400: '#df9a4d', 500: '#d68332', 600: '#c76b28', 700: '#a55223', 800: '#854222', 900: '#6c371e' },
+            ocean: { 50: '#eff8ff', 100: '#dbeffe', 200: '#bfe3fe', 300: '#93d2fd', 400: '#60b8fa', 500: '#3b9af6', 600: '#257ceb', 700: '#1d64d8', 800: '#1e51ae', 900: '#1e4689' },
+            forest: { 50: '#f3f6f3', 100: '#e3eae3', 200: '#c7d6c8', 300: '#a0bba2', 400: '#729d76', 500: '#4f8153', 600: '#3c663f', 700: '#325034', 800: '#2a402c', 900: '#1f3520' },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #1a1a2e; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #d68332, #257ceb); border-radius: 10px; }
+
+    /* Scroll Animations */
+    .reveal { opacity: 0; transform: translateY(60px); transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-80px); transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reveal-left.active { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(80px); transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reveal-right.active { opacity: 1; transform: translateX(0); }
+    .reveal-scale { opacity: 0; transform: scale(0.85); transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reveal-scale.active { opacity: 1; transform: scale(1); }
+    .reveal-rotate { opacity: 0; transform: rotate(-5deg) translateY(60px); transition: all 1s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reveal-rotate.active { opacity: 1; transform: rotate(0deg) translateY(0); }
+
+    /* Hero Background */
+    .hero-bg {
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      position: relative;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('http://static.photos/nature/1200x630/42') center/cover no-repeat;
+      opacity: 0.25;
+      animation: heroPan 30s ease-in-out infinite alternate;
+    }
+    @keyframes heroPan {
+      0% { transform: scale(1.1) translateX(0); }
+      100% { transform: scale(1.2) translateX(-30px); }
+    }
+
+    /* Floating particles */
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: floatParticle linear infinite;
+    }
+    @keyframes floatParticle {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* Gradient Orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+      animation: orbFloat 8s ease-in-out infinite alternate;
+    }
+    @keyframes orbFloat {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(30px, -30px) scale(1.1); }
+    }
+
+    /* Parallax layers */
+    .parallax-layer {
+      will-change: transform;
+      transition: transform 0.1s linear;
+    }
+
+    /* Card hover effects */
+    .guide-card {
+      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .guide-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, rgba(214,131,50,0.1) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.5s;
+      z-index: 1;
+    }
+    .guide-card:hover::before { opacity: 1; }
+    .guide-card:hover { transform: translateY(-12px); box-shadow: 0 25px 60px rgba(0,0,0,0.15); }
+    .guide-card .card-img {
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .guide-card:hover .card-img { transform: scale(1.1); }
+
+    /* Wave divider */
+    .wave-divider {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .wave-divider svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 80px;
+    }
+
+    /* Shimmer effect on buttons */
+    .shimmer-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .shimmer-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transform: rotate(25deg);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0% { left: -60%; }
+      50% { left: 120%; }
+      100% { left: 120%; }
+    }
+
+    /* Text gradient animation */
+    .text-gradient-animate {
+      background: linear-gradient(135deg, #d68332, #3b9af6, #4f8153, #d68332);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 6s ease infinite;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Number counter */
+    .stat-number {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Marquee */
+    .marquee-track {
+      display: flex;
+      animation: marquee 40s linear infinite;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Stagger delays */
+    .delay-100 { transition-delay: 0.1s !important; }
+    .delay-200 { transition-delay: 0.2s !important; }
+    .delay-300 { transition-delay: 0.3s !important; }
+    .delay-400 { transition-delay: 0.4s !important; }
+    .delay-500 { transition-delay: 0.5s !important; }
+    .delay-600 { transition-delay: 0.6s !important; }
+    .delay-700 { transition-delay: 0.7s !important; }
+    .delay-800 { transition-delay: 0.8s !important; }
+
+    /* Nav */
+    .nav-blur {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: all 0.4s;
+    }
+    .nav-scrolled {
+      background: rgba(15, 12, 41, 0.9) !important;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+    }
+
+    /* Testimonial card */
+    .testimonial-card {
+      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .testimonial-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    }
+
+    /* Pulsing dot */
+    .pulse-dot {
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.5; }
+    }
+
+    /* Section backgrounds */
+    .bg-mesh-1 {
+      background: 
+        radial-gradient(at 20% 20%, rgba(214,131,50,0.08) 0%, transparent 50%),
+        radial-gradient(at 80% 80%, rgba(37,124,235,0.06) 0%, transparent 50%),
+        #fdf8f0;
+    }
+    .bg-mesh-2 {
+      background:
+        radial-gradient(at 70% 30%, rgba(79,129,83,0.08) 0%, transparent 50%),
+        radial-gradient(at 30% 70%, rgba(214,131,50,0.06) 0%, transparent 50%),
+        #f9edda;
+    }
+    .bg-mesh-dark {
+      background:
+        radial-gradient(at 20% 80%, rgba(214,131,50,0.15) 0%, transparent 50%),
+        radial-gradient(at 80% 20%, rgba(37,124,235,0.1) 0%, transparent 50%),
+        #0f0c29;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    /* Price tag */
+    .price-tag {
+      background: linear-gradient(135deg, #d68332, #c76b28);
+      clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 10% 100%, 0% 50%);
+    }
+  </style>
+</head>
+<body class="bg-sand-50 text-gray-800 font-body">
+
+  <!-- Navigation -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 nav-blur bg-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <a href="#" class="flex items-center gap-2">
+          <i data-lucide="compass" class="w-8 h-8 text-sand-400"></i>
+          <span class="font-display text-2xl font-bold text-white">Wanderlust</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#guides" class="text-white/80 hover:text-sand-300 transition-colors font-medium">Guides</a>
+          <a href="#destinations" class="text-white/80 hover:text-sand-300 transition-colors font-medium">Destinations</a>
+          <a href="#testimonials" class="text-white/80 hover:text-sand-300 transition-colors font-medium">Reviews</a>
+          <a href="#pricing" class="text-white/80 hover:text-sand-300 transition-colors font-medium">Pricing</a>
+          <a href="#" class="shimmer-btn inline-flex items-center gap-2 bg-sand-500 hover:bg-sand-600 text-white px-6 py-2.5 rounded-full font-semibold transition-all">
+            <i data-lucide="shopping-bag" class="w-4 h-4"></i> Shop Now
+          </a>
+        </div>
+        <button id="mobileMenuBtn" class="md:hidden text-white">
+          <i data-lucide="menu" class="w-7 h-7"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-50 bg-gradient-to-br from-[#0f0c29] to-[#302b63] flex flex-col items-center justify-center gap-8">
+    <button id="mobileMenuClose" class="absolute top-6 right-6 text-white">
+      <i data-lucide="x" class="w-8 h-8"></i>
+    </button>
+    <a href="#guides" class="text-white text-2xl font-display mobile-link">Guides</a>
+    <a href="#destinations" class="text-white text-2xl font-display mobile-link">Destinations</a>
+    <a href="#testimonials" class="text-white text-2xl font-display mobile-link">Reviews</a>
+    <a href="#pricing" class="text-white text-2xl font-display mobile-link">Pricing</a>
+    <a href="#" class="shimmer-btn inline-flex items-center gap-2 bg-sand-500 text-white px-8 py-3 rounded-full font-semibold text-xl mt-4">
+      <i data-lucide="shopping-bag" class="w-5 h-5"></i> Shop Now
+    </a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-bg min-h-screen flex items-center relative overflow-hidden">
+    <!-- Orbs -->
+    <div class="orb w-96 h-96 bg-sand-500 top-20 -left-20" style="animation-delay: 0s;"></div>
+    <div class="orb w-72 h-72 bg-ocean-600 bottom-20 right-10" style="animation-delay: 3s;"></div>
+    <div class="orb w-56 h-56 bg-forest-500 top-1/2 left-1/2" style="animation-delay: 5s;"></div>
+
+    <!-- Particles -->
+    <div id="particles" class="absolute inset-0 pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="text-center lg:text-left">
+          <div class="reveal inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-sand-300 px-4 py-2 rounded-full text-sm font-medium mb-6 border border-white/10">
+            <span class="pulse-dot w-2 h-2 bg-sand-400 rounded-full inline-block"></span>
+            Over 50,000 guides sold worldwide
+          </div>
+          <h1 class="reveal delay-100 font-display text-5xl sm:text-6xl lg:text-7xl font-900 text-white leading-tight mb-6">
+            Explore the World<br>
+            <span class="text-gradient-animate">Through Words</span>
+          </h1>
+          <p class="reveal delay-200 text-lg sm:text-xl text-white/70 max-w-xl mb-8 leading-relaxed">
+            Beautifully crafted written travel guides that transport you before you even pack. Each guide is a love letter to a destination — rich, immersive, and unforgettable.
+          </p>
+          <div class="reveal delay-300 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <a href="#guides" class="shimmer-btn inline-flex items-center justify-center gap-2 bg-sand-500 hover:bg-sand-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all shadow-lg shadow-sand-500/25">
+              <i data-lucide="book-open" class="w-5 h-5"></i> Browse Guides
+            </a>
+            <a href="#destinations" class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all backdrop-blur-sm border border-white/10">
+              <i data-lucide="play-circle" class="w-5 h-5"></i> Watch Story
+            </a>
+          </div>
+          <div class="reveal delay-400 flex items-center gap-6 mt-10 justify-center lg:justify-start">
+            <div class="text-center">
+              <div class="stat-number text-3xl font-bold text-white" data-target="120">0</div>
+              <div class="text-white/50 text-sm">Destinations</div>
+            </div>
+            <div class="w-px h-10 bg-white/20"></div>
+            <div class="text-center">
+              <div class="stat-number text-3xl font-bold text-white" data-target="50">0</div>
+              <div class="text-white/50 text-sm">K+ Guides Sold</div>
+            </div>
+            <div class="w-px h-10 bg-white/20"></div>
+            <div class="text-center">
+              <div class="stat-number text-3xl font-bold text-white" data-target="4.9">0</div>
+              <div class="text-white/50 text-sm">Avg Rating</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Image Stack -->
+        <div class="reveal-scale delay-300 relative hidden lg:block">
+          <div class="relative w-full max-w-md mx-auto">
+            <div class="absolute -top-8 -left-8 w-64 h-80 rounded-2xl overflow-hidden shadow-2xl transform rotate-[-6deg] z-10 border-4 border-white/20">
+              <img src="http://static.photos/travel/320x240/10" alt="Guide cover" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute -top-4 left-20 w-64 h-80 rounded-2xl overflow-hidden shadow-2xl transform rotate-[2deg] z-20 border-4 border-white/20">
+              <img src="http://static.photos/travel/320x240/22" alt="Guide cover" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute top-8 left-40 w-64 h-80 rounded-2xl overflow-hidden shadow-2xl transform rotate-[8deg] z-30 border-4 border-white/20">
+              <img src="http://static.photos/nature/320x240/55" alt="Guide cover" class="w-full h-full object-cover">
+            </div>
+            <div class="h-[400px]"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 z-10">
+      <span class="text-xs tracking-widest uppercase">Scroll to explore</span>
+      <div class="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-1">
+        <div class="w-1.5 h-3 bg-white/50 rounded-full animate-bounce"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee Banner -->
+  <section class="bg-sand-500 py-4 overflow-hidden">
+    <div class="marquee-track">
+      <div class="flex items-center gap-8 px-4 whitespace-nowrap">
+        <span class="text-white font-semibold text-lg flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 fill-current"></i> Japan Unveiled</span>
+        <span class="text-white/60">•</span>
+        <span class="text-white font-semibold text-lg flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 fill-current"></i> Italian Escapes</span>
+        <span class="text-white/60">•</span>
+        <span class="text-white font-semibold text-lg flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 fill-current"></i> Moroccan Dreams</span>
+        <span class="text-white/60">•</span>
+        <span class="text-white font-semibold text-lg flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 fill-current"></i> Patagonia Wild</span>
+        <span class="text-white/60">•</span>
+        <span class="text-white font-semibold text-lg flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 fill-current"></i> Bali Serenity</span>
+        <span class="text-white/60">•</span>
+        <span class="text-white font-semibold text-lg flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 fill-current"></i> Nordic Lights</span>
+        <span class="text-white/60">•</span>
+        <span class="text-white font-semibold text-lg flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 fill-current"></i> Greek Islands</span>
+        <span class="text-white/60">•</span>
+        <span class="text-white font-semibold text-lg flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 fill-current"></i> Peru Explorer</span>
+        <span class="text-white/60">•</span>
+      </div>
+      <div class="flex items-center gap-8 px-4 whitespace-nowrap">
+        <span class="text-white font-semibold text-lg flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 fill-current"></i> Japan Unveiled</span>
+        <span class="text-white/60">•</span>
+        <span class="text-white font-semibold text-lg flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 fill-current"></i> Italian Escapes</span>
+        <span class="text-white/60">•</span>
+        <span class="text-white font-semibold text-lg flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 fill-current"></i> Moroccan Dreams</span>
+        <span class="text-white/60">•</span>
+        <span class="text-white font-semibold text-lg flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 fill-current"></i> Patagonia Wild</span>
+        <span class="text-white/60">•</span>
+        <span class="text-white font-semibold text-lg flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 fill-current"></i> Bali Serenity</span>
+        <span class="text-white/60">•</span>
+        <span class="text-white font-semibold text-lg flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 fill-current"></i> Nordic Lights</span>
+        <span class="text-white/60">•</span>
+        <span class="text-white font-semibold text-lg flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 fill-current"></i> Greek Islands</span>
+        <span class="text-white/60">•</span>
+        <span class="text-white font-semibold text-lg flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 fill-current"></i> Peru Explorer</span>
+        <span class="text-white/60">•</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Guides Section -->
+  <section id="guides" class="bg-mesh-1 py-24 relative overflow-hidden">
+    <div class="orb w-64 h-64 bg-ocean-400 -top-20 -right-20 opacity-20"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="reveal inline-block text-sand-600 font-semibold tracking-wider uppercase text-sm mb-3">Curated Collection</span>
+        <h2 class="reveal delay-100 font-display text-4xl sm:text-5xl font-bold text-gray-900 mb-4">Bestselling Travel Guides</h2>
+        <p class="reveal delay-200 text-gray-500 text-lg max-w-2xl mx-auto">Each guide is meticulously researched, beautifully written, and designed to be your perfect travel companion.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Guide Card 1 -->
+        <div class="reveal delay-100 guide-card bg-white rounded-3xl shadow-lg overflow-hidden group cursor-pointer">
+          <div class="relative overflow-hidden h-72">
+            <img src="http://static.photos/travel/640x360/10" alt="Japan Guide" class="card-img w-full h-full object-cover">
+            <div class="absolute top-4 left-4 bg-sand-500 text-white text-xs font-bold px-3 py-1.5 rounded-full z-10">BESTSELLER</div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4 z-10">
+              <span class="text-white/80 text-sm">East Asia</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-bold text-gray-900 mb-2">Japan Unveiled</h3>
+            <p class="text-gray-500 text-sm mb-4 line-clamp-2">From the neon-lit streets of Tokyo to the serene temples of Kyoto — discover Japan through the eyes of a local.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1">
+                <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+                <span class="text-sm font-semibold text-gray-700">4.9</span>
+                <span class="text-gray-400 text-sm">(2.3k)</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-400 line-through text-sm">$34.99</span>
+                <span class="text-sand-600 font-bold text-lg">$24.99</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guide Card 2 -->
+        <div class="reveal delay-200 guide-card bg-white rounded-3xl shadow-lg overflow-hidden group cursor-pointer">
+          <div class="relative overflow-hidden h-72">
+            <img src="http://static.photos/travel/640x360/22" alt="Italy Guide" class="card-img w-full h-full object-cover">
+            <div class="absolute top-4 left-4 bg-ocean-600 text-white text-xs font-bold px-3 py-1.5 rounded-full z-10">NEW</div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4 z-10">
+              <span class="text-white/80 text-sm">Southern Europe</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-bold text-gray-900 mb-2">Italian Escapes</h3>
+            <p class="text-gray-500 text-sm mb-4 line-clamp-2">Wander through Tuscany's vineyards, explore the Amalfi Coast, and find hidden gems in Rome and Florence.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1">
+                <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+                <span class="text-sm font-semibold text-gray-700">4.8</span>
+                <span class="text-gray-400 text-sm">(1.8k)</span>
+              </div>
+              <span class="text-sand-600 font-bold text-lg">$29.99</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guide Card 3 -->
+        <div class="reveal delay-300 guide-card bg-white rounded-3xl shadow-lg overflow-hidden group cursor-pointer">
+          <div class="relative overflow-hidden h-72">
+            <img src="http://static.photos/nature/640x360/88" alt="Morocco Guide" class="card-img w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4 z-10">
+              <span class="text-white/80 text-sm">North Africa</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-bold text-gray-900 mb-2">Moroccan Dreams</h3>
+            <p class="text-gray-500 text-sm mb-4 line-clamp-2">Navigate the labyrinthine medinas, taste authentic tagine, and sleep under Saharan stars in this vivid guide.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1">
+                <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+                <span class="text-sm font-semibold text-gray-700">4.9</span>
+                <span class="text-gray-400 text-sm">(1.5k)</span>
+              </div>
+              <span class="text-sand-600 font-bold text-lg">$27.99</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guide Card 4 -->
+        <div class="reveal delay-400 guide-card bg-white rounded-3xl shadow-lg overflow-hidden group cursor-pointer">
+          <div class="relative overflow-hidden h-72">
+            <img src="http://static.photos/nature/640x360/55" alt="Patagonia Guide" class="card-img w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4 z-10">
+              <span class="text-white/80 text-sm">South America</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-bold text-gray-900 mb-2">Patagonia Wild</h3>
+            <p class="text-gray-500 text-sm mb-4 line-clamp-2">Trek through untouched wilderness, witness glaciers calving, and experience the raw beauty of Patagonia.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1">
+                <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+                <span class="text-sm font-semibold text-gray-700">4.7</span>
+                <span class="text-gray-400 text-sm">(980)</span>
+              </div>
+              <span class="text-sand-600 font-bold text-lg">$26.99</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guide Card 5 -->
+        <div class="reveal delay-500 guide-card bg-white rounded-3xl shadow-lg overflow-hidden group cursor-pointer">
+          <div class="relative overflow-hidden h-72">
+            <img src="http://static.photos/travel/640x360/33" alt="Bali Guide" class="card-img w-full h-full object-cover">
+            <div class="absolute top-4 left-4 bg-forest-500 text-white text-xs font-bold px-3 py-1.5 rounded-full z-10">EDITOR'S PICK</div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4 z-10">
+              <span class="text-white/80 text-sm">Southeast Asia</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-bold text-gray-900 mb-2">Bali Serenity</h3>
+            <p class="text-gray-500 text-sm mb-4 line-clamp-2">Find your peace in Ubud's rice terraces, discover secret waterfalls, and immerse in Balinese spirituality.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1">
+                <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+                <span class="text-sm font-semibold text-gray-700">4.9</span>
+                <span class="text-gray-400 text-sm">(2.1k)</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-400 line-through text-sm">$32.99</span>
+                <span class="text-sand-600 font-bold text-lg">$22.99</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guide Card 6 -->
+        <div class="reveal delay-600 guide-card bg-white rounded-3xl shadow-lg overflow-hidden group cursor-pointer">
+          <div class="relative overflow-hidden h-72">
+            <img src="http://static.photos/nature/640x360/42" alt="Nordic Guide" class="card-img w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4 z-10">
+              <span class="text-white/80 text-sm">Northern Europe</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-bold text-gray-900 mb-2">Nordic Lights</h3>
+            <p class="text-gray-500 text-sm mb-4 line-clamp-2">Chase the aurora, explore fjords, and cozy up in Scandinavian design hotels across Norway and Iceland.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1">
+                <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+                <span class="text-sm font-semibold text-gray-700">4.8</span>
+                <span class="text-gray-400 text-sm">(1.2k)</span>
+              </div>
+              <span class="text-sand-600 font-bold text-lg">$31.99</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal text-center mt-12">
+        <a href="#" class="inline-flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-white px-8 py-4 rounded-full font-semibold transition-all shadow-lg hover:shadow-xl">
+          View All Guides <i data-lucide="arrow-right" class="w-5 h-5"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section class="bg-mesh-2 py-24 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="reveal text-forest-600 font-semibold tracking-wider uppercase text-sm mb-3 block">Why Wanderlust</span>
+          <h2 class="reveal delay-100 font-display text-4xl sm:text-5xl font-bold text-gray-900 mb-6">Not Just a Guide.<br>A Story You Live.</h2>
+          <p class="reveal delay-200 text-gray-500 text-lg mb-10">We don't do boring lists and dry facts. Every Wanderlust guide reads like a novel — immersive, emotional, and deeply personal.</p>
+
+          <div class="space-y-8">
+            <div class="reveal delay-200 flex gap-4">
+              <div class="flex-shrink-0 w-14 h-14 bg-sand-100 rounded-2xl flex items-center justify-center">
+                <i data-lucide="pen-tool" class="w-6 h-6 text-sand-600"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900 text-lg mb-1">Written by Locals</h4>
+                <p class="text-gray-500">Every guide is penned by someone who calls the destination home, sharing secrets no tourist map reveals.</p>
+              </div>
+            </div>
+            <div class="reveal delay-300 flex gap-4">
+              <div class="flex-shrink-0 w-14 h-14 bg-ocean-100 rounded-2xl flex items-center justify-center">
+                <i data-lucide="heart" class="w-6 h-6 text-ocean-600"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900 text-lg mb-1">Passionate Storytelling</h4>
+                <p class="text-gray-500">Feel the cobblestones beneath your feet and smell the street food — our writing transports you there.</p>
+              </div>
+            </div>
+            <div class="reveal delay-400 flex gap-4">
+              <div class="flex-shrink-0 w-14 h-14 bg-forest-100 rounded-2xl flex items-center justify-center">
+                <i data-lucide="refresh-cw" class="w-6 h-6 text-forest-600"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900 text-lg mb-1">Always Updated</h4>
+                <p class="text-gray-500">Buy once, get lifetime updates. Our guides evolve as destinations change, so you're always in the know.</p>
+              </div>
+            </div>
+            <div class="reveal delay-500 flex gap-4">
+              <div class="flex-shrink-0 w-14 h-14 bg-red-100 rounded-2xl flex items-center justify-center">
+                <i data-lucide="globe" class="w-6 h-6 text-red-500"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900 text-lg mb-1">Offline-Ready</h4>
+                <p class="text-gray-500">Download your guide as PDF or ePub. No internet needed when you're exploring off the grid.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal-scale delay-200 relative">
+          <div class="relative">
+            <img src="http://static.photos/nature/1200x630/88" alt="Travel writing" class="rounded-3xl shadow-2xl w-full object-cover">
+            <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-5 flex items-center gap-3">
+              <div class="w-12 h-12 bg-sand-500 rounded-full flex items-center justify-center">
+                <i data-lucide="award" class="w-6 h-6 text-white"></i>
+              </div>
+              <div>
+                <div class="font-bold text-gray-900">Award-Winning</div>
+                <div class="text-gray-500 text-sm">Best Travel Guides 2024</div>
+              </div>
+            </div>
+            <div class="absolute -top-6 -right-6 bg-white rounded-2xl shadow-xl p-5 flex items-center gap-3">
+              <div class="flex -space-x-2">
+                <div class="w-9 h-9 rounded-full bg-sand-300 border-2 border-white flex items-center justify-center text-xs font-bold text-white">A</div>
+                <div class="w-9 h-9 rounded-full bg-ocean-400 border-2 border-white flex items-center justify-center text-xs font-bold text-white">M</div>
+                <div class="w-9 h-9 rounded-full bg-forest-400 border-2 border-white flex items-center justify-center text-xs font-bold text-white">S</div>
+              </div>
+              <div>
+                <div class="font-bold text-gray-900">50K+</div>
+                <div class="text-gray-500 text-sm">Happy Readers</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Destinations Section -->
+  <section id="destinations" class="bg-mesh-dark py-24 relative overflow-hidden">
+    <div class="orb w-96 h-96 bg-sand-500 -top-32 -left-32 opacity-20"></div>
+    <div class="orb w-72 h-72 bg-ocean-600 -bottom-20 -right-20 opacity-20"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="reveal text-sand-400 font-semibold tracking-wider uppercase text-sm mb-3 block">Explore By Region</span>
+        <h2 class="reveal delay-100 font-display text-4xl sm:text-5xl font-bold text-white mb-4">Find Your Next Adventure</h2>
+        <p class="reveal delay-200 text-white/50 text-lg max-w-2xl mx-auto">From ancient Asian temples to wild South American landscapes — we have a guide for every dream.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div class="reveal delay-100 group relative rounded-2xl overflow-hidden cursor-pointer aspect-[3/4]">
+          <img src="http://static.photos/travel/320x240/10" alt="Asia" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 z-10">
+            <h3 class="text-white font-display text-xl font-bold">Asia</h3>
+            <p class="text-white/70 text-sm">24 guides</p>
+          </div>
+          <div class="absolute inset-0 bg-sand-500/0 group-hover:bg-sand-500/20 transition-colors duration-500"></div>
+        </div>
+
+        <div class="reveal delay-200 group relative rounded-2xl overflow-hidden cursor-pointer aspect-[3/4]">
+          <img src="http://static.photos/travel/320x240/22" alt="Europe" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 z-10">
+            <h3 class="text-white font-display text-xl font-bold">Europe</h3>
+            <p class="text-white/70 text-sm">38 guides</p>
+          </div>
+          <div class="absolute inset-0 bg-sand-500/0 group-hover:bg-sand-500/20 transition-colors duration-500"></div>
+        </div>
+
+        <div class="reveal delay-300 group relative rounded-2xl overflow-hidden cursor-pointer aspect-[3/4]">
+          <img src="http://static.photos/nature/320x240/55" alt="Americas" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 z-10">
+            <h3 class="text-white font-display text-xl font-bold">Americas</h3>
+            <p class="text-white/70 text-sm">22 guides</p>
+          </div>
+          <div class="absolute inset-0 bg-sand-500/0 group-hover:bg-sand-500/20 transition-colors duration-500"></div>
+        </div>
+
+        <div class="reveal delay-400 group relative rounded-2xl overflow-hidden cursor-pointer aspect-[3/4]">
+          <img src="http://static.photos/travel/320x240/33" alt="Oceania" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 z-10">
+            <h3 class="text-white font-display text-xl font-bold">Oceania</h3>
+            <p class="text-white/70 text-sm">14 guides</p>
+          </div>
+          <div class="absolute inset-0 bg-sand-500/0 group-hover:bg-sand-500/20 transition-colors duration-500"></div>
+        </div>
+
+        <div class="reveal delay-500 group relative rounded-2xl overflow-hidden cursor-pointer aspect-[3/4]">
+          <img src="http://static.photos/nature/320x240/88" alt="Africa" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 z-10">
+            <h3 class="text-white font-display text-xl font-bold">Africa</h3>
+            <p class="text-white/70 text-sm">12 guides</p>
+          </div>
+          <div class="absolute inset-0 bg-sand-500/0 group-hover:bg-sand-500/20 transition-colors duration-500"></div>
+        </div>
+
+        <div class="reveal delay-600 group relative rounded-2xl overflow-hidden cursor-pointer aspect-[3/4]">
+          <img src="http://static.photos/nature/320x240/42" alt="Arctic" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 z-10">
+            <h3 class="text-white font-display text-xl font-bold">Arctic</h3>
+            <p class="text-white/70 text-sm">6 guides</p>
+          </div>
+          <div class="absolute inset-0 bg-sand-500/0 group-hover:bg-sand-500/20 transition-colors duration-500"></div>
+        </div>
+
+        <div class="reveal delay-700 group relative rounded-2xl overflow-hidden cursor-pointer aspect-[3/4]">
+          <img src="http://static.photos/travel/640x360/15" alt="Middle East" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4 z-10">
+            <h3 class="text-white font-display text-xl font-bold">Middle East</h3>
+            <p class="text-white/70 text-sm">8 guides</p>
+          </div>
+          <div class="absolute inset-0 bg-sand-500/0 group-hover:bg-sand-500/20 transition-colors duration-500"></div>
+        </div>
+
+        <div class="reveal delay-800 group relative rounded-2xl overflow-hidden cursor-pointer aspect-[3/4] bg-gradient-to-br from-sand-500 to-sand-700 flex items-center justify-center">
+          <div class="text-center z-10">
+            <i data-lucide="plus" class="w-10 h-10 text-white mx-auto mb-2"></i>
+            <h3 class="text-white font-display text-xl font-bold">Coming Soon</h3>
+            <p class="text-white/70 text-sm">More regions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="bg-mesh-1 py-24 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="reveal text-ocean-600 font-semibold tracking-wider uppercase text-sm mb-3 block">Simple Process</span>
+        <h2 class="reveal delay-100 font-display text-4xl sm:text-5xl font-bold text-gray-900 mb-4">How It Works</h2>
+        <p class="reveal delay-200 text-gray-500 text-lg max-w-2xl mx-auto">From discovery to departure — getting your perfect travel guide is just three steps away.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 relative">
+        <!-- Connection line -->
+        <div class="hidden md:block absolute top-24 left-[20%] right-[20%] h-0.5 bg-gradient-to-r from-sand-300 via-ocean-300 to-forest-300 z-0"></div>
+
+        <div class="reveal delay-100 text-center relative z-10">
+          <div class="w-20 h-20 bg-white rounded-full shadow-lg flex items-center justify-center mx-auto mb-6 border-4 border-sand-100">
+            <i data-lucide="search" class="w-8 h-8 text-sand-500"></i>
+          </div>
+          <div class="bg-sand-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mx-auto -mt-3 mb-4 relative z-20">1</div>
+          <h3 class="font-display text-xl font-bold text-gray-900 mb-2">Choose Your Destination</h3>
+          <p class="text-gray-500">Browse 120+ destinations and find the guide that speaks to your wanderlust.</p>
+        </div>
+
+        <div class="reveal delay-300 text-center relative z-10">
+          <div class="w-20 h-20 bg-white rounded-full shadow-lg flex items-center justify-center mx-auto mb-6 border-4 border-ocean-100">
+            <i data-lucide="credit-card" class="w-8 h-8 text-ocean-500"></i>
+          </div>
+          <div class="bg-ocean-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mx-auto -mt-3 mb-4 relative z-20">2</div>
+          <h3 class="font-display text-xl font-bold text-gray-900 mb-2">Purchase & Download</h3>
+          <p class="text-gray-500">Instant checkout. Get your guide in PDF and ePub formats right away.</p>
+        </div>
+
+        <div class="reveal delay-500 text-center relative z-10">
+          <div class="w-20 h-20 bg-white rounded-full shadow-lg flex items-center justify-center mx-auto mb-6 border-4 border-forest-100">
+            <i data-lucide="map-pin" class="w-8 h-8 text-forest-500"></i>
+          </div>
+          <div class="bg-forest-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mx-auto -mt-3 mb-4 relative z-20">3</div>
+          <h3 class="font-display text-xl font-bold text-gray-900 mb-2">Explore the World</h3>
+          <p class="text-gray-500">Pack your bags and let our guide lead you to unforgettable experiences.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="bg-mesh-2 py-24 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="reveal text-sand-600 font-semibold tracking-wider uppercase text-sm mb-3 block">Testimonials</span>
+        <h2 class="reveal delay-100 font-display text-4xl sm:text-5xl font-bold text-gray-900 mb-4">Stories From Our Readers</h2>
+        <p class="reveal delay-200 text-gray-500 text-lg max-w-2xl mx-auto">Don't take our word for it — hear from the travelers who've wandered with our guides.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="reveal delay-100 testimonial-card bg-white rounded-2xl p-6 shadow-md border border-gray-100">
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+          </div>
+          <p class="text-gray-600 mb-6 italic leading-relaxed">"Japan Unveiled made me feel like I had a local friend holding my hand through Tokyo. I found temples and ramen shops I'd never have discovered on my own."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 bg-sand-200 rounded-full flex items-center justify-center font-bold text-sand-700">SE</div>
+            <div>
+              <div class="font-semibold text-gray-900 text-sm">Sarah E.</div>
+              <div class="text-gray-400 text-xs">Read Japan Unveiled</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal delay-200 testimonial-card bg-white rounded-2xl p-6 shadow-md border border-gray-100">
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+          </div>
+          <p class="text-gray-600 mb-6 italic leading-relaxed">"The writing is poetic yet practical. I've bought three guides so far and each one has been worth every penny. The offline feature is a lifesaver in remote areas!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 bg-ocean-200 rounded-full flex items-center justify-center font-bold text-ocean-700">MK</div>
+            <div>
+              <div class="font-semibold text-gray-900 text-sm">Marco K.</div>
+              <div class="text-gray-400 text-xs">Read 3 Guides</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal delay-300 testimonial-card bg-white rounded-2xl p-6 shadow-md border border-gray-100">
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+          </div>
+          <p class="text-gray-600 mb-6 italic leading-relaxed">"Moroccan Dreams transported me before I even boarded the plane. The section on Saharan camps was so vivid I could taste the mint tea."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 bg-forest-200 rounded-full flex items-center justify-center font-bold text-forest-700">LP</div>
+            <div>
+              <div class="font-semibold text-gray-900 text-sm">Luna P.</div>
+              <div class="text-gray-400 text-xs">Read Moroccan Dreams</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal delay-400 testimonial-card bg-white rounded-2xl p-6 shadow-md border border-gray-100">
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+          </div>
+          <p class="text-gray-600 mb-6 italic leading-relaxed">"I'm a solo female traveler and the Bali guide made me feel so safe and prepared. The cultural insights were deeper than any blog I've read."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 bg-red-200 rounded-full flex items-center justify-center font-bold text-red-700">AT</div>
+            <div>
+              <div class="font-semibold text-gray-900 text-sm">Amara T.</div>
+              <div class="text-gray-400 text-xs">Read Bali Serenity</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal delay-500 testimonial-card bg-white rounded-2xl p-6 shadow-md border border-gray-100 md:col-span-2 lg:col-span-1">
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 text-sand-400 fill-current"></i>
+          </div>
+          <p class="text-gray-600 mb-6 italic leading-relaxed">"Bought the Nordic Lights guide for my honeymoon trip to Iceland. It was the best investment of the entire trip. We found hot springs that weren't on any tourist list!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 bg-purple-200 rounded-full flex items-center justify-center font-bold text-purple-700">JD</div>
+            <div>
+              <div class="font-semibold text-gray-900 text-sm">James & Daria</div>
+              <div class="text-gray-400 text-xs">Read Nordic Lights</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="bg-mesh-dark py-24 relative overflow-hidden">
+    <div class="orb w-80 h-80 bg-forest-500 top-10 right-10 opacity-15"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="reveal text-sand-400 font-semibold tracking-wider uppercase text-sm mb-3 block">Pricing</span>
+        <h2 class="reveal delay-100 font-display text-4xl sm:text-5xl font-bold text-white mb-4">Choose Your Journey</h2>
+        <p class="reveal delay-200 text-white/50 text-lg max-w-2xl mx-auto">Whether you're a weekend explorer or a full-time nomad, we have the perfect plan for you.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <!-- Single Guide -->
+        <div class="reveal delay-100 bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 hover:border-sand-400/30 transition-all duration-500 group">
+          <div class="text-sand-400 font-semibold mb-2 flex items-center gap-2">
+            <i data-lucide="book" class="w-5 h-5"></i> Single Guide
+          </div>
+          <div class="flex items-end gap-1 mb-4">
+            <span class="text-5xl font-bold text-white">$24</span>
+            <span class="text-white/40 mb-1">/guide</span>
+          </div>
+          <p class="text-white/50 mb-8">Perfect for a specific trip you're planning.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-white/70"><i data-lucide="check-circle" class="w-5 h-5 text-sand-400"></i> Full written guide</li>
+            <li class="flex items-center gap-3 text-white/70"><i data-lucide="check-circle" class="w-5 h-5 text-sand-400"></i> PDF + ePub formats</li>
+            <li class="flex items-center gap-3 text-white/70"><i data-lucide="check-circle" class="w-5 h-5 text-sand-400"></i> Offline access</li>
+            <li class="flex items-center gap-3 text-white/70"><i data-lucide="check-circle" class="w-5 h-5 text-sand-400"></i> 1 year of updates</li>
+          </ul>
+          <a href="#" class="block text-center bg-white/10 hover:bg-sand-500 text-white font-semibold py-3.5 rounded-xl transition-all duration-300">
+            Get This Guide
+          </a>
+        </div>
+
+        <!-- Explorer Pack -->
+        <div class="reveal delay-200 bg-gradient-to-b from-sand-500/20 to-sand-600/10 backdrop-blur-sm border-2 border-sand-400 rounded-3xl p-8 relative transform md:-translate-y-4 shadow-2xl shadow-sand-500/20">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-sand-500 text-white text-xs font-bold px-4 py-1.5 rounded-full">MOST POPULAR</div>
+          <div class="text-sand-400 font-semibold mb-2 flex items-center gap-2">
+            <i data-lucide="map" class="w-5 h-5"></i> Explorer Pack
+          </div>
+          <div class="flex items-end gap-1 mb-4">
+            <span class="text-5xl font-bold text-white">$59</span>
+            <span class="text-white/40 mb-1">/3 guides</span>
+          </div>
+          <p class="text-white/50 mb-8">Save 20% when you bundle three guides together.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-white/70"><i data-lucide="check-circle" class="w-5 h-5 text-sand-400"></i> 3 guides of your choice</li>
+            <li class="flex items-center gap-3 text-white/70"><i data-lucide="check-circle" class="w-5 h-5 text-sand-400"></i> PDF + ePub formats</li>
+            <li class="flex items-center gap-3 text-white/70"><i data-lucide="check-circle" class="w-5 h-5 text-sand-400"></i> Offline access</li>
+            <li class="flex items-center gap-3 text-white/70"><i data-lucide="check-circle" class="w-5 h-5 text-sand-400"></i> Lifetime updates</li>
+            <li class="flex items-center gap-3 text-white/70"><i data-lucide="check-circle" class="w-5 h-5 text-sand-400"></i> Priority support</li>
+          </ul>
+          <a href="#" class="shimmer-btn block text-center bg-sand-500 hover:bg-sand-600 text-white font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-sand-500/30">
+            Get Explorer Pack
+          </a>
+        </div>
+
+        <!-- Unlimited -->
+        <div class="reveal delay-300 bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 hover:border-ocean-400/30 transition-all duration-500 group">
+          <div class="text-ocean-400 font-semibold mb-2 flex items-center gap-2">
+            <i data-lucide="infinity" class="w-5 h-5"></i> Unlimited
+          </div>
+          <div class="flex items-end gap-1 mb-4">
+            <span class="text-5xl font-bold text-white">$149</span>
+            <span class="text-white/40 mb-1">/year</span>
+          </div>
+          <p class="text-white/50 mb-8">For the ultimate nomad — access everything, anytime.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-white/70"><i data-lucide="check-circle" class="w-5 h-5 text-ocean-400"></i> All 120+ guides</li>
+            <li class="flex items-center gap-3 text-white/70"><i data-lucide="check-circle" class="w-5 h-5 text-ocean-400"></i> New guides monthly</li>
+            <li class="flex items-center gap-3 text-white/70"><i data-lucide="check-circle" class="w-5 h-5 text-ocean-400"></i> PDF + ePub + audiobook</li>
+            <li class="flex items-center gap-3 text-white/70"><i data-lucide="check-circle" class="w-5 h-5 text-ocean-400"></i> Offline access</li>
+            <li class="flex items-center gap-3 text-white/70"><i data-lucide="check-circle" class="w-5 h-5 text-ocean-400"></i> Lifetime updates</li>
+            <li class="flex items-center gap-3 text-white/70"><i data-lucide="check-circle" class="w-5 h-5 text-ocean-400"></i> Private community</li>
+          </ul>
+          <a href="#" class="block text-center bg-white/10 hover:bg-ocean-600 text-white font-semibold py-3.5 rounded-xl transition-all duration-300">
+            Go Unlimited
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter CTA -->
+  <section class="relative py-24 overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="http://static.photos/nature/1200x630/55" alt="Travel CTA" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0f0c29]/90 to-[#302b63]/70"></div>
+    </div>
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      <div class="reveal">
+        <i data-lucide="mail" class="w-12 h-12 text-sand-400 mx-auto mb-4"></i>
+      </div>
+      <h2 class="reveal delay-100 font-display text-4xl sm:text-5xl font-bold text-white mb-4">Get Free Travel Stories</h2>
+      <p class="reveal delay-200 text-white/60 text-lg mb-8">Join 30,000+ readers who receive weekly travel tales, exclusive discounts, and early access to new guides.</p>
+      <form class="reveal delay-300 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto" onsubmit="handleSubscribe(event)">
+        <input type="email" placeholder="Enter your email" class="flex-1 bg-white/10 border border-white/20 text-white placeholder-white/40 rounded-xl px-5 py-3.5 focus:outline-none focus:border-sand-400 backdrop-blur-sm" required>
+        <button type="submit" class="shimmer-btn bg-sand-500 hover:bg-sand-600 text-white font-semibold px-8 py-3.5 rounded-xl transition-all">Subscribe</button>
+      </form>
+      <p class="reveal delay-400 text-white/30 text-sm mt-4">No spam, ever. Unsubscribe anytime.</p>
+      <div id="subscribeMsg" class="hidden mt-4 text-sand-400 font-semibold"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#0a0a1a] text-white/60 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div>
+          <a href="#" class="flex items-center gap-2 mb-4">
+            <i data-lucide="compass" class="w-7 h-7 text-sand-400"></i>
+            <span class="font-display text-xl font-bold text-white">Wanderlust</span>
+          </a>
+          <p class="text-sm leading-relaxed mb-4">Written travel guides that transport you before you even pack. Explore the world through words.</p>
+          <div class="flex gap-3">
+            <a href="#" class="w-9 h-9 bg-white/5 hover:bg-sand-500 rounded-lg flex items-center justify-center transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+            <a href="#" class="w-9 h-9 bg-white/5 hover:bg-sand-500 rounded-lg flex items-center justify-center transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+            <a href="#" class="w-9 h-9 bg-white/5 hover:bg-sand-500 rounded-lg flex items-center justify-center transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+            <a href="#" class="w-9 h-9 bg-white/5 hover:bg-sand-500 rounded-lg flex items-center justify-center transition-colors"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Destinations</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-sand-400 transition-colors">Asia</a></li>
+            <li><a href="#" class="hover:text-sand-400 transition-colors">Europe</a></li>
+            <li><a href="#" class="hover:text-sand-400 transition-colors">Americas</a></li>
+            <li><a href="#" class="hover:text-sand-400 transition-colors">Africa</a></li>
+            <li><a href="#" class="hover:text-sand-400 transition-colors">Oceania</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Company</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-sand-400 transition-colors">About Us</a></li>
+            <li><a href="#" class="hover:text-sand-400 transition-colors">Our Writers</a></li>
+            <li><a href="#" class="hover:text-sand-400 transition-colors">Careers</a></li>
+            <li><a href="#" class="hover:text-sand-400 transition-colors">Press Kit</a></li>
+            <li><a href="#" class="hover:text-sand-400 transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Support</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-sand-400 transition-colors">Help Center</a></li>
+            <li><a href="#" class="hover:text-sand-400 transition-colors">Refund Policy</a></li>
+            <li><a href="#" class="hover:text-sand-400 transition-colors">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-sand-400 transition-colors">Terms of Service</a></li>
+            <li><a href="#" class="hover:text-sand-400 transition-colors">Accessibility</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+        <p>&copy; 2024 Wanderlust Guides. All rights reserved.</p>
+        <p>Made with <i data-lucide="heart" class="w-4 h-4 inline text-sand-400 fill-current"></i> for travelers everywhere</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // =====================
+    // Scroll Reveal Animation
+    // =====================
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-rotate');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // =====================
+    // Navbar scroll effect
+    // =====================
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('nav-scrolled');
+      } else {
+        navbar.classList.remove('nav-scrolled');
+      }
+    });
+
+    // =====================
+    // Mobile Menu
+    // =====================
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+    mobileMenuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+
+    // =====================
+    // Stat Counter Animation
+    // =====================
+    const statNumbers = document.querySelectorAll('.stat-number');
+    let statAnimated = false;
+
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !statAnimated) {
+          statAnimated = true;
+          statNumbers.forEach(stat => {
+            const target = parseFloat(stat.dataset.target);
+            const isDecimal = target % 1 !== 0;
+            const duration = 2000;
+            const startTime = performance.now();
+
+            function updateStat(currentTime) {
+              const elapsed = currentTime - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              // Ease out cubic
+              const eased = 1 - Math.pow(1 - progress, 3);
+              const current = eased * target;
+              stat.textContent = isDecimal ? current.toFixed(1) : Math.floor(current);
+              if (progress < 1) {
+                requestAnimationFrame(updateStat);
+              }
+            }
+            requestAnimationFrame(updateStat);
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+
+    statNumbers.forEach(stat => statObserver.observe(stat));
+
+    // =====================
+    // Hero Particles
+    // =====================
+    const particlesContainer = document.getElementById('particles');
+    const particleColors = ['#d68332', '#3b9af6', '#4f8153', '#f9edda', '#ffffff'];
+
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      const size = Math.random() * 6 + 2;
+      const color = particleColors[Math.floor(Math.random() * particleColors.length)];
+      const left = Math.random() * 100;
+      const duration = Math.random() * 15 + 10;
+      const delay = Math.random() * 10;
+
+      particle.style.cssText = `
+        width: ${size}px;
+        height: ${size}px;
+        background: ${color};
+        left: ${left}%;
+        bottom: -10px;
+        animation-duration: ${duration}s;
+        animation-delay: ${delay}s;
+        opacity: 0;
+      `;
+      particlesContainer.appendChild(particle);
+
+      // Remove after animation
+      setTimeout(() => {
+        particle.remove();
+        createParticle();
+      }, (duration + delay) * 1000);
+    }
+
+    // Create initial particles
+    for (let i = 0; i < 25; i++) {
+      createParticle();
+    }
+
+    // =====================
+    // Parallax on Mouse Move
+    // =====================
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
+      document.querySelectorAll('.orb').forEach((orb, i) => {
+        const speed = (i + 1) * 8;
+        orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+      });
+    });
+
+    // =====================
+    // Newsletter Subscribe
+    // =====================
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const msg = document.getElementById('subscribeMsg');
+      msg.textContent = '🎉 Welcome aboard! Check your inbox for a welcome gift.';
+      msg.classList.remove('hidden');
+      e.target.reset();
+      setTimeout(() => {
+        msg.classList.add('hidden');
+      }, 5000);
+    }
+
+    // =====================
+    // Smooth scroll for anchor links
+    // =====================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // =====================
+    // Guide cards click interaction
+    // =====================
+    document.querySelectorAll('.guide-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const name = card.querySelector('h3').textContent;
+        // Simple add-to-cart feedback
+        card.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          card.style.transform = '';
+          const toast = document.createElement('div');
+          toast.className = 'fixed bottom-6 right-6 bg-gray-900 text-white px-6 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2 font-semibold';
+          toast.innerHTML = `<span class="text-sand-400">✓</span> "${name}" added to cart`;
+          document.body.appendChild(toast);
+          setTimeout(() => toast.remove(), 3000);
+        }, 200);
+      });
+    });
+  </script>
+</body>
+</html>
