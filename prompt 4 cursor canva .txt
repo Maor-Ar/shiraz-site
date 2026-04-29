@@ -1,0 +1,16 @@
+we need to build another version of the site
+i added a new MCP server for canva and authenticated with it
+the customer provided a new canva design for the next version
+https://www.canva.com/design/DAHHe23P3wY/2iBiSyKH8R1h3JmpYIr4BQ/edit 
+i want to implement all of it and after all of the sections from the design to continue the site as shown in 
+@deepsite8 from he gallery section included and all of thre other sections that comes afterward
+make this site ina new folder named deepsite9
+copy all of the assets to that folder except whatever wont be needed anymore
+the assets from the canva design were downloaded and placed in this folder - @canva_assets 
+ill need you to go through all of the photos to ynderstand what each one contains so you will place them at the correct spot.
+again all of the assets for this new site should be placed at the asstes folder inside the new site folder 
+make sure it looks exactly as the canva design 
+make sure using @Browser as many times needed
+i used live server extension to howst the sites locally like so:
+http://127.0.0.1:5501/deepsite8/ 
+make it flawlesly and as accurate as possible to my intentions
