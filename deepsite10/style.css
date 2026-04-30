@@ -2283,6 +2283,43 @@ body {
   filter: invert(1);
 }
 
+.brand-logo {
+  display: inline-block;
+  height: auto;
+}
+
+.hero-brand {
+  margin: 0.3rem 0 1rem;
+}
+
+.brand-logo-hero {
+  width: clamp(260px, 58vw, 520px);
+  filter: invert(1);
+}
+
+.brand-logo-inline {
+  width: 130px;
+  vertical-align: middle;
+  margin: 0 0.2rem;
+}
+
+.brand-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.brand-logo-title {
+  width: clamp(140px, 20vw, 220px);
+  filter: invert(1);
+}
+
+.brand-logo-footer {
+  width: clamp(150px, 24vw, 220px);
+  filter: invert(1);
+}
+
 .hero-inner {
   padding-top: 9.3rem;
 }
