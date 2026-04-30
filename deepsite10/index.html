@@ -3,434 +3,141 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digital Travel</title>
+  <title>Digital Travel - Montenegro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=Gveret+Levin:wght@400;700&family=Heebo:wght@400;500;700;800;900&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Great+Vibes&family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="loader" class="loader">
-    <div class="loader-logo brand-font">Digital Travel</div>
-    <div class="loader-bar"><span></span></div>
-  </div>
-
-  <div id="scrollProgress" class="scroll-progress"></div>
-  <div id="cursorFollower" class="cursor-follower"></div>
-  <canvas id="particlesCanvas" class="particles-canvas" aria-hidden="true"></canvas>
-  <div class="paper-overlay" aria-hidden="true"></div>
-  <header id="top" class="site-header">
+  <header class="site-header">
     <nav id="navbar" class="navbar">
-      <a href="#top" class="logo brand-font">Digital Travel</a>
-      <button id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="navLinks">☰</button>
-      <div id="navLinks" class="nav-links">
-        <a href="#gallery">גלריה</a>
-        <a href="#guide-preview">הצצה למדריך</a>
-        <a href="#faq">שאלות נפוצות</a>
-        <a href="#purchase" class="btn-small">רכישה מהירה</a>
+      <div class="container navbar-inner">
+        <a href="#top" class="logo"><img src="assets/images/digitaltravel-logo-signature.png" alt="Digital Travel"></a>
+        <button id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="navLinks">☰</button>
+        <div id="navLinks" class="nav-links">
+          <a href="#intro">המדריך</a>
+          <a href="#audience">למי מתאים</a>
+          <a href="#canva-end">תוכן המדריך</a>
+          <a href="#gallery">גלריה</a>
+          <a href="#purchase" class="btn-small">רכישה מהירה</a>
+        </div>
       </div>
     </nav>
-    <div id="compass" class="compass" aria-hidden="true">
-      <span class="compass-needle"></span>
-    </div>
   </header>
 
-  <main>
-    <section class="hero section">
-      <video
-        class="hero-video"
-        src="assets/videos/herovideo.mp4"
-        poster="assets/images/gallery-kotor-bay-viewpoint-deck.jpg"
-        autoplay
-        loop
-        muted
-        playsinline
-        preload="auto"
-      >
-        <source src="assets/videos/herovideo.mp4" type="video/mp4">
-      </video>
+  <main id="top">
+    <section class="hero-canva">
+      <video class="hero-video" src="assets/videos/hero-video.mp4" autoplay loop muted playsinline></video>
       <div class="hero-overlay"></div>
-      <div class="hero-content container">
-        <p class="eyebrow brand-font reveal">Digital Travel</p>
-        <h2 class="reveal title-hero">המסלול המלא לשבעה ימים במונטנגרו</h2>
-        <h2 class="reveal hero-typed-heading">
-          <span class="hero-sub-wrap">
-            <span class="hero-sub" id="hero-sub" data-text="הראשון מסוגו בישראל"></span><span class="type-cursor" aria-hidden="true">|</span>
-          </span>
-        </h2>
-        <p class="reveal">מבוסס חוויה אמיתית, חיסכון עצום בזמן התכנון שלך!</p>
-        <a href="#purchase" class="btn cta magnetic reveal">לרכישה מהירה לחצו כאן</a>
-        <div class="hero-stats reveal-stagger">
-          <article class="glass-card tilt-card"><strong data-counter="7">0</strong><span>ימים מלאים</span></article>
-          <article class="glass-card tilt-card"><strong>מסלול מדויק</strong><span>תוכנית יומית</span></article>
-          <article class="glass-card tilt-card"><strong>חוויה אמיתית</strong><span>מבוסס שטח</span></article>
+      <div class="hero-inner container reveal">
+        <p class="hero-kicker">MONTENEGRO</p>
+        <h1>Digital Travel</h1>
+        <a href="#purchase" class="btn cta-main">לרכישה מהירה לחץ כאן</a>
+        <a href="#intro" class="btn cta-secondary">גלה עוד</a>
+        <div class="hero-social">
+          <a href="https://www.instagram.com/shiraz_sanker?igsh=d3Vncm1ndDBiYXpy&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+          <a href="https://www.tiktok.com/@shiraz_sanker?_r=1&_t=ZS-95MyjZcVljc" target="_blank" rel="noopener noreferrer" aria-label="TikTok">TikTok</a>
+          <a href="https://www.facebook.com/share/1GPdFNtnfF/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
         </div>
+        <a class="scroll-hint" href="#intro">גללו למטה</a>
       </div>
     </section>
 
-    <section class="marquee-wrap">
-      <div class="marquee-track">
-        <span class="marquee-item">🏔️ קוטור •</span>
-        <span class="marquee-item">🌊 בודווה •</span>
-        <span class="marquee-item">🏞️ דורמיטור •</span>
-        <span class="marquee-item">🛥️ סבניק •</span>
-        <span class="marquee-item">🌅 סטיווה •</span>
-        <span class="marquee-item">🏕️ זאבלאק •</span>
-        <span class="marquee-item">🏖️ בראנה •</span>
-        <span class="marquee-item">🏰 אולצין •</span>
-        <span class="marquee-item">🏔️ קוטור •</span>
-        <span class="marquee-item">🌊 בודווה •</span>
-        <span class="marquee-item">🏞️ דורמיטור •</span>
-        <span class="marquee-item">🛥️ סבניק •</span>
-        <span class="marquee-item">🌅 סטיווה •</span>
-        <span class="marquee-item">🏕️ זאבלאק •</span>
-        <span class="marquee-item">🏖️ בראנה •</span>
-        <span class="marquee-item">🏰 אולצין •</span>
+    <section id="intro" class="section canva-intro">
+      <div class="container intro-panel reveal">
+        <h2>המסלול המלא לשבעה ימים מלאים במונטנגרו</h2>
+        <p class="intro-accent">חיסכון עצום בזמן התכנון שלך!</p>
+        <div class="device-row">
+          <img src="assets/images/mockup-tablet.png" alt="מדריך בטאבלט">
+          <img src="assets/images/mockup-phone.png" alt="מדריך בנייד">
+        </div>
+        <img class="stamp" src="assets/images/montenegro-stamp.png" alt="" aria-hidden="true">
+      </div>
+      <div class="container intro-copy reveal">
+        <p>תכינו לעצמכם משהו חם לשתות, תתמקמו בנוח ותנו לעצמכם רגע להיכנס למסלול שייקח את הטיול שלכם למונטנגרו כמה רמות קדימה.</p>
+        <p>זה לא עוד סתם מדריך זה מסלול מדויק וחכם, שנבנה מתוך חוויה אמיתית שלי, עם הבנה ברורה של מה באמת שווה לראות ואיך להספיק את זה בדרך הכי נעימה, יעילה ומרגיעה שיש.</p>
+        <p>במקום לבזבז שעות על תכנון, לקרוא מאות המלצות ולהתלבט על כל צעד קבלו תכנון יומי מלא של 7 ימים, הכולל נקודות עצירה, מסעדות, תצפיות ומקומות לינה מומלצים. הכל מסודר במדריך אחד.</p>
       </div>
     </section>
 
-    <section class="section section-promise curve-top curve-bottom">
-      <div class="container promise-panel">
-        <h2 class="reveal promise-title">Digital Travel — המסלול המלא לשבעה<br>ימים מלאים במונטנגרו</h2>
-        <p class="reveal promise-paragraph">
-          במקום לבזבז שעות על תכנון, לקרוא מאות המלצות ולהתלבט על כל צעד —
-          קבלו תכנון יומי מלא של <span class="promise-highlight">7 ימים מלאים</span> עם נקודות עצירה, מסעדות, תצפיות,
-          מקומות לינה מומלצים וקישורים נוחים. הכול מסודר במדריך אחד ברור.
-        </p>
-        <div class="promise-divider reveal"></div>
-        <p class="reveal promise-paragraph">
-          זה לא עוד סתם מדריך — זה מסלול מדויק וחכם, שנבנה מתוך
-          <span class="promise-highlight">חוויה אמיתית שלי</span>, עם הבנה ברורה של מה באמת שווה לראות ואיך להספיק את זה בצורה נעימה, יעילה ומרגשת.
-        </p>
-        <div class="promise-divider reveal"></div>
-        <p class="reveal promise-paragraph">
-          מתאים למשפחות, זוגות או קבוצות — אם אתם רוצים לטייל בלי לדלג על המקומות שבאמת שווה לראות,
-          וליהנות מהמסלול שתוכנן כמו שצריך —
-          <span class="promise-highlight">זה בדיוק בשבילכם.</span>
-        </p>
-      </div>
-    </section>
-
-    <!-- ============ SECTION: קצת עליי ============ -->
-    <section class="section section-about-me" id="about-me">
-      <div class="about-me-blob about-me-blob--1" aria-hidden="true"></div>
-      <div class="about-me-blob about-me-blob--2" aria-hidden="true"></div>
-      <div class="container about-me-inner">
-        <div class="about-me-grid">
-
-          <!-- עמודה ויזואלית — תמונה -->
-          <div class="about-me-visual reveal">
-            <div class="about-me-img-wrap">
-              <img
-                src="assets/images/shiraz.png"
-                alt="שירז מור"
-                class="about-me-img"
-                loading="lazy"
-                decoding="async"
-              >
-              <div class="about-me-img-overlay" aria-hidden="true"></div>
-            </div>
-            <!-- כרטיסיות סטטיסטיקה צפות -->
-            <div class="about-me-stat about-me-stat--top glass-card tilt-card">
-              <strong>7</strong>
-              <span>ימי טיול<br>מלאים</span>
-            </div>
-            <div class="about-me-stat about-me-stat--bottom glass-card tilt-card">
-              <strong>100%</strong>
-              <span>חוויה<br>אישית</span>
-            </div>
-          </div>
-
-          <!-- עמודת תוכן -->
-          <div class="about-me-content reveal">
-            <span class="about-me-eyebrow">קצת עליי</span>
-            <h2 class="about-me-title">
-              שירז מור<br>
-              <span class="wild-gradient-text">מייסדת Digital Travel</span>
-            </h2>
-            <p class="about-me-lead">
-              שמי שירז, ואני אוהבת לטייל — אבל יותר מזה, אני אוהבת לתכנן טיולים בצורה חכמה. כשחזרתי ממונטנגרו עם ראש מלא מקומות, טיפים ומסלולים שאין בשום מדריך רגיל, הבנתי שאני חייבת לשתף את זה. כך נולד Digital Travel — מדריך שנבנה מתוך ניסיון אמיתי בשטח, צעד אחר צעד.
-            </p>
-
-            <div class="about-me-features">
-              <div class="about-me-feature">
-                <div class="about-me-feature-icon about-me-feature-icon--gold" aria-hidden="true">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-                </div>
-                <div>
-                  <h3>ביקרתי בכל מקום בעצמי</h3>
-                  <p>אין המלצות מיד שנייה — כל נקודה במדריך נבדקה, נחוותה ונבחרה אישית.</p>
-                </div>
-              </div>
-
-              <div class="about-me-feature">
-                <div class="about-me-feature-icon about-me-feature-icon--green" aria-hidden="true">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                </div>
-                <div>
-                  <h3>טיפים שלא תמצאו בגוגל</h3>
-                  <p>חניות, כניסות בתשלום, שעות עומס, מה שבאמת שווה — מהשטח, לא מהאינטרנט.</p>
-                </div>
-              </div>
-
-              <div class="about-me-feature">
-                <div class="about-me-feature-icon about-me-feature-icon--rose" aria-hidden="true">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                </div>
-                <div>
-                  <h3>נבנה מאהבה אמיתית לטיולים</h3>
-                  <p>זה לא מוצר — זו החוויה שלי, ארוזה בשבילכם, כי רציתי שגם אתם תרגישו מה שהרגשתי שם.</p>
-                </div>
-              </div>
-
-              <div class="about-me-feature">
-                <div class="about-me-feature-icon about-me-feature-icon--sand" aria-hidden="true">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.81-.81a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 17z"/></svg>
-                </div>
-                <div>
-                  <h3>תמיד זמינה לשאלות</h3>
-                  <p>לפני הרכישה, אחרי הרכישה, ממש לפני הטיסה — אני כאן. אתם לא לבד בתכנון.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-pain">
-      <div class="container pain-inner">
-        <div class="pain-header">
-          <h2 class="reveal pain-title" id="pain-heading">
-            הגעתם עד מונטנגרו <span class="pain-title-accent">אבל מרגישים שפספסתם</span> את המקומות הכי שווים?
-          </h2>
-        </div>
-        <div class="pain-grid reveal-stagger">
-          <article class="glass-card tilt-card pain-card pain-card-shine">
-            <div class="pain-emoji" aria-hidden="true">😰</div>
-            <h3>שורפים שעות על תכנון</h3>
-            <p>ועדיין לא בטוחים אם זה באמת המסלול הכי טוב</p>
-          </article>
-          <article class="glass-card tilt-card pain-card pain-card-shine">
-            <div class="pain-emoji" aria-hidden="true">😵</div>
-            <h3>עברתם עשרות פוסטים</h3>
-            <p>והמלצות אבל הכול מרגיש מבולגן ולא ברור</p>
-          </article>
-          <article class="glass-card tilt-card pain-card pain-card-shine">
-            <div class="pain-emoji" aria-hidden="true">😤</div>
-            <h3>מתלבטים על כל צעד</h3>
-            <p>במקום ליהנות מהטיול באמת</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-audience">
-      <div class="container audience-inner">
-        <header class="audience-head">
-          <p class="audience-eyebrow reveal">
-            <span class="audience-eyebrow-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </span>
-            למי המדריך מתאים?
-          </p>
-          <h2 class="reveal audience-title">
-            המדריך מתאים <span class="wild-gradient-text wild-gradient-text--title">בדיוק לכם</span>
-          </h2>
-        </header>
-
-        <div class="audience-grid reveal-stagger">
-          <article class="audience-card">
-            <div class="audience-card-icon-wrap audience-card-icon-wrap--a" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="audience-card-svg"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </div>
-            <h3>זוגות</h3>
-            <p>רוצים לטייל ביחד בלי לדלג על המקומות ששווים לראות</p>
-          </article>
-          <article class="audience-card">
-            <div class="audience-card-icon-wrap audience-card-icon-wrap--b" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="audience-card-svg"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </div>
-            <h3>משפחות</h3>
-            <p>מסלול מתוכנן שמתאים גם לילדים עם קצב נעים ונוח</p>
-          </article>
-          <article class="audience-card">
-            <div class="audience-card-icon-wrap audience-card-icon-wrap--c" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="audience-card-svg"><path d="M18 21a8 8 0 0 0-16 0"/><circle cx="10" cy="8" r="5"/><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"/></svg>
-            </div>
-            <h3>קבוצות</h3>
-            <p>רוצים ליהנות ממסלול ברור שכולם יכולים לעקוב אחריו</p>
-          </article>
-          <article class="audience-card">
-            <div class="audience-card-icon-wrap audience-card-icon-wrap--d" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="audience-card-svg"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
-            </div>
-            <h3>מטיילים עצמאיים</h3>
-            <p>רוצים מסלול ברור וחיסכון בזמן — בלי להתחיל מאפס בכל בוקר</p>
-          </article>
-        </div>
-
-        <p class="reveal audience-footnote">תכינו לעצמכם משהו חם לשתות, תתמקמו בנוח, ותנו לעצמכם רגע להיכנס למסלול שייקח את הטיול שלכם כמה רמות קדימה.</p>
-        <div class="audience-cta-wrap reveal">
-          <a href="#purchase" class="btn magnetic">לרכישה מהירה לחצו כאן</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Path line reveal tuning (desktop): data-path-desktop-start/end = 0–1 along raw section scroll (0=start earlier, 1=later). -->
-    <section class="section section-whats-inside" id="whats-inside" data-path-desktop-start="0.5" data-path-desktop-end="0.92">
+    <section class="section canva-pain reveal">
       <div class="container">
-        <h2 class="reveal">מה מחכה לכם במדריך?</h2>
-
-        <div class="path-desktop">
-          <div class="path-col path-col-left">
-            <div class="path-station-slot">
-              <div class="path-station-card glass-card tilt-card reveal">
-                <div class="station-num">02</div>
-                <h3 class="station-title">לו״ז מסודר ל-7 ימים מלאים</h3>
-                <p class="station-desc">בלי לחץ להספיק הכול ביום אחד</p>
-              </div>
-            </div>
-            <div class="path-station-slot">
-              <div class="path-station-card glass-card tilt-card reveal">
-                <div class="station-num">04</div>
-                <h3 class="station-title">טיפים שצריך לדעת על כל מקום</h3>
-                <p class="station-desc">כניסות בתשלום, חניות ועוד</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="path-col path-col-center">
-            <!-- Clip-path reveal (same idea as mobile): dashed S-path stays dashed; no strokeDasharray=length trick. -->
-            <svg class="path-svg-desktop" viewBox="0 0 100 460" preserveAspectRatio="xMidYMid meet" data-clip-max="460" aria-hidden="true">
-              <defs>
-                <clipPath id="desktop-path-clip">
-                  <rect id="desktop-path-clip-rect" x="0" y="0" width="100" height="0"/>
-                </clipPath>
-              </defs>
-              <g clip-path="url(#desktop-path-clip)">
-                <path id="desktop-path-line"
-                d="M 80,40 H 20 C 8,40 8,140 20,140 H 80 C 92,140 92,240 80,240 H 20 C 8,240 8,340 20,340 H 80"
-                fill="none" stroke="#c8a44e" stroke-width="3" stroke-dasharray="14 10" stroke-linecap="round"/>
-              </g>
-              <circle cx="80" cy="40" r="16" fill="#c8a44e"/>
-              <text x="80" y="46" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="Heebo,sans-serif">1</text>
-              <circle cx="20" cy="140" r="16" fill="#c8a44e"/>
-              <text x="20" y="146" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="Heebo,sans-serif">2</text>
-              <circle cx="80" cy="240" r="16" fill="#c8a44e"/>
-              <text x="80" y="246" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="Heebo,sans-serif">3</text>
-              <circle cx="20" cy="340" r="16" fill="#c8a44e"/>
-              <text x="20" y="346" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="Heebo,sans-serif">4</text>
-              <text x="80" y="440" text-anchor="middle" font-size="28" opacity="0.9">✈</text>
-            </svg>
-          </div>
-
-          <div class="path-col path-col-right">
-            <div class="path-station-slot">
-              <div class="path-station-card glass-card tilt-card reveal">
-                <div class="station-num">01</div>
-                <h3 class="station-title">מפה מסודרת עם מסלול יומי מפורט</h3>
-                <p class="station-desc">דרך Google Maps</p>
-              </div>
-            </div>
-            <div class="path-station-slot">
-              <div class="path-station-card glass-card tilt-card reveal">
-                <div class="station-num">03</div>
-                <h3 class="station-title">קישורים למסעדות, מלונות ואטרקציות</h3>
-                <p class="station-desc">קישורים וניווטים מהירים</p>
-              </div>
-            </div>
-          </div>
+        <h2 class="section-title">איך נדע אם המדריך בשבילך?</h2>
+        <div class="pain-grid">
+          <article class="pain-card"><h3>אתם שורפים שעות על תכנון</h3><p>לחסוך את זמן החיפוש המתיש ולקבל הכול מסודר במקום אחד.</p></article>
+          <article class="pain-card"><h3>רוצים להגיע לכל נקודה בביטחון מלא</h3><p>לדעת בדיוק איפה לחנות, מאיפה נכנסים ומה אסור לפספס.</p></article>
+          <article class="pain-card"><h3>למי שרוצה לחוות את מונטנגרו ב-100%</h3><p>לראות את המקומות הכי יפים ולחזור עם תחושה שמיציתם עד הסוף.</p></article>
+          <article class="pain-card"><h3>למי שרוצה לחסוך כסף על טעויות</h3><p>להימנע מהוצאות מיותרות על תיירים וממסלולים לא יעילים.</p></article>
         </div>
-
-        <div class="path-mobile">
-          <div class="path-mobile-inner">
-            <!-- Clip only the dashed line; station circles / text / plane sit above (same pattern as desktop). data-clip-max = viewBox height. -->
-            <svg class="path-svg-mobile" viewBox="0 0 60 880" preserveAspectRatio="xMidYMid meet" data-clip-max="880" aria-hidden="true">
-              <defs>
-                <clipPath id="mobile-path-clip">
-                  <rect id="mobile-path-clip-rect" x="0" y="0" width="60" height="0"/>
-                </clipPath>
-              </defs>
-              <g clip-path="url(#mobile-path-clip)">
-                <line id="mobile-path-line"
-                  x1="30" y1="28" x2="30" y2="842"
-                  stroke="#c8a44e" stroke-width="3" stroke-dasharray="14 10" stroke-linecap="round"/>
-              </g>
-              <circle cx="30" cy="35" r="16" fill="#c8a44e"/>
-              <text x="30" y="41" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="Heebo,sans-serif">1</text>
-              <circle cx="30" cy="255" r="16" fill="#c8a44e"/>
-              <text x="30" y="261" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="Heebo,sans-serif">2</text>
-              <circle cx="30" cy="450" r="16" fill="#c8a44e"/>
-              <text x="30" y="456" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="Heebo,sans-serif">3</text>
-              <circle cx="30" cy="665" r="16" fill="#c8a44e"/>
-              <text x="30" y="671" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="Heebo,sans-serif">4</text>
-              <text x="30" y="856" text-anchor="middle" font-size="24" opacity="0.9">✈</text>
-            </svg>
-            <div class="path-mobile-cards">
-              <div class="path-station-card glass-card tilt-card reveal">
-                <div class="station-num">01</div>
-                <h3 class="station-title">מפה מסודרת עם מסלול יומי מפורט</h3>
-                <p class="station-desc">דרך Google Maps</p>
-              </div>
-              <div class="path-station-card glass-card tilt-card reveal">
-                <div class="station-num">02</div>
-                <h3 class="station-title">לו״ז מסודר ל-7 ימים מלאים</h3>
-                <p class="station-desc">בלי לחץ להספיק הכול ביום אחד</p>
-              </div>
-              <div class="path-station-card glass-card tilt-card reveal">
-                <div class="station-num">03</div>
-                <h3 class="station-title">קישורים למסעדות, מלונות ואטרקציות</h3>
-                <p class="station-desc">קישורים וניווטים מהירים</p>
-              </div>
-              <div class="path-station-card glass-card tilt-card reveal">
-                <div class="station-num">04</div>
-                <h3 class="station-title">טיפים שצריך לדעת על כל מקום</h3>
-                <p class="station-desc">כניסות בתשלום, חניות ועוד</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <p class="path-end-text font-secondary-he reveal">עכשיו אתם מוכנים לטיול!</p>
       </div>
     </section>
 
-    <section class="section section-parallax" id="travel-ready">
-      <div class="parallax-bg" role="img" aria-label="אגם בהרים עם קשת בשמיים"></div>
-      <div class="container section-parallax-inner">
-        <h2 class="reveal">עכשיו אתם מוכנים לטיול!</h2>
-        <p class="reveal">כל התמונות כאן צולמו במקומות שביקרתי בהם בעצמי — כולם מחכים לכם בתוך המדריך עם הוראות הגעה ברורות.</p>
+    <section id="audience" class="section canva-audience reveal">
+      <div class="container">
+        <h2 class="section-title">למי המדריך מתאים?</h2>
+        <div class="audience-grid-simple">
+          <article><h3>זוגות</h3><p>לחופשה זוגית פוטוגנית, זורמת ונטולת דאגות.</p></article>
+          <article><h3>קבוצות</h3><p>מסלול ברור שמתאים לקצב של כולם בלי בלגן.</p></article>
+          <article><h3>משפחות</h3><p>כולל נקודות שמתאימות גם לילדים עם קצב נעים.</p></article>
+          <article><h3>מטיילים עצמאיים</h3><p>מדריך פרקטי שנותן סדר וביטחון מהיום הראשון.</p></article>
+        </div>
+        <a href="#purchase" class="btn cta-main">אני רוצה את המסלול הדיגיטלי!</a>
+      </div>
+    </section>
+
+    <section class="section canva-path reveal">
+      <div class="container">
+        <h2 class="section-title">מה מחכה לכם במדריך?</h2>
+        <img src="assets/images/guide-path-overview.png" alt="מה מחכה לכם במדריך">
+      </div>
+    </section>
+
+    <section id="canva-end" class="section canva-author">
+      <div class="container author-grid reveal">
+        <div>
+          <h2 class="section-title">עדיין לא הכרנו</h2>
+          <p>היי, נעים מאוד, אני שירז סנקר מור. בת 28, נשואה באושר. מאז שאני ילדה אני אוהבת לטייל, לצלם ולשתף חוויות מהדרך.</p>
+          <p>אחרי שחוויתי בעצמי כמה תכנון טיול יכול להיות מבלבל ומפוזר, יצרתי מסלולים דיגיטליים שיעזרו לכם לטייל חכם יותר וליהנות בראש שקט.</p>
+          <p>כך נולד Digital Travel - מסלולים מדויקים ומעוצבים שמרכזים את כל מה שצריך במקום אחד.</p>
+        </div>
+        <div class="author-media">
+          <img src="assets/images/shiraz-portrait-bw.png" alt="שירז סנקר">
+          <img src="assets/images/digitaltravel-logo-signature.png" alt="חתימה" class="signature">
+        </div>
+      </div>
+    </section>
+
+    <section class="section canva-guide reveal">
+      <div class="container">
+        <h2 class="section-title">בטח הייתם רוצים להיכנס לתוך המדריך</h2>
+        <img src="assets/images/guide-spread.jpeg" alt="דוגמה מתוך המדריך">
+        <p class="pdf-line">המדריך מגיע בקובץ PDF</p>
       </div>
     </section>
 
     <section id="gallery" class="section section-gallery">
       <div class="container">
         <h2 class="reveal">הצצה קטנה לנופים שמחכים לכם..</h2>
-        <div class="masonry">
-          <img class="reveal" src="assets/images/gallery-lake-rowboats-wooden-dock.jpg" alt="אגם וסירות עץ" loading="lazy" decoding="async">
-          <img class="reveal" src="assets/images/gallery-kotor-bay-viewpoint-deck.jpg" alt="תצפית קוטור" loading="lazy" decoding="async">
-          <img class="reveal" src="assets/images/gallery-mountain-lake-rainbow-sky.jpg" alt="אגם עם קשת" loading="lazy" decoding="async">
-          <img class="reveal" src="assets/images/gallery-sveti-stefan-woman-viewpoint.jpg" alt="סווטי סטפן תצפית" loading="lazy" decoding="async">
-          <img class="reveal" src="assets/images/gallery-durdevica-tara-bridge-canyon.jpg" alt="גשר טארה" loading="lazy" decoding="async">
-          <img class="reveal" src="assets/images/gallery-rocky-cliffs-turquoise-inlet.jpg" alt="מפרץ טורקיז" loading="lazy" decoding="async">
-          <img class="reveal" src="assets/images/gallery-coastal-promenade-palms-dining.jpg" alt="טיילת חוף" loading="lazy" decoding="async">
-          <img class="reveal" src="assets/images/gallery-waterfall-wide-person-on-rock.jpg" alt="מפל רחב" loading="lazy" decoding="async">
+        <div class="masonry reveal-stagger">
+          <img src="assets/images/gallery-01.jpeg" alt="נוף מונטנגרו">
+          <img src="assets/images/gallery-02.jpeg" alt="שקיעה">
+          <img src="assets/images/gallery-03.jpeg" alt="אגם הררי">
+          <img src="assets/images/gallery-04.jpeg" alt="סמטאות עתיקות">
+          <img src="assets/images/gallery-05.jpeg" alt="תצפית הרים">
+          <img src="assets/images/gallery-06.jpeg" alt="מפל">
+          <img src="assets/images/gallery-07.jpeg" alt="מים זורמים">
+          <img src="assets/images/gallery-08.jpeg" alt="עמק ירוק">
+          <img src="assets/images/gallery-09.jpeg" alt="עמק ירוק נוסף">
+          <img src="assets/images/gallery-10.jpeg" alt="אגם בין הרים">
+          <img src="assets/images/gallery-11.jpeg" alt="מצוקי חוף">
         </div>
       </div>
     </section>
 
     <section class="section-wild-showcase" aria-labelledby="wild-showcase-title">
       <div class="wild-showcase-media reveal">
-        <img
-          src="assets/images/gallery-mountain-lake-rainbow-sky.jpg"
-          alt=""
-          class="wild-showcase-img"
-          width="1200"
-          height="630"
-          decoding="async"
-        >
+        <img src="assets/images/island-wide.jpg" alt="" class="wild-showcase-img" width="1200" height="630" decoding="async">
         <div class="wild-showcase-scrim" aria-hidden="true"></div>
       </div>
       <div class="wild-showcase-inner container">
@@ -507,17 +214,10 @@
 
     <section id="guide-preview" class="section section-book">
       <div class="container">
-        <h2 class="reveal">בטח הייתם רוצים להיכנס קצת לתוך המדריך</h2>
-        <p class="book-subtitle font-secondary-he reveal">דוגמא ליום הראשון</p>
+        <h2 class="reveal">עוד הצצה לתוך המדריך</h2>
         <article class="book-mockup reveal">
-          <div class="book-page">
-            <img src="assets/images/guide-intro-welcome-mockup-mobile-hebrew.png" alt="דוגמה נוספת מהמדריך">
-          </div>
-          <div class="book-page">
-            <img src="assets/images/guide-day1-itinerary-page-budva-tivat-hebrew.jpg" alt="דוגמה לעמוד מהמדריך">
-            <p style="text-align: center;">המדריך מגיע בקובץ PDF</p>
-            <span class="pdf-badge">PDF</span>
-          </div>
+          <div class="book-page"><img src="assets/images/mockup-tablet.png" alt="דוגמה מהמדריך"></div>
+          <div class="book-page"><img src="assets/images/guide-spread.jpeg" alt="עמוד מהמדריך"><p>המדריך מגיע בקובץ PDF</p><span class="pdf-badge">PDF</span></div>
         </article>
       </div>
     </section>
@@ -525,7 +225,7 @@
     <section class="section section-social">
       <div class="container">
         <h2 class="reveal">למה שווה לרכוש את המסלול שלי?</h2>
-        <p class="reveal">אחרי שביקרתי במונטנגרו, טיילתי, בדקתי, טעמתי ועצרתי בכל נקודה חשובה — ריכזתי הכול למדריך פרקטי שמבוסס חוויה אישית אמיתית.</p>
+        <p class="reveal">אחרי שביקרתי במונטנגרו, בדקתי, טעמתי ועצרתי בכל נקודה חשובה ריכזתי הכול למדריך פרקטי שמבוסס חוויה אישית אמיתית.</p>
         <span class="pill reveal">המדריך מגיע בקובץ PDF</span>
       </div>
     </section>
@@ -535,163 +235,57 @@
         <header class="simple-process-header">
           <p class="simple-process-eyebrow reveal">תהליך פשוט</p>
           <h2 class="reveal">איך מקבלים את המדריך?</h2>
-          <p class="simple-process-lead reveal">משלב הרכישה ועד קבלת הקובץ במייל — הכול מהיר, ברור ובטוח.</p>
+          <p class="simple-process-lead reveal">משלב הרכישה ועד קבלת הקובץ במייל הכול מהיר, ברור ובטוח.</p>
         </header>
-
         <div class="simple-process-grid">
           <div class="simple-process-line" aria-hidden="true"></div>
-
-          <article class="simple-process-step reveal">
-            <div class="simple-process-icon-wrap simple-process-icon--gold">
-              <span class="simple-process-icon" aria-hidden="true">🔍</span>
-            </div>
-            <span class="simple-process-badge simple-process-badge--gold">1</span>
-            <h3>בוחרים ולוחצים על רכישה מהירה</h3>
-            <p>בוחרים את המסלול לשבעה ימים במונטנגרו, עוברים לעמוד הרכישה ולוחצים על הכפתור — בלי סיבוכים.</p>
-          </article>
-
-          <article class="simple-process-step reveal">
-            <div class="simple-process-icon-wrap simple-process-icon--ocean">
-              <span class="simple-process-icon" aria-hidden="true">💳</span>
-            </div>
-            <span class="simple-process-badge simple-process-badge--ocean">2</span>
-            <h3>ממלאים פרטים ומשלמים</h3>
-            <p>מזינים את הפרטים האישיים ומבצעים תשלום מאובטח. אישור מגיע מיד לאחר השלמת העסקה.</p>
-          </article>
-
-          <article class="simple-process-step reveal">
-            <div class="simple-process-icon-wrap simple-process-icon--forest">
-              <span class="simple-process-icon" aria-hidden="true">📧</span>
-            </div>
-            <span class="simple-process-badge simple-process-badge--forest">3</span>
-            <h3>מקבלים את המדריך במייל</h3>
-            <p>תוך עד 24 שעות מקבלים קובץ PDF מלא — מפות, לו״ז, קישורים וטיפים — ויוצאים לטיול בראש שקט.</p>
-          </article>
+          <article class="simple-process-step reveal"><div class="simple-process-icon-wrap simple-process-icon--gold"><span class="simple-process-icon">🔍</span></div><span class="simple-process-badge simple-process-badge--gold">1</span><h3>בוחרים ולוחצים על רכישה מהירה</h3><p>בוחרים את המסלול לשבעה ימים וממשיכים לתשלום.</p></article>
+          <article class="simple-process-step reveal"><div class="simple-process-icon-wrap simple-process-icon--ocean"><span class="simple-process-icon">💳</span></div><span class="simple-process-badge simple-process-badge--ocean">2</span><h3>ממלאים פרטים ומשלמים</h3><p>מזינים פרטים ומבצעים תשלום מאובטח.</p></article>
+          <article class="simple-process-step reveal"><div class="simple-process-icon-wrap simple-process-icon--forest"><span class="simple-process-icon">📧</span></div><span class="simple-process-badge simple-process-badge--forest">3</span><h3>מקבלים את המדריך במייל</h3><p>עד 24 שעות המדריך המלא נשלח אליכם.</p></article>
         </div>
       </div>
     </section>
 
     <section class="section section-testimonials-ds3" id="testimonials">
-      <div class="testimonials-ds3-orb testimonials-ds3-orb--1" aria-hidden="true"></div>
-      <div class="testimonials-ds3-orb testimonials-ds3-orb--2" aria-hidden="true"></div>
-
       <div class="container testimonials-ds3-inner">
         <header class="testimonials-ds3-head">
           <p class="testimonials-ds3-eyebrow reveal">מה אומרים הלקוחות</p>
-          <h2 class="reveal testimonials-ds3-title">
-            סיפורים <span class="wild-gradient-text wild-gradient-text--title">ממטיילים</span> שכבר קנו
-          </h2>
-          <p class="testimonials-ds3-lead reveal">לא רק אנחנו אומרים — הנה חוויות אמיתיות ממי שכבר השתמש במדריך.</p>
+          <h2 class="reveal testimonials-ds3-title">סיפורים <span class="wild-gradient-text wild-gradient-text--title">ממטיילים</span> שכבר קנו</h2>
         </header>
-
         <div class="testimonials-ds3-grid reveal-stagger">
-          <article class="testimonial-ds3-card guide-card-ds7">
-            <div class="guide-card-ds7-shimmer" aria-hidden="true"></div>
-            <div class="testimonial-ds3-card-body">
-              <p class="testimonial-ds3-stars" aria-label="5 מתוך 5 כוכבים">★★★★★</p>
-              <blockquote class="testimonial-ds3-quote">״המדריך חסך לנו שעות של חיפושים. קיבלנו מסלול ברור לכל יום במונטנגרו — ממש מרגישים שמישהו כבר עשה את העבודה בשבילנו.״</blockquote>
-              <footer class="testimonial-ds3-footer">
-                <span class="testimonial-ds3-avatar testimonial-ds3-avatar--sand">ר׳</span>
-                <div>
-                  <div class="testimonial-ds3-name">רוני א.</div>
-                  <div class="testimonial-ds3-meta">רכשה את המסלול המלא</div>
-                </div>
-              </footer>
-            </div>
-          </article>
-
-          <article class="testimonial-ds3-card guide-card-ds7">
-            <div class="guide-card-ds7-shimmer" aria-hidden="true"></div>
-            <div class="testimonial-ds3-card-body">
-              <p class="testimonial-ds3-stars" aria-label="5 מתוך 5 כוכבים">★★★★★</p>
-              <blockquote class="testimonial-ds3-quote">״הקישורים למסעדות ולחניות עבדו מצוין. הטיפים לפני כל עצירה חסכו לנו זמן ועצבים בדרך.״</blockquote>
-              <footer class="testimonial-ds3-footer">
-                <span class="testimonial-ds3-avatar testimonial-ds3-avatar--ocean">מ׳</span>
-                <div>
-                  <div class="testimonial-ds3-name">מתן ויעל</div>
-                  <div class="testimonial-ds3-meta">טיילו כזוג</div>
-                </div>
-              </footer>
-            </div>
-          </article>
-
-          <article class="testimonial-ds3-card guide-card-ds7">
-            <div class="guide-card-ds7-shimmer" aria-hidden="true"></div>
-            <div class="testimonial-ds3-card-body">
-              <p class="testimonial-ds3-stars" aria-label="5 מתוך 5 כוכבים">★★★★★</p>
-              <blockquote class="testimonial-ds3-quote">״פעם ראשונה במונטנגרו עם ילדים — הכול היה מסודר, מהמפה ועד ההמלצות לכל אזור. ממליצה בחום!״</blockquote>
-              <footer class="testimonial-ds3-footer">
-                <span class="testimonial-ds3-avatar testimonial-ds3-avatar--forest">ש׳</span>
-                <div>
-                  <div class="testimonial-ds3-name">שירה ל.</div>
-                  <div class="testimonial-ds3-meta">משפחה עם ילדים</div>
-                </div>
-              </footer>
-            </div>
-          </article>
-
-          <article class="testimonial-ds3-card guide-card-ds7">
-            <div class="guide-card-ds7-shimmer" aria-hidden="true"></div>
-            <div class="testimonial-ds3-card-body">
-              <p class="testimonial-ds3-stars" aria-label="5 מתוך 5 כוכבים">★★★★★</p>
-              <blockquote class="testimonial-ds3-quote">״הורדתי את ה־PDF ויצאתי לדרך. הרבה יותר רגוע בלי להחליט כל בוקר מאפס איפה נוסעים.״</blockquote>
-              <footer class="testimonial-ds3-footer">
-                <span class="testimonial-ds3-avatar testimonial-ds3-avatar--rose">א׳</span>
-                <div>
-                  <div class="testimonial-ds3-name">אלון ב.</div>
-                  <div class="testimonial-ds3-meta">מטייל עצמאי</div>
-                </div>
-              </footer>
-            </div>
-          </article>
-
-          <article class="testimonial-ds3-card guide-card-ds7 testimonial-ds3-card--wide">
-            <div class="guide-card-ds7-shimmer" aria-hidden="true"></div>
-            <div class="testimonial-ds3-card-body">
-              <p class="testimonial-ds3-stars" aria-label="5 מתוך 5 כוכבים">★★★★★</p>
-              <blockquote class="testimonial-ds3-quote">״קנינו לפני החופשה ותוך כמה שעות כבר קיבלנו את המייל עם המדריך. תוכן עשיר ושירות מהיר — בדיוק מה שרצינו.״</blockquote>
-              <footer class="testimonial-ds3-footer">
-                <span class="testimonial-ds3-avatar testimonial-ds3-avatar--purple">נ׳</span>
-                <div>
-                  <div class="testimonial-ds3-name">נועה ודני</div>
-                  <div class="testimonial-ds3-meta">קראו את המדריך לפני הטיסה</div>
-                </div>
-              </footer>
-            </div>
-          </article>
+          <article class="testimonial-ds3-card guide-card-ds7"><div class="testimonial-ds3-card-body"><p class="testimonial-ds3-stars">★★★★★</p><blockquote class="testimonial-ds3-quote">המדריך חסך לנו שעות של חיפושים וקיבלנו מסלול ברור לכל יום.</blockquote></div></article>
+          <article class="testimonial-ds3-card guide-card-ds7"><div class="testimonial-ds3-card-body"><p class="testimonial-ds3-stars">★★★★★</p><blockquote class="testimonial-ds3-quote">הקישורים למסעדות ולחניות עבדו מצוין והכול היה מדויק.</blockquote></div></article>
+          <article class="testimonial-ds3-card guide-card-ds7"><div class="testimonial-ds3-card-body"><p class="testimonial-ds3-stars">★★★★★</p><blockquote class="testimonial-ds3-quote">פעם ראשונה במונטנגרו עם ילדים, הכול היה מסודר ונוח.</blockquote></div></article>
         </div>
       </div>
     </section>
 
     <section class="section section-features">
       <div class="container features-row reveal-stagger">
-        <article>🗓️ לו״ז מסודר ל-7 ימים מלאים</article>
-        <article>🔗 קישורים לאטרקציות ועוד</article>
-        <article>🗺️ מפה עם מסלול מפורט לכל יום</article>
-        <article>💡 טיפים שצריך לדעת בכל יום</article>
+        <article>🗓️ לו"ז מסודר ל-7 ימים מלאים</article>
+        <article>🔗 קישורים לאטרקציות</article>
+        <article>🗺️ מפה עם מסלול מפורט</article>
+        <article>💡 טיפים שחשוב לדעת</article>
       </div>
     </section>
 
     <section id="purchase" class="section section-purchase">
       <div class="container purchase-grid">
         <article class="price-card reveal">
-          <h2>Digital Travel — המסלול המלא לשבעה ימים מלאים במונטנגרו</h2>
+          <h2>Digital Travel - המסלול המלא לשבעה ימים מלאים במונטנגרו</h2>
           <h3>המדריך למונטנגרו</h3>
-          <p class="price-old"><span data-counter="239">0</span>₪</p>
-          <p class="price-new"><span data-counter="99">0</span>₪</p>
-          <p class="sale">במבצע לזמן מוגבל!!</p>
+          <p class="price-old">239₪</p>
+          <p class="price-new">99₪</p>
+          <p class="sale">במבצע לזמן מוגבל</p>
         </article>
         <form class="form-card reveal">
           <h3>המדריך למונטנגרו</h3>
           <label>שם פרטי *<input required type="text" placeholder="לדוגמא: שירז"></label>
           <label>שם משפחה *<input required type="text" placeholder="לדוגמא: מור"></label>
-          <label>כתובת דוא״ל *<input required type="email" placeholder="your@email.com"></label>
+          <label>כתובת דוא"ל *<input required type="email" placeholder="your@email.com"></label>
           <label>מספר טלפון נייד *<input required type="tel" placeholder="05X-XXXXXXX"></label>
-          <label class="agree">
-            <input required type="checkbox">
-            קראתי והבנתי את תנאי השימוש ואת מדיניות הרכישה, ומאשר/ת מוצר דיגיטלי ללא החזר כספי.
-          </label>
-          <button type="submit" class="btn magnetic">לרכישה</button>
+          <label class="agree"><input required type="checkbox">קראתי והבנתי את תנאי השימוש ואת מדיניות הרכישה, ומאשר/ת מוצר דיגיטלי ללא החזר כספי.</label>
+          <button type="submit" class="btn cta-main">לרכישה</button>
         </form>
       </div>
     </section>
@@ -736,9 +330,7 @@
           </ul>
         </section>
       </div>
-      <div class="footer-bottom">
-        <p>© 2026 Shiraz Sanker. All rights reserved.</p>
-      </div>
+      <div class="footer-bottom"><p>© 2026 Shiraz Sanker. All rights reserved.</p></div>
     </div>
   </footer>
 
