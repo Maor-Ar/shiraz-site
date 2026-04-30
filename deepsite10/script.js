@@ -1,4 +1,4 @@
-﻿const qs = (selector, root = document) => root.querySelector(selector);
+const qs = (selector, root = document) => root.querySelector(selector);
 const qsa = (selector, root = document) => [...root.querySelectorAll(selector)];
 
 function initNavbar() {
@@ -27,38 +27,11 @@ function initMenu() {
 }
 
 function initReveal() {
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const items = qsa('.reveal, .reveal-scale');
   const groups = qsa('.reveal-stagger');
-
-  if (reduceMotion) {
-    items.forEach((el) => el.classList.add('visible'));
-    groups.forEach((group) => [...group.children].forEach((el) => el.classList.add('visible')));
-    return;
-  }
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('visible');
-      io.unobserve(entry.target);
-    });
-  }, { root: null, threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
-
-  items.forEach((el) => io.observe(el));
-
-  groups.forEach((group) => {
-    const go = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        [...group.children].forEach((child, i) => {
-          window.setTimeout(() => child.classList.add('visible'), i * 120);
-        });
-        go.unobserve(group);
-      });
-    }, { root: null, threshold: 0.12 });
-    go.observe(group);
-  });
+  // Keep sections consistently visible across local/live environments.
+  items.forEach((el) => el.classList.add('visible'));
+  groups.forEach((group) => [...group.children].forEach((el) => el.classList.add('visible')));
 }
 
 function initFaqAccordion() {

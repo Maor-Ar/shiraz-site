@@ -1983,6 +1983,7 @@ body {
   align-items: center;
   color: #fff;
   isolation: isolate;
+  background: #2b2b2b url("assets/images/island-wide.jpg") center / cover no-repeat;
 }
 
 .hero-canva .hero-video,
@@ -2233,7 +2234,7 @@ body {
   border-radius: 20px;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 760px) {
   .device-row,
   .pain-grid,
   .audience-grid-simple,
@@ -2294,7 +2295,7 @@ body {
 
 .brand-logo-hero {
   width: clamp(260px, 58vw, 520px);
-  filter: invert(1);
+  filter: none;
 }
 
 .brand-logo-inline {
@@ -2312,12 +2313,12 @@ body {
 
 .brand-logo-title {
   width: clamp(140px, 20vw, 220px);
-  filter: invert(1);
+  filter: none;
 }
 
 .brand-logo-footer {
   width: clamp(150px, 24vw, 220px);
-  filter: invert(1);
+  filter: none;
 }
 
 .hero-inner {
