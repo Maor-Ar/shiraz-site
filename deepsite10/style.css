@@ -855,11 +855,7 @@ body {
 .path-end-text {
   text-align: center;
   margin-top: 3rem;
-<<<<<<< HEAD
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-=======
   font-size: clamp(1.3rem, 4vw, 2.8rem);
->>>>>>> d56f23d7b4e721f57248337b56d2dfc682b2b0f7
   color: #c8a44e;
 }
 
@@ -1937,7 +1933,6 @@ body {
   }
 }
 
-<<<<<<< HEAD
 /* ===== deepsite9: Canva-first layer + hybrid bridge ===== */
 :root {
   --canvas-bg: #d7d6d2;
@@ -2414,7 +2409,14 @@ body {
   .nav-links.open {
     display: flex;
   }
-=======
+
+  .nav-links a {
+    color: #171717;
+    font-size: 1rem;
+    padding: 0.35rem 0;
+  }
+}
+
 .title-hero {
   font-size: 31px;
   color: #fff8d3;
@@ -2625,5 +2627,4 @@ body {
   .about-me-stat--top { inset-inline-end: 0.5rem; }
   .about-me-stat--bottom { inset-inline-start: 0.5rem; }
   .about-me-img { height: 320px; }
->>>>>>> d56f23d7b4e721f57248337b56d2dfc682b2b0f7
 }

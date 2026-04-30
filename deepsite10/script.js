@@ -1,18 +1,9 @@
-<<<<<<< HEAD
-﻿const qs = (selector, root = document) => root.querySelector(selector);
-const qsa = (selector, root = document) => [...root.querySelectorAll(selector)];
-
-function initNavbar() {
-  const navbar = qs('#navbar');
-  if (!navbar) return;
-  const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 20);
-  window.addEventListener('scroll', onScroll, { passive: true });
-=======
 const qs = (selector, root = document) => root.querySelector(selector);
 const qsa = (selector, root = document) => [...root.querySelectorAll(selector)];
 
 function initLoader() {
   const loader = qs("#loader");
+  if (!loader) return;
   window.setTimeout(() => {
     loader.style.opacity = "0";
     loader.style.pointerEvents = "none";
@@ -26,40 +17,33 @@ function initProgressAndNavbar() {
   const onScroll = () => {
     const max = document.documentElement.scrollHeight - window.innerHeight;
     const ratio = max > 0 ? (window.scrollY / max) * 100 : 0;
-    progress.style.width = `${ratio}%`;
-    navbar.classList.toggle("scrolled", window.scrollY > 30);
+    if (progress) progress.style.width = `${ratio}%`;
+    if (navbar) navbar.classList.toggle("scrolled", window.scrollY > 30);
   };
   window.addEventListener("scroll", onScroll, { passive: true });
->>>>>>> d56f23d7b4e721f57248337b56d2dfc682b2b0f7
   onScroll();
 }
 
 function initMenu() {
-<<<<<<< HEAD
-  const toggle = qs('#menuToggle');
-  const links = qs('#navLinks');
-  if (!toggle || !links) return;
-  toggle.addEventListener('click', () => {
-    const expanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!expanded));
-    links.classList.toggle('open');
-  });
-  qsa('a', links).forEach((link) => {
-    link.addEventListener('click', () => {
-      links.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-=======
   const toggle = qs("#menuToggle");
   const links = qs("#navLinks");
+  if (!toggle || !links) return;
   toggle.addEventListener("click", () => {
     const expanded = toggle.getAttribute("aria-expanded") === "true";
     toggle.setAttribute("aria-expanded", String(!expanded));
     links.classList.toggle("open");
   });
+  qsa("a", links).forEach((link) => {
+    link.addEventListener("click", () => {
+      links.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    });
+  });
 }
 
 function initCompass() {
   const needle = qs(".compass-needle");
+  if (!needle) return;
   window.addEventListener("scroll", () => {
     needle.style.transform = `rotate(${window.scrollY * 0.5}deg)`;
   }, { passive: true });
@@ -76,7 +60,9 @@ function initCursorFollower() {
 
 function initParticles() {
   const canvas = qs("#particlesCanvas");
+  if (!canvas) return;
   const ctx = canvas.getContext("2d");
+  if (!ctx) return;
   const pointer = { x: -9999, y: -9999 };
   const particles = [];
   const count = 52;
@@ -291,45 +277,10 @@ function initTiltCards() {
     });
     card.addEventListener("mouseleave", () => {
       card.style.transform = "";
->>>>>>> d56f23d7b4e721f57248337b56d2dfc682b2b0f7
     });
   });
 }
 
-<<<<<<< HEAD
-function initReveal() {
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const items = qsa('.reveal, .reveal-scale');
-  const groups = qsa('.reveal-stagger');
-
-  if (reduceMotion) {
-    items.forEach((el) => el.classList.add('visible'));
-    groups.forEach((group) => [...group.children].forEach((el) => el.classList.add('visible')));
-    return;
-  }
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('visible');
-      io.unobserve(entry.target);
-    });
-  }, { root: null, threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
-
-  items.forEach((el) => io.observe(el));
-
-  groups.forEach((group) => {
-    const go = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        [...group.children].forEach((child, i) => {
-          window.setTimeout(() => child.classList.add('visible'), i * 120);
-        });
-        go.unobserve(group);
-      });
-    }, { root: null, threshold: 0.12 });
-    go.observe(group);
-=======
 function initMagneticButtons() {
   qsa(".magnetic").forEach((button) => {
     button.addEventListener("mousemove", (event) => {
@@ -341,27 +292,10 @@ function initMagneticButtons() {
     button.addEventListener("mouseleave", () => {
       button.style.transform = "";
     });
->>>>>>> d56f23d7b4e721f57248337b56d2dfc682b2b0f7
   });
 }
 
 function initFaqAccordion() {
-<<<<<<< HEAD
-  const cards = qsa('.faq-card');
-  cards.forEach((card) => {
-    const btn = qs('.faq-toggle', card);
-    if (!btn) return;
-    btn.addEventListener('click', () => {
-      const open = card.classList.contains('open');
-      cards.forEach((item) => {
-        item.classList.remove('open');
-        const b = qs('.faq-toggle', item);
-        b?.setAttribute('aria-expanded', 'false');
-      });
-      if (!open) {
-        card.classList.add('open');
-        btn.setAttribute('aria-expanded', 'true');
-=======
   const cards = qsa(".faq-card");
   cards.forEach((card) => {
     const toggle = qs(".faq-toggle", card);
@@ -375,30 +309,21 @@ function initFaqAccordion() {
       if (!isOpen) {
         card.classList.add("open");
         toggle.setAttribute("aria-expanded", "true");
->>>>>>> d56f23d7b4e721f57248337b56d2dfc682b2b0f7
       }
     });
   });
 }
 
-<<<<<<< HEAD
 function initForm() {
-  const form = qs('.form-card');
+  const form = qs(".form-card");
   if (!form) return;
-  form.addEventListener('submit', (event) => {
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
-    alert('תודה! הפרטים נקלטו בהצלחה.');
+    alert("תודה! הפרטים נקלטו בהצלחה.");
     form.reset();
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  initNavbar();
-  initMenu();
-  initReveal();
-  initFaqAccordion();
-  initForm();
-=======
 function initParallax() {
   const bg = qs(".parallax-bg");
   const section = qs("#travel-ready");
@@ -472,7 +397,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initTiltCards();
   initMagneticButtons();
   initFaqAccordion();
+  initForm();
   initParallax();
   initReducedMotion();
->>>>>>> d56f23d7b4e721f57248337b56d2dfc682b2b0f7
 });
