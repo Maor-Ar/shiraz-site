@@ -2248,7 +2248,7 @@ body {
   pointer-events: none;
   z-index: 3;
   filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.14));
-  transform: translateX(80px);
+  transform: translateX(112px);
 }
 
 .intro-copy {
