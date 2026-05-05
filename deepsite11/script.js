@@ -27,11 +27,71 @@ function initMenu() {
 }
 
 function initReveal() {
-  const items = qsa('.reveal, .reveal-scale');
-  const groups = qsa('.reveal-stagger');
-  // Keep sections consistently visible across local/live environments.
-  items.forEach((el) => el.classList.add('visible'));
-  groups.forEach((group) => [...group.children].forEach((el) => el.classList.add('visible')));
+  const motionReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.body.classList.add('motion-ready');
+
+  const baseTargets = qsa('.reveal, .reveal-scale, .reveal-stagger > *');
+  const autoTargets = qsa(
+    [
+      'main section h2',
+      'main section h3',
+      'main section p',
+      'main section article',
+      'main section img',
+      'main section .btn',
+      'main section form',
+      'main section label',
+      'main section .faq-card',
+      'footer .footer-grid > section',
+      'footer .footer-list li',
+      'footer .footer-bottom p'
+    ].join(', ')
+  );
+
+  const targets = [...new Set([...baseTargets, ...autoTargets])]
+    .filter((el) => !el.closest('.hero-video'));
+
+  targets.forEach((el) => el.classList.add('scroll-reveal'));
+
+  const buckets = new Map();
+  const bucketSelector = '.reveal-stagger, .pain-grid, .audience-grid-simple, .faq-list, .simple-process-grid, .testimonials-ds3-grid, .features-row, .footer-grid';
+
+  targets.forEach((el) => {
+    const bucket = el.closest(bucketSelector) || el.parentElement;
+    if (!bucket) return;
+    if (!buckets.has(bucket)) buckets.set(bucket, []);
+    buckets.get(bucket).push(el);
+  });
+
+  buckets.forEach((elements) => {
+    elements.forEach((el, index) => {
+      const delay = Math.min(index * 90, 540);
+      el.style.setProperty('--reveal-delay', `${delay}ms`);
+    });
+  });
+
+  if (motionReduce || !('IntersectionObserver' in window)) {
+    targets.forEach((el) => {
+      el.classList.add('is-visible', 'visible');
+    });
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible', 'visible');
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.14,
+      rootMargin: '0px 0px -12% 0px'
+    }
+  );
+
+  targets.forEach((el) => observer.observe(el));
 }
 
 function initFaqAccordion() {
