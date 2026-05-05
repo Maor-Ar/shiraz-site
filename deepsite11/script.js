@@ -48,8 +48,14 @@ function initReveal() {
     ].join(', ')
   );
 
+  const preservePositionSelectors = [
+    '.device-phone',
+    '.intro-stamp'
+  ];
+
   const targets = [...new Set([...baseTargets, ...autoTargets])]
-    .filter((el) => !el.closest('.hero-video'));
+    .filter((el) => !el.closest('.hero-video'))
+    .filter((el) => !preservePositionSelectors.some((selector) => el.matches(selector)));
 
   targets.forEach((el) => el.classList.add('scroll-reveal'));
 
