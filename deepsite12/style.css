@@ -2965,7 +2965,7 @@ body {
 
 .brand-logo-title {
   width: clamp(140px, 20vw, 220px);
-  filter: brightness(0);
+  filter: brightness(0) !important;
 }
 
 .brand-logo-footer {
