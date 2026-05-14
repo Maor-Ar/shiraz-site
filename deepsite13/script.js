@@ -611,6 +611,34 @@ function initGuidePromoForm() {
   });
 }
 
+function initLegalModals() {
+  const map = {
+    terms: 'legal-modal-terms',
+    accessibility: 'legal-modal-accessibility',
+    purchase: 'legal-modal-purchase',
+    privacy: 'legal-modal-privacy',
+  };
+
+  qsa('[data-open-legal]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const key = btn.getAttribute('data-open-legal');
+      const id = key ? map[key] : null;
+      if (!id) return;
+      const dlg = document.getElementById(id);
+      if (dlg && typeof dlg.showModal === 'function') {
+        dlg.showModal();
+      }
+    });
+  });
+
+  qsa('.legal-modal').forEach((dlg) => {
+    dlg.addEventListener('click', (e) => {
+      const closer = e.target && e.target.closest && e.target.closest('[data-close-legal]');
+      if (closer) dlg.close();
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initMenu();
@@ -622,4 +650,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initLineDrawSections();
   initGuidePromoForm();
   initForm();
+  initLegalModals();
 });
